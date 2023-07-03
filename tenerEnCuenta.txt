@@ -1,0 +1,4 @@
+'' dejan el input tal cual esta
+"" hacen lo mismo, salvo por el output
+tomaremos los caracteres \ y ; como texto plano
+si hay varios $ seguidos, se interpretan en orden
