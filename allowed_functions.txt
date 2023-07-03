@@ -1,0 +1,40 @@
+BASIC
+printf, malloc, free, write
+
+FILES
+access, open, read, close
+
+PROCESSES(all used in pipex)
+fork, wait, waitpid, wait3, wait4, kill, exit, execve, dup, dup2, pipe
+
+READLINE
+readline: reads a line from the terminal and returns it
+rl_clear_history: removes all previously added commands to the history
+rl_on_new_line: indicates to the readline that the cursor has moved to the next line
+rl_replace_line: replace the current line buffer contents with parameter
+rl_redisplay
+add_history: add line to the history of commands
+
+SIGNALS
+signal: handle when project recieves signal
+sigaction: same as above, more general
+sigaddset: initializes a signal set to be empty
+
+FILES/DIRECTORIES
+getcwd: get current working dir
+chdir: change dir (for cd)
+stat, lstat, fstat: state of files
+unlink: removes link named from dir (close fd, erase files, use in here_doc)
+opendir, closedir, readdir: directories handling
+
+ERRORS
+strerror, perror
+
+TTY
+isatty: determines wether a fd is a valid terminal
+ttyname: device name of a tty
+ttyslot(deprecated): find the slot of the current user's terminal in some file
+ioctl: manipulates the underlying device parameters of terminals
+getenv: gets env variable value
+tcsetattr, tcgetattr: set and get the termios(tty i/o, settings and options) structure
+tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs: termcap library
