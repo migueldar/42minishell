@@ -17,6 +17,6 @@ re: fclean all
 objs:
 	mkdir -p objs
 objs/%.o: %.c objs
-	gcc $(CFLAGS) -c $< -o $@
- 
+	cc $(CFLAGS) -c $< -o $@
+
 .PHONY: all clean fclean re
