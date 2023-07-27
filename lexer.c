@@ -1,23 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/07/27 04:47:57 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/07/27 04:25:53 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/07/27 04:47:28 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
-int main() {
-	char	*raw;
-	t_token_l *tok_list;
-	
-	while (1) {
-		raw = readline("$> ");
-		tok_list = lexer(raw);
-	}
+t_token_l	*lexer(char *raw_input) {
+	printf("%s\n", raw_input);
 }

@@ -1,4 +1,26 @@
-'' dejan el input tal cual esta
-"" hacen lo mismo, salvo por el output
-tomaremos los caracteres \ y ; como texto plano
-si hay varios $ seguidos, se interpretan en orden
+PARSER
+
+- '' dejan el input tal cual esta
+- "" hacen lo mismo, salvo por el output
+- tomaremos los caracteres \ y ; como texto plano
+- si hay varios $ seguidos, se interpretan en orden
+
+
+EXECUTER
+
+- si hay varios </<< se toma el ultimo solo, lo mismo con >/>>. Se prioriza el (>>/> o <</<) antes quel pipe (pero hay que abrir todos, por ejemplo si tenemos ls > a > b, a y b tienen que abrirse)
+
+
+FLOW OF INPUT TILL EXECUTED
+
+input -> lexer -> parser -> expander -> executer
+
+lexer: returns a list of tokens which can be words or operators. Is in charge of removing ' and ". Should give have flags that tell us wether they need to expand later.
+parser: returns a list of t_commands
+expander: same as parser but expanded
+executer: executes commands in order assuming pipes between them (an overcomplicated pipex)
+
+
+UNSOLVED
+
+what to do with heredoc

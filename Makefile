@@ -1,5 +1,5 @@
 NAME = minishell
-SRCS = main.c
+SRCS = main.c lexer.c
 CFLAGS = -Wall -Wextra -Werror -I /Users/$(USER)/.brew/opt/readline/include
 LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline
 RM = /bin/rm -rf

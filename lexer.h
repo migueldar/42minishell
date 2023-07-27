@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/07/27 04:47:57 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/07/27 04:26:55 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/07/27 04:47:36 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef LEXER_H
+# define LEXER_H
 
-int main() {
-	char	*raw;
-	t_token_l *tok_list;
-	
-	while (1) {
-		raw = readline("$> ");
-		tok_list = lexer(raw);
-	}
-}
+# include <stdio.h>
+
+typedef struct s_token {
+	char	*content;
+	int		flags;
+}	t_token;
+
+typedef struct s_token_l
+{
+	t_token				token;
+	struct s_token_l	*next;
+}	t_token_l;
+
+t_token_l	*lexer(char *raw_input);
+
+#endif
