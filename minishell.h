@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 03:48:31 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/07/27 04:44:22 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/07/27 04:58:38 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
 
 typedef enum e_redir_flag {
 	IN,
