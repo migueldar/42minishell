@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/07/29 23:15:29 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/07/29 20:53:05 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/07/29 20:57:01 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "minishell.h"
-
-int main() {
-	char	*raw;
-	t_token_l *tok_list;
-	
-	while (1) {
-		raw = readline("$> ");
-		tok_list = lexer(raw);
-	}
+int	ft_isspace(char c) {
+	if ((c >= 9 && c <= 13) || c == ' ' )
+		return 1;
+	return 0;
 }

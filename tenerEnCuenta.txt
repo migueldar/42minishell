@@ -21,6 +21,7 @@ expander: same as parser but expanded
 executer: executes commands in order assuming pipes between them (an overcomplicated pipex)
 
 
-UNSOLVED
+OTHER
 
 what to do with heredoc
+probably 

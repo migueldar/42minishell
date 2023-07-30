@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:26:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/07/27 04:47:36 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:09:34 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEXER_H
 
 # include <stdio.h>
+# include "libft/libft.h"
 
 typedef struct s_token {
 	char	*content;
