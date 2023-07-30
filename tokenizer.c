@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/27 04:26:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/07/30 20:19:04 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/07/30 19:24:23 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/07/30 21:40:06 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#include "lexer.h"
 
-# include <stdio.h>
-# include "libft/libft.h"
+t_token_l	*tokenizer(char **input) {
+	t_token_l	*ret;
+	t_token		*aux;
+	
+	while (*input)
+		aux = malloc(sizeof (t_token));
+	if (!aux) 
+		return NULL;
+	
+	aux->content = *input;
+	aux->flag = OPERATOR;
+	
+	ret = NULL;
+	ft_lstadd_back((t_list **) &ret, ft_lstnew(aux));
+	printf("%s\n", ret->token->content);
+	printf("%d\n", ret->token->flag);
 
-typedef enum e_token_flag {
-	OPERATOR,
-	WORD
-}	t_token_flag;
-
-typedef struct s_token {
-	char			*content;
-	t_token_flag	flag;
-}	t_token;
-
-typedef struct s_token_l
-{
-	t_token				*token;
-	struct s_token_l	*next;
-}	t_token_l;
-
-t_token_l	*lexer(char *raw_input);
-t_token_l	*tokenizer(char **input);
-
-#endif
+	return ret;
+}
