@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 01:53:51 by mde-arpe          #+#    #+#             */
-/*   Updated: 2022/03/25 03:07:50 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/11 01:30:16 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ static char	**norminette_while(char **ret, char const *s, char c)
 			inner_counter = 0;
 			ret[++counter] = ft_calloc(len_till_next__word(s, c) + 1, 1);
 			if (!(ret[counter]))
-			{	
+			{
 				while (counter >= 0)
 					free(ret[counter--]);
-				return (NULL);
+				return (free(ret), NULL);
 			}
 			while (*s != c && *s)
 				ret[counter][inner_counter++] = *(s++);
@@ -86,10 +86,5 @@ char	**ft_split(char const *s, char c)
 	if (!ret)
 		return (NULL);
 	ret = norminette_while(ret, s, c);
-	if (!ret)
-	{	
-		free(ret);
-		return (NULL);
-	}
 	return (ret);
 }

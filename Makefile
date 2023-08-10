@@ -1,25 +1,26 @@
 NAME = minishell
-SRCS = main.c lexer.c utils.c word_split.c tokenizer.c
-CFLAGS = -Wall -Wextra -Werror -I /Users/$(USER)/.brew/opt/readline/include
-LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline
+SRCS = main.c lexer.c utils.c splitter.c tokenizer.c
+CFLAGS = -Wall -Wextra -Werror -I /Users/$(USER)/.brew/opt/readline/include #-fsanitize=address
+LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline #-fsanitize=address
 RM = /bin/rm -rf
 OBJS = $(SRCS:%.c=objs/%.o)
 OBJS += libft/libft.a
 
-$(NAME): $(OBJS)
+$(NAME): objs $(OBJS)
 	cc $(OBJS) $(LDFLAGS) -o $(NAME)
 all: $(NAME)
 clean:
-	$(RM) $(OBJS)
+	$(RM) objs
+	make fclean -C libft
 fclean: clean
 	$(RM) $(NAME)
-	make fclean -C libft
 re: fclean all
 
 libft/libft.a: 
 	make -C libft
+objs:
+	mkdir -p objs
 objs/%.o: %.c
-	@mkdir -p objs
 	cc $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re
