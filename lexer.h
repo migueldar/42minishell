@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:26:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/07/30 20:19:04 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/10 01:09:32 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 # include "libft/libft.h"
 
 typedef enum e_token_flag {
-	OPERATOR,
+	OPERATOR_IN,
+	OPERATOR_HERE_DOC,
+	OPERATOR_OUT,
+	OPERATOR_APPEND,
+	OPERATOR_PIPE,
 	WORD
 }	t_token_flag;
 
@@ -32,7 +36,10 @@ typedef struct s_token_l
 	struct s_token_l	*next;
 }	t_token_l;
 
+
+
 t_token_l	*lexer(char *raw_input);
 t_token_l	*tokenizer(char **input);
+char		**splitter(char const *s, char *status);
 
 #endif
