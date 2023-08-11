@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 02:29:42 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/10 20:58:47 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/11 21:01:41 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ char	**splitter(char const *s, char *status)
 	tokenly_splitted = token_split(wordly_splitted);
 	if (!tokenly_splitted)
 	{
-			free_arr_2((void **) wordly_splitted);
-			return (NULL);
+		free_arr_2((void **) wordly_splitted);
+		return (NULL);
 	}
 	return (tokenly_splitted);
 }

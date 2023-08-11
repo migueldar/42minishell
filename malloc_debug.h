@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   malloc_debug.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/11 20:58:42 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/08/11 03:27:04 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/08/11 03:33:01 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "minishell.h"
+#ifndef MALLOC_DEBUG_H
+# define MALLOC_DEBUG_H
 
-//probably need to free output from readline
-int main()
-{
-	char	*raw;
-	t_token_l *tok_list;
-	
-	#ifdef MALLOC_DEBUG
-	atexit(leaks);
-	#endif
-	
-	while (1) {
-		raw = readline("$> ");
-		tok_list = lexer(raw);
-		free(raw);
-	}
-}
+
+# ifndef MALLOC_FAIL
+#  define MALLOC_FAIL 0
+#  endif
+
+# include <string.h>
+
+void	*malloc(size_t n);
+void	leaks(); 
+
+# endif
