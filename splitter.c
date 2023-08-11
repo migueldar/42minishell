@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 02:29:42 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/11 20:18:38 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/11 21:01:41 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static char	**word_split(char const *s, char *status)
 //must have a way to identify invalid tokens and return them
 static char	**token_split(char **word_s)
 {
-	
+	(void) word_s;
 	return (NULL);
 }
 
