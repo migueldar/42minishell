@@ -6,8 +6,9 @@ RM = /bin/rm -rf
 OBJS = $(SRCS:%.c=objs/%.o)
 OBJS += libft/libft.a
 
-$(NAME): objs $(OBJS)
-	cc $(OBJS) $(LDFLAGS) -o $(NAME)
+$(NAME): $(LMAO) objs $(OBJS)
+	cc $(LDFLAGS) $(OBJS) -o $(NAME)
+
 all: $(NAME)
 clean:
 	$(RM) objs
@@ -23,4 +24,16 @@ objs:
 objs/%.o: %.c
 	cc $(CFLAGS) -c $< -o $@
 
-.PHONY: all clean fclean re
+#malloc debug flags#
+
+fclean_nolib:
+	$(RM) objs
+	$(RM) $(NAME)
+re_nolib: fclean_nolib all
+
+malloc_debug:: CFLAGS += -D MALLOC_DEBUG
+malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
+malloc_debug: fclean_nolib objs $(OBJS) objs/malloc_debug.o
+	cc $(LDFLAGS) $(OBJS) objs/malloc_debug.o -o $(NAME)
+
+.PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug

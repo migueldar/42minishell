@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:25:53 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/11 02:07:57 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/11 03:14:38 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // cuando finalice el splitter, hacer comprobacion de todos los mallocs
 t_token_l	*lexer(char *raw_input) {
-	t_token_l	*ret;
+	//t_token_l	*ret;
 	char		**split_raw_input;
 	char		status;
 	
@@ -31,14 +31,13 @@ t_token_l	*lexer(char *raw_input) {
 			write(2, "Syntax error: unexpected token\n", 32);
 		return NULL;
 	}
-
-	int i = -1;
-	while (split_raw_input && split_raw_input[++i])
-		printf("Param %d: %s\n", i, split_raw_input[i]);
-	ret = tokenizer(split_raw_input);
+	free_arr_2((void **) split_raw_input);
+	//int i = -1;
+	// while (split_raw_input && split_raw_input[++i])
+	// 	printf("Param %d: %s\n", i, split_raw_input[i]);
+	// ret = tokenizer(split_raw_input);
 	// if (!ret) // liberar splitter
 	// 	write(2, "Malloc failed\n", 15);
 	
-	
-	return ret;
+	return NULL;
 }
