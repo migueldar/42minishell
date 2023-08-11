@@ -6,7 +6,7 @@ RM = /bin/rm -rf
 OBJS = $(SRCS:%.c=objs/%.o)
 OBJS += libft/libft.a
 
-$(NAME): $(LMAO) objs $(OBJS)
+$(NAME): objs $(OBJS)
 	cc $(LDFLAGS) $(OBJS) -o $(NAME)
 
 all: $(NAME)
