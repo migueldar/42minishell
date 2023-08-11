@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:25:53 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/10 00:42:16 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/11 02:07:57 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_token_l	*lexer(char *raw_input) {
 	ret = tokenizer(split_raw_input);
 	// if (!ret) // liberar splitter
 	// 	write(2, "Malloc failed\n", 15);
+	
 	
 	return ret;
 }
