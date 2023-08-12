@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/11 20:58:42 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:49:52 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ int main()
 	#ifdef MALLOC_DEBUG
 	atexit(leaks);
 	#endif
-	
-	while (1) {
+
 		raw = readline("$> ");
 		tok_list = lexer(raw);
 		free(raw);
-	}
+	
 }
