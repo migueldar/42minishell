@@ -13,33 +13,61 @@ t_list	*ft_lstnew(void *content)
 	return (ret);
 }
 
-t_env   create_key_value(char *env)
+t_env  *create_key_value(char *env, t_env *old)
 {
-    t_env   key_value;
+    t_env   *key_value;
     int     lkey;
     int     aux;
-
     lkey = 0;
     aux = 0;
+    key_value = malloc(sizeof(t_env *));
     while(env[lkey] && env[lkey] != '=')
         lkey ++;
-    key_value.key = ft_calloc(lkey, sizeof(char));
-    if(ft_calloc == NULL)
+    key_value->key = ft_calloc(sizeof(char), (lkey +1));
+    if(key_value->key == NULL)
         perror("fallo de malloc key");
     while(lkey--)
-        key_value.key[aux] = env[aux++];
+    {
+        key_value->key[aux] = env[aux];
+        aux ++;
+    }
     env += aux;
-    key_value.value = ft_calloc(ft_strlen(env), sizeof(char));
-    while(*env)
-        key_value.value
-
-
-
+    aux = 0;
+    key_value->value = ft_calloc(ft_strlen(env), sizeof(char));
+    if(key_value->key == NULL)
+        perror("fallo de malloc value");
+    while(env[aux])
+    {
+        key_value->value[aux] = env[aux];
+        aux ++;
+    }    
+    key_value->next = NULL; 
+    if(old)
+        old->next = key_value;
+    return(key_value);
 }
+
 
 int ft_create_env_list(char **env)
 {
     int counter;
+    counter = 0;
+    t_env  *envi;
+    t_env *old;
+    t_env *aux;
+    envi = create_key_value(env[counter], NULL);
+    aux = envi;
+    counter ++;
     while(env[counter])
-       ft_lstnew(create_key_value(env[counter++]));
+    {
+        old = create_key_value(env[counter], aux);
+        aux = old;
+        counter ++;
+    }
+    while(envi)
+    {
+        printf("%s%s\n", envi->key,  envi->value);
+        envi = envi->next;
+    }
+    return(0);
 }
