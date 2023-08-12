@@ -51,10 +51,11 @@ t_env  *create_key_value(char *env, t_env *old)
 int ft_create_env_list(char **env)
 {
     int counter;
-    counter = 0;
     t_env  *envi;
     t_env *old;
     t_env *aux;
+
+    counter = 0;
     envi = create_key_value(env[counter], NULL);
     aux = envi;
     counter ++;
