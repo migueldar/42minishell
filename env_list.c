@@ -65,10 +65,5 @@ int ft_create_env_list(char **env)
         aux = old;
         counter ++;
     }
-    while(envi)
-    {
-        printf("%s%s\n", envi->key,  envi->value);
-        envi = envi->next;
-    }
     return(0);
 }
