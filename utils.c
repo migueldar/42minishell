@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:53:05 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/10 00:57:41 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:11:42 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 int	ft_isspace(char c)
 {
 	if ((c >= 9 && c <= 13) || c == ' ')
+		return (1);
+	return (0);
+}
+
+int	ft_isoperator(char c)
+{
+	if (c == '<' || c == '>' || c == '|')
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:26:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/10 01:09:32 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:52:46 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,14 @@ typedef struct s_token_l
 	struct s_token_l	*next;
 }	t_token_l;
 
-
+typedef struct s_string_l
+{
+	char				*content;
+	struct s_string_l	*next;
+}	t_string_l;
 
 t_token_l	*lexer(char *raw_input);
 t_token_l	*tokenizer(char **input);
-char		**splitter(char const *s, char *status);
+t_string_l	*splitter(char const *s, char *status);
 
 #endif

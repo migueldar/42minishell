@@ -15,8 +15,8 @@ FLOW OF INPUT TILL EXECUTED
 
 input -> lexer -> parser -> expander -> executer
 
-lexer: returns a list of tokens which can be words or operators. Is in charge of removing ' and ". Should give have flags that tell us wether they need to expand later.
-parser: returns a list of t_commands
+lexer: returns a list of tokens which can be words or operators. Is in charge of identifying unclosed quotes
+parser: returns a list of t_commands. Is in charge of identifying invalid operator orders such as >>>
 expander: same as parser but expanded
 executer: executes commands in order assuming pipes between them (an overcomplicated pipex)
 
