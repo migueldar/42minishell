@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 19:24:23 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/13 18:45:35 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/13 19:21:08 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,14 @@ t_token_l	*tokenizer(t_string_l *input)
 	{
 		dup = ft_strdup(input->content);
 		if (!dup)
-			return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_token), NULL);
+			return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_token)
+					, NULL);
 		new_n = create_token_l(dup);
 		if (!new_n)
-			return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_token), free(dup), NULL);
+			return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_token)
+					, free(dup), NULL);
 		ft_lstadd_back((t_list **) &ret, (t_list *) new_n);
 		input = input->next;
 	}
 	return (ret);
 }
-	
