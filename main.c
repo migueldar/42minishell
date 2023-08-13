@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/12 20:49:52 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:44:44 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int main()
 		raw = readline("$> ");
 		tok_list = lexer(raw);
 		free(raw);
-	
+
 }
