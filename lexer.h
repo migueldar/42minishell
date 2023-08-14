@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:26:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/13 18:34:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/14 02:39:36 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include "libft/libft.h"
+# include "utils.h"
 
 typedef enum e_token_flag {
 	OP_IN,
@@ -35,12 +36,6 @@ typedef struct s_token_l
 	t_token				*token;
 	struct s_token_l	*next;
 }	t_token_l;
-
-typedef struct s_string_l
-{
-	char				*content;
-	struct s_string_l	*next;
-}	t_string_l;
 
 t_token_l	*lexer(char *raw_input);
 t_token_l	*tokenizer(t_string_l *input);
