@@ -11,6 +11,14 @@ EXECUTER
 - si hay varios </<< se toma el ultimo solo, lo mismo con >/>>. Se prioriza el (>>/> o <</<) antes quel pipe (pero hay que abrir todos, por ejemplo si tenemos ls > a > b, a y b tienen que abrirse)
 
 
+HERE_DOC
+
+- "" y '' anywhere in delimiter avoids expansions
+- delimiter is not expanded
+- the only way in which the input is edited is expanding variables when there are no quotes
+- when we are inside heredoc, signal handling funcitions have to change
+
+
 FLOW OF INPUT TILL EXECUTED
 
 input -> lexer -> parser -> expander -> executer
