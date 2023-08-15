@@ -12,7 +12,7 @@ BUILTINS_OBJDIR = $(OBJDIR)/builtins
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 BUILTINS_OBJS = $(addprefix $(BUILTINS_OBJDIR)/, $(notdir $(wildcard builtins/*.c:.c=.o)))
 
-# Rutas a las bibliotecas y opciones de compilación
+# Rutas a las bibliotecas y opciones de cgit remoompilación
 CFLAGS = -Wall -Wextra -Werror -I /Users/$(USER)/.brew/opt/readline/include
 LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib
 
