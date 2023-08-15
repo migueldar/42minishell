@@ -2,7 +2,7 @@
 NAME = minishell
 
 # Archivos fuente principales
-SRCS = main_lucia_y_el_uraño.c lexer.c utils.c splitter.c tokenizer.c env_list.c utils_lucia_y_el_uraño.c $(wildcard builtins/*.c)
+SRCS = main_lucia_y_el_uraño.c lexer.c utils.c splitter.c tokenizer.c env_list_libft.c utils_lucia_y_el_uraño.c $(wildcard builtins/*.c)
 
 # Directorio para objetos
 OBJDIR = objs
