@@ -29,6 +29,13 @@ expander: same as parser but expanded
 executer: executes commands in order assuming pipes between them (an overcomplicated pipex)
 
 
+SIGNALS
+
+Executing:			Ctrl + C and Ctrl + \ handled by the execve. Ctrl + D, if its not recieved by the process, should wait till process ends and exit
+For heredoc: 		Ctrl + C cancels command, exits 1. Ctrl + \ does nothing. Ctrl + D exits from the heredoc its in, exits 0.
+Interactive mode:	Ctrl + C newline, exits 1. Ctrl + \ does nothing. Ctrl + D exits.
+
+
 OTHER
 
 what to do with heredoc
