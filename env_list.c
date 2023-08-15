@@ -65,5 +65,6 @@ int ft_create_env_list(char **env)
         aux = old;
         counter ++;
     }
+    ft_env(envi);
     return(0);
 }
