@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 23:13:41 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/12 17:32:08 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/08/13 19:36:40 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/08/15 00:41:47 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*aux;
+# include "lexer.h"
+# include <stdio.h>
+# include "utils.h"
 
-	if (!lst)
-		return ;
-	while (*lst != NULL)
-	{
-		(*del)((*lst)->content);
-		aux = *lst;
-		*lst = (*lst)->next;
-		free(aux);
-	}
-}
+t_command_l	*parser_handler(t_token_l *toks);
+void		free_cmd(t_command *cmd);
+void		free_redir(t_redir *redir);
+void		free_cmd(t_command *cmd);
+char		add_redir(t_command *cmd, t_token *redir, t_token *word);
+char		add_word(t_command *cmd, t_token *token);
+
+#endif

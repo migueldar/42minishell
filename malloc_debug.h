@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   malloc_debug.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 23:13:41 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/12 17:32:08 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/08/11 03:27:04 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/08/15 22:46:23 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MALLOC_DEBUG_H
+# define MALLOC_DEBUG_H
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*aux;
+# ifndef MALLOC_FAIL
+#  define MALLOC_FAIL 0
+# endif
 
-	if (!lst)
-		return ;
-	while (*lst != NULL)
-	{
-		(*del)((*lst)->content);
-		aux = *lst;
-		*lst = (*lst)->next;
-		free(aux);
-	}
-}
+# include <string.h>
+
+void	*malloc(size_t n);
+void	leaks(void);
+
+#endif

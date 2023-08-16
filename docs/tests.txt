@@ -1,0 +1,8 @@
+THINGS TO TEST MINISHELL
+
+- Paralel execution in processes:
+	- sleep 5 | sleep 5			should take 5 secs
+	- cat < bigfile | sleep 5	should take 5 secs
+
+- All heredoc goes first:
+	- sleep 5 | cat << a | cat << b		should take 5 secs after heredocs are closed

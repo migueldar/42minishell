@@ -6,39 +6,37 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:25:53 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/11 02:07:57 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/13 19:45:33 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-#include "utils.h"
 
-// cuando finalice el splitter, hacer comprobacion de todos los mallocs
-t_token_l	*lexer(char *raw_input) {
+// returns NULL if any of these happen:
+// - malloc fail
+// - unclosed quotes
+// - empty input
+t_token_l	*lexer(char *raw_input)
+{
+	t_string_l	*split_raw_input;
 	t_token_l	*ret;
-	char		**split_raw_input;
 	char		status;
-	
-	status = 0;
+
 	split_raw_input = splitter(raw_input, &status);
 	if (!split_raw_input)
 	{
-		if (status == 0)
+		if (status == 1)
 			write(2, "Malloc failed\n", 15);
-		else if (status == 1)
-			write(2, "Syntax error: unclosed quotes\n", 31);
 		else if (status == 2)
-			write(2, "Syntax error: unexpected token\n", 32);
-		return NULL;
+			write(2, "Syntax error: unclosed quotes\n", 31);
+		return (NULL);
 	}
-
-	int i = -1;
-	while (split_raw_input && split_raw_input[++i])
-		printf("Param %d: %s\n", i, split_raw_input[i]);
 	ret = tokenizer(split_raw_input);
-	// if (!ret) // liberar splitter
-	// 	write(2, "Malloc failed\n", 15);
-	
-	
-	return ret;
+	ft_lstclear((t_list **) &split_raw_input, free);
+	if (!ret)
+	{
+		write(2, "Malloc failed\n", 15);
+		return (NULL);
+	}
+	return (ret);
 }

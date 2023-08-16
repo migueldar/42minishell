@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   malloc_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 23:13:41 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/12 17:32:08 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/08/11 03:25:57 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/08/11 05:29:41 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifdef MALLOC_DEBUG
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*aux;
+#include "minishell.h"
+#include "malloc_debug.h"
 
-	if (!lst)
-		return ;
-	while (*lst != NULL)
-	{
-		(*del)((*lst)->content);
-		aux = *lst;
-		*lst = (*lst)->next;
-		free(aux);
-	}
+void leaks() {
+	system("leaks minishell");
 }
+
+void	*malloc(size_t n)
+{
+	static int cnt = 0;
+
+	if (cnt == MALLOC_FAIL) {
+		printf("len was %zu\n", n);
+		return (NULL);
+	}
+	cnt++;
+	return (calloc(n, 1));
+}
+
+#endif
