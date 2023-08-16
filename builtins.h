@@ -6,7 +6,7 @@
 /*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:27:41 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/15 21:35:51 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/16 01:49:33 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 # include "minishell.h"
 
-typedef struct s_env
-{
-	char            *key;
-	char            *value;
-	struct s_env    *next;
-}t_env;
-
-typedef struct s_envlista_key
+typedef struct s_env_var
 {
 	char            *key;
 	char            *value; 
-}t_envlista_key;
+}t_env_var;
+
+typedef struct s_env
+{
+	t_env_var		*content;
+	struct s_env    *next;
+}t_env;
+
 
 
 

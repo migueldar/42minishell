@@ -12,11 +12,11 @@ void	ft_print_array_bi(char **array)
 	}
 }
 
-void    ft_env(t_env *envi)
+/*void    ft_env(t_env *envi)
 {
 	while(envi)
 	{
 		printf("%s%s\n", envi->key, envi->value);
 		envi = envi->next;
 	}
-}
+}*/
