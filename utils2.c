@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/16 18:22:37 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:37:29 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_print_env(t_env *envi)
 {
 	while (envi)
 	{
-		printf("%s%s\n", envi->content->key, envi->content->value);
+		printf("%s=%s\n", envi->content->key, envi->content->value);
 		envi = envi->next;
 	}
 }

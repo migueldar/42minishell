@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/16 21:11:21 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:36:36 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,38 +47,43 @@ t_env_var	*create_env_var(char *env)
 	while (env[length] && env[length] != '=')
 		length ++;
 	env_var->key = ft_calloc(sizeof(char), length + 1);
-	if (env_var->key == NULL)
+	if (!env_var->key)
 		return (free_env_var(env_var), NULL);
 	put_content(length, &env_var->key, &env);
 	length = ft_strlen(env);
-	env_var->value = ft_calloc(length, sizeof(char));
-	if (env_var->value == NULL)
+	env_var->value = ft_calloc(sizeof(char), length);
+	if (!env_var->value)
 		return (free_env_var(env_var), NULL);
-	env ++;
+	env++;
 	put_content(length, &env_var->value, &env);
 	return (env_var);
 }
 
-t_env	*ft_create_env_list(char **env)
+t_env	*create_env_list(char **env)
 {
 	t_env	*envi;
 	t_env	*new;
 	int		counter;
 
-	counter = 0;
-	envi = (NULL);
-	while (env[counter])
+	counter = -1;
+	envi = NULL;
+	while (env[++counter])
 	{
-		new = (t_env *)ft_lstnew((void *)create_env_var(env[counter]));
-		if (!new || new->content == NULL)
+		new = ft_calloc(1, sizeof (t_env));
+		if (!new)
 		{
-			write(2, "malloc env fail in env\n", 16);
-			ft_lstclear ((t_list **) &envi, (void (*)(void	*)) free_env_var);
+			write(2, "malloc env fail in env\n", 24);
+			ft_lstclear((t_list **) &envi, (void (*)(void *)) free_env_var);
 			return (NULL);
 		}
+		new->content = create_env_var(env[counter]);
+		if (!new->content)
+		{
+			write(2, "malloc env fail in env\n", 24);
+			ft_lstclear((t_list **) &envi, (void (*)(void *)) free_env_var);
+			return (free(new), NULL);
+		}
 		ft_lstadd_back((t_list **)&envi, (t_list *)new);
-		counter ++;
 	}
-	ft_print_env(envi);
 	return (envi);
 }

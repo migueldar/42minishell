@@ -1,5 +1,5 @@
 NAME = minishell
-SRCS = lexer.c utils.c splitter.c tokenizer.c main_lucia_y_el_uraño.c utils2.c env_list.c
+SRCS = lexer.c utils.c splitter.c tokenizer.c main_lucia_y_el_uranio.c utils2.c env_list.c
 CFLAGS = -Wall -Wextra -Werror -I /Users/$(USER)/.brew/opt/readline/include #-fsanitize=address
 LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline #-fsanitize=address
 RM = /bin/rm -rf

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:27:41 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/16 21:00:32 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:29:13 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_env
 
 
 void	ft_print_env(t_env *envi);
-t_env	*ft_create_env_list(char **env);
+t_env	*create_env_list(char **env);
 void	ft_print_array_bi(char **array);
 void    ft_env(t_env *envi);
 int		ft_echo(char ** argv);
