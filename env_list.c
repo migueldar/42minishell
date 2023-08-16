@@ -6,7 +6,7 @@
 /*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/16 20:44:00 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:08:57 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,6 @@ t_env_var	*create_env_var(char *env)
 	return (env_var);
 }
 
-void	*free_env_l(t_env **envi)
-{
-	ft_lstclear ((t_list **) &envi, (void (*)(void	*)) free_env_var);
-	return (NULL);
-}
-
 t_env	*ft_create_env_list(char **env)
 {
 	t_env	*envi;
@@ -78,7 +72,8 @@ t_env	*ft_create_env_list(char **env)
 		if (!new || new->content == NULL)
 		{
 			write(2, "malloc env fail in env\n", 16);
-			return (free_env_l(&envi));
+			ft_lstclear ((t_list **) &envi, (void (*)(void	*)) free_env_var);
+			return (NULL);
 		}
 		ft_lstadd_back((t_list **)&envi, (t_list *)new);
 		counter ++;

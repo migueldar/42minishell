@@ -22,8 +22,14 @@ void leaks(void)
 
 int main(int argc, char **argv, char **env)
 {
-    if(argc && **argv)
-        ft_create_env_list(env);
+    t_env   *envi;
+
+    if (argc && **argv)
+    {
+        envi = ft_create_env_list(env);
+	    ft_lstclear ((t_list **) &envi, (void (*)(void	*)) free_env_var);
+    }
+        
     atexit(leaks);
     /*if (argc > 2 && ft_strncmp(argv[1], "echo ", 4) == 0)
     {
