@@ -6,23 +6,22 @@
 /*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/16 20:27:51 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/16 20:38:51 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
 
-void	ft_free_env_var(t_env_var *env_value)
+void	free_env_var(t_env_var *env_value)
 {
-	t_env_var	*k_v_to_free;
-
-	k_v_to_free = env_value;
-	if(k_v_to_free->key)
-		free(k_v_to_free->key);
-	if(k_v_to_free->value)
-		free(k_v_to_free->value);
-	free(k_v_to_free);
+	if (!env_value)
+		return ;
+	if (env_value->key)
+		free(env_value->key);
+	if (env_value->value)
+		free(env_value->value);
+	free(env_value);
 }
 
 void	put_content(int iterator, char **str, char **content)
@@ -51,12 +50,12 @@ t_env_var	*create_env_value(char *env)
 		length ++;
 	env_value->key = ft_calloc(sizeof(char), length + 1);
 	if (env_value->key == NULL)
-		return (ft_free_env_var(env_value), NULL);
+		return (free_env_var(env_value), NULL);
 	put_content(length, &env_value->key, &env);
 	length = ft_strlen(env);
 	env_value->value = ft_calloc(length, sizeof(char));
 	if (env_value->value == NULL)
-		return (ft_free_env_var(env_value), NULL);
+		return (free_env_var(env_value), NULL);
 	env ++;
 	put_content(length, &env_value->value, &env);
 	return (env_value);
@@ -64,7 +63,7 @@ t_env_var	*create_env_value(char *env)
 
 void	*free_env_l(t_env **envi)
 {
-	ft_lstclear ((t_list **) &envi, (void (*)(void	*)) ft_free_env_var);
+	ft_lstclear ((t_list **) &envi, (void (*)(void	*)) free_env_var);
 	return (NULL);
 }
 
