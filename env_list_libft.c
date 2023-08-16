@@ -6,53 +6,63 @@
 /*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/16 02:23:48 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:12:05 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
 
-void	*ft_free_key_value(void *key_value)
+void	ft_free_env_value(void *env_value)
 {
-	t_env_var *k_v_to_free;
+	t_env_var	*k_v_to_free;
 
-	k_v_to_free = key_value;
+	k_v_to_free = env_value;
 	free(k_v_to_free->key);
 	free(k_v_to_free->value);
 	free(k_v_to_free);
-	write(2, "malloc env fail\n", 16);
-
 }
 
-t_env_var	*create_key_value(char *env, t_env **envi)
+void	put_content(int iterator, char **str, char **content)
 {
-	t_env_var		*key_value;
-	int				lkey;
-	int				aux;
+	int	counter;
 
-	aux = ((lkey = 0),0);
-	key_value = ft_calloc(sizeof(t_env_var *), 1);
-	while (env[lkey] && env[lkey] != '=')
-		lkey ++;
-	key_value->key = ft_calloc(sizeof(char), lkey + 1);
-	if (key_value->key == NULL)
-		return ((ft_lstclear(envi, ft_free_key_value)), NULL);
-	while (lkey --)
+	counter = 0;
+	while (iterator --)
 	{
-		key_value->key[aux] = env[aux];
-		aux ++;
+		str[0][counter] = **content;
+		counter ++;
+		(*content)++;
 	}
-	aux = ((env += aux), 0);
-	key_value->value = ft_calloc(ft_strlen(env), sizeof(char));
-	if (key_value->key == NULL)
-		return ((ft_lstclear(envi, ft_free_key_value)), NULL);
-	while (env[aux])
-	{
-		key_value->value[aux] = env[aux];
-		aux ++;
-	}
-	return (key_value);
+}
+
+t_env_var	*create_env_value(char *env)
+{
+	t_env_var		*env_value;
+	int				length;
+
+	length = 0;
+	env_value = ft_calloc(sizeof(t_env_var *), 1);
+	while (env[length] && env[length] != '=')
+		length ++;
+	env_value->key = ft_calloc(sizeof(char), length + 1);
+	if (env_value->key == NULL)
+		return (NULL);
+	put_content(length, &env_value->key, &env);
+	length = ft_strlen(env);
+	env_value->value = ft_calloc(length, sizeof(char));
+	if (env_value->value == NULL)
+		return (NULL);
+	env ++;
+	put_content(length, &env_value->value, &env);
+	return (env_value);
+}
+
+int	free_env_l(t_env **envi)
+{
+	ft_lstclear((t_list **) &envi, (void *)ft_free_env_value);
+	write(2, "malloc env fail in env\n", 16);
+	return (1);
 }
 
 int	ft_create_env_list_lib(char **env)
@@ -62,28 +72,26 @@ int	ft_create_env_list_lib(char **env)
 	t_env	*head;
 	int		counter;
 
-	counter = 0;
-	envi = NULL;
+	envi = ((counter = 0), NULL);
 	while (env[counter])
 	{
-		new = ft_lstnew(NULL);
+		new = (t_env *)ft_lstnew(NULL);
 		if (!new)
-			return (write(2, "malloc env fail in env\n", 16));
-		ft_lstadd_back(&envi, new);
+			return (free_env_l(&envi));
+		ft_lstadd_back((t_list **)&envi, (t_list *)new);
 		counter ++;
 	}
 	head = envi;
 	counter = 0;
 	while (envi)
 	{
-		envi->content = create_key_value(env[counter], &envi);
+		envi->content = create_env_value(env[counter]);
 		if (envi->content == NULL)
-			return (write(2, "malloc env fail in env\n", 16));
-
+			return (free_env_l(&envi));
 		envi = envi->next;
 		counter ++;
 	}
-	while (head)
+	while(head)
 	{
 		printf("%s%s\n", head->content->key, head->content->value);
 		head = head->next;
