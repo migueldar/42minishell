@@ -6,7 +6,7 @@
 /*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/16 21:08:57 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:11:21 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ t_env	*ft_create_env_list(char **env)
 	t_env	*new;
 	int		counter;
 
-	envi = ((counter = 0), NULL);
+	counter = 0;
+	envi = (NULL);
 	while (env[counter])
 	{
 		new = (t_env *)ft_lstnew((void *)create_env_var(env[counter]));
