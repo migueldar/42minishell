@@ -7,6 +7,19 @@ void leaks(void)
       system("leaks -q minishell");
 }
 
+
+/*void	*malloc(size_t n)
+{
+	static int cnt = 0;
+
+	if (cnt == MALLOC_FAIL) {
+		printf("len was %zu\n", n);
+		return (NULL);
+	}
+	cnt++;
+	return (calloc(n, 1));
+}*/
+
 int main(int argc, char **argv, char **env)
 {
     if(argc && **argv)
