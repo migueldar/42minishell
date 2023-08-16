@@ -6,65 +6,82 @@
 /*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/15 21:25:25 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:22:13 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
 
-t_env	*create_key_value(char *env, t_env *old)
+void	ft_free_env_value(void *env_value)
 {
-	t_env	*key_value;
-	int		lkey;
-	int		aux;
+	t_env_var	*k_v_to_free;
 
-	lkey = 0;
-	aux = 0;
-	key_value = malloc(sizeof(t_env *));
-	while (env[lkey] && env[lkey] != '=')
-		lkey ++;
-	key_value->key = ft_calloc(sizeof(char), (lkey +1));
-	if (key_value->key == NULL)
-		perror("fallo de malloc key");
-	while (lkey--)
-	{
-		key_value->key[aux] = env[aux];
-		aux ++;
-	}
-	env += aux;
-	aux = 0;
-	key_value->value = ft_calloc(ft_strlen(env), sizeof(char));
-	if (key_value->key == NULL)
-		perror("fallo de malloc value");
-	while (env[aux])
-	{
-		key_value->value[aux] = env[aux];
-		aux ++;
-	}
-	key_value->next = NULL; 
-	if (old)
-		old->next = key_value;
-	return (key_value);
+	k_v_to_free = env_value;
+	free(k_v_to_free->key);
+	free(k_v_to_free->value);
+	free(k_v_to_free);
 }
 
-int	ft_create_env_list(char **env)
+void	put_content(int iterator, char **str, char **content)
 {
-	int		counter;
-	t_env	*envi;
-	t_env	*old;
-	t_env	*aux;
+	int	counter;
 
 	counter = 0;
-	envi = create_key_value(env[counter], NULL);
-	aux = envi;
-	counter ++;
+	while (iterator --)
+	{
+		str[0][counter] = **content;
+		counter ++;
+		(*content)++;
+	}
+}
+
+t_env_var	*create_env_value(char *env)
+{
+	t_env_var		*env_value;
+	int				length;
+
+	length = 0;
+	env_value = ft_calloc(1, sizeof(t_env_var));
+	while (env[length] && env[length] != '=')
+		length ++;
+	env_value->key = ft_calloc(sizeof(char), length + 1);
+	if (env_value->key == NULL)
+		return (NULL);
+	put_content(length, &env_value->key, &env);
+	length = ft_strlen(env);
+	env_value->value = ft_calloc(length, sizeof(char));
+	if (env_value->value == NULL)
+		return (NULL);
+	env ++;
+	put_content(length, &env_value->value, &env);
+	return (env_value);
+}
+
+void	*free_env_l(t_env **envi)
+{
+	ft_lstclear((t_list **) &envi, (void *)ft_free_env_value);
+	return (NULL);
+}
+
+t_env	*ft_create_env_list(char **env)
+{
+	t_env	*envi;
+	t_env	*new;
+	int		counter;
+
+	envi = ((counter = 0), NULL);
 	while (env[counter])
 	{
-		old = create_key_value(env[counter], aux);
-		aux = old;
+		new = (t_env *)ft_lstnew((void *)create_env_value(env[counter]));
+		if (!new || new->content == NULL)
+		{
+			write(2, "malloc env fail in env\n", 16);
+			return (free_env_l(&envi));
+		}
+		ft_lstadd_back((t_list **)&envi, (t_list *)new);
 		counter ++;
 	}
-	ft_env(envi);
-	return (0);
+	ft_print_env(envi);
+	return (envi);
 }
