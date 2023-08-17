@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 03:25:57 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/11 05:29:41 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:16:42 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,20 @@
 #include "malloc_debug.h"
 
 void leaks() {
-	system("leaks minishell");
+	system("leaks -q minishell");
 }
 
 void	*malloc(size_t n)
 {
 	static int cnt = 0;
 
+	
 	if (cnt == MALLOC_FAIL) {
-		printf("len was %zu\n", n);
+		void	*ptr[100];
+		int		size;
+		
+		size = backtrace(ptr, 100);
+		backtrace_symbols_fd(ptr, size, 1);
 		return (NULL);
 	}
 	cnt++;
