@@ -6,13 +6,13 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/15 21:20:43 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/17 00:47:54 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//add history should not add empty lines
+// add history should not add empty lines
 int main()
 {
 	char		*raw;
@@ -24,15 +24,21 @@ int main()
 	atexit(leaks);
 	#endif
 
-	for (int i = 0; i < 100; i++)
+	g_exit_status = ST_OK;
+	sig_setter(sig_handler_interactive);
+	while (1)
 	{
 		raw = readline("$> ");
+		if (!raw)   // ctrl + D
+			break ; // will have to free all
+		// printf("%s\n", raw);
 		add_history(raw);
 		tok_list = lexer(raw);
 		free(raw);
 		if (!tok_list)
 			continue ;
 		parsed_list = parser_handler(tok_list);
+		// command_l_printer(parsed_list);
 		ft_lstclear((t_list **) &tok_list, (void (*)(void *)) free_token);
 		if (!parsed_list)
 			continue ;
