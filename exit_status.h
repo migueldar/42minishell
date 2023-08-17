@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   exit_status.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 03:48:31 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/17 00:47:21 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/08/16 01:43:00 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/08/17 00:48:09 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXIT_STATUS_H
+# define EXIT_STATUS_H
 
-# ifdef MALLOC_DEBUG
-#  include "malloc_debug.h"
-# endif
-
-# include "lexer.h"
-# include "parser.h"
-# include "signal_handle.h"
-# include "exit_status.h"
-# include "libft/libft.h"
-# include <stdio.h>
-# include <sys/stat.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <errno.h>
-
-int	g_exit_status;
+# define ST_OK				0
+# define ST_SIGINT			1
+# define ST_SIGQUIT			131
+# define ST_SYNTAX_ERROR	258
 
 #endif
