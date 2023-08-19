@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:53:05 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/14 18:32:21 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/18 20:02:36 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,31 @@ void	free_arr_2(void **fr)
 		}
 		free(fr);
 	}
+}
+
+int	protected_strlen(char const *str)
+{
+	int	counter;
+
+	counter = 0;
+	while (str && str[counter])
+		counter++;
+	return (counter);
+}
+
+// takes NULLS as len 0
+char	*protected_strjoin(char *s1, char *s2)
+{
+	char	*ret;
+	int		counter;
+
+	ret = ft_calloc(protected_strlen(s1) + protected_strlen(s2) + 1, 1);
+	if (ret == NULL)
+		return (NULL);
+	counter = -1;
+	while (s1 && s1[++counter])
+		ret[counter] = s1[counter];
+	while (s2 && s2[++counter])
+		ret[counter] = s2[counter - protected_strlen(s1)];
+	return (ret);
 }

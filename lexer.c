@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:25:53 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/13 19:45:33 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/19 01:05:47 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_token_l	*lexer(char *raw_input)
 	t_token_l	*ret;
 	char		status;
 
+	status = 0;
 	split_raw_input = splitter(raw_input, &status);
 	if (!split_raw_input)
 	{

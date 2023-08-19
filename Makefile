@@ -6,14 +6,14 @@
 #    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/16 01:25:06 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/08/18 20:06:46 by mde-arpe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-SRCS = main.c lexer.c utils.c splitter.c tokenizer.c parser.c parser2.c not_final_utils.c signal_handle.c
-CFLAGS = -Wall -Wextra -Werror -I /Users/$(USER)/.brew/opt/readline/include #-fsanitize=address
-LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline #-fsanitize=address
+SRCS = main.c lexer.c utils.c utils2.c splitter.c tokenizer.c parser.c parser2.c not_final_utils.c signal_handle.c env_list.c expander.c
+CFLAGS = -Wall -Wextra -Werror -I /Users/$(USER)/.brew/opt/readline/include
+LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline
 RM = /bin/rm -rf
 OBJS = $(SRCS:%.c=objs/%.o)
 OBJS += libft/libft.a
@@ -47,5 +47,12 @@ malloc_debug:: CFLAGS += -D MALLOC_DEBUG
 malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
 malloc_debug: fclean_nolib objs $(OBJS) objs/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/malloc_debug.o -o $(NAME)
+
+#sanitizer flags#
+
+sanitize:: CFLAGS += -fsanitize=address
+sanitize:: LDFLAGS += -fsanitize=address
+sanitize:: re_nolib
+
 
 .PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug
