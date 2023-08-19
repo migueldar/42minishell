@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/18 19:55:50 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/08/17 03:46:09 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/08/18 00:52:56 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef EXPANDER_H
+# define EXPANDER_H
 
-# include <stdlib.h>
-# include <stdio.h>
 # include "command.h"
-# include "./libft/libft.h"
+# include "builtins.h"
+# include <stdlib.h>
+# include "libft/libft.h"
+# include "utils.h"
 
-int		ft_isspace(char c);
-int		ft_isoperator(char c);
-void	free_arr_2(void **fr);
-void	command_l_printer(t_command_l *in);
-char	*protected_strjoin(char *s1, char *s2);
-int		protected_strlen(char const *str);
-char	*protected_strcharjoin(char *str, char c);
+t_command_l *expander(t_command_l *cmds, t_env *env);
 
 #endif

@@ -6,11 +6,10 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/16 21:36:36 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/18 19:13:17 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "builtins.h"
 
 void	free_env_var(t_env_var *env_var)
@@ -59,6 +58,7 @@ t_env_var	*create_env_var(char *env)
 	return (env_var);
 }
 
+// handle empty env, shouldnt return NULL
 t_env	*create_env_list(char **env)
 {
 	t_env	*envi;
