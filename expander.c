@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:13 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/19 02:45:24 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/19 03:05:16 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char 	*expand_substring(char **str, t_env *env)
 	{
 		 	
 	}
+	return NULL;
 }
 
 //the return of this function must be t_string_l, susceptible to word_splitting expansions
