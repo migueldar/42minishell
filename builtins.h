@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:27:41 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/18 19:12:48 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/19 03:08:16 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 
 typedef struct s_env_var
 {
-	char            *key;
-	char            *value; 
+	char	*key;
+	char	*value; 
 }	t_env_var;
 
 typedef struct s_env
 {
 	t_env_var		*content;
-	struct s_env    *next;
+	struct s_env	*next;
 }	t_env;
 
 void	ft_print_env(t_env *envi);

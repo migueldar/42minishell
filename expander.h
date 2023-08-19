@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:09 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/18 00:52:56 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/19 03:07:43 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 # include "libft/libft.h"
 # include "utils.h"
 
-t_command_l *expander(t_command_l *cmds, t_env *env);
+t_command_l	*expander(t_command_l *cmds, t_env *env);
 
 #endif

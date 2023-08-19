@@ -6,12 +6,13 @@
 #    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/18 20:06:46 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/08/19 03:06:33 by mde-arpe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-SRCS = main.c lexer.c utils.c utils2.c splitter.c tokenizer.c parser.c parser2.c not_final_utils.c signal_handle.c env_list.c expander.c
+SRCS =	main.c lexer.c utils.c utils2.c splitter.c tokenizer.c parser.c parser2.c not_final_utils.c \
+		signal_handle.c env_list.c expander.c complete_parser.c
 CFLAGS = -Wall -Wextra -Werror -I /Users/$(USER)/.brew/opt/readline/include
 LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline
 RM = /bin/rm -rf

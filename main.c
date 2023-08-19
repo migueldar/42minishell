@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/19 01:08:36 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/19 03:05:00 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int main(int argc, char **argv, char **env)
 {
 	char		*raw;
 	t_env		*enviroment;
-	t_token_l	*tok_list;
-	t_command_l	*parsed_list;
 	t_command_l *expanded_list;
 	
 	#ifdef MALLOC_DEBUG
@@ -37,17 +35,10 @@ int main(int argc, char **argv, char **env)
 		raw = readline("$> ");
 		if (!raw)   // ctrl + D
 			break ; // will have to free all
-		add_history(raw);
-		tok_list = lexer(raw);
-		free(raw);
-		if (!tok_list)
-			continue ;
-		parsed_list = parser_handler(tok_list);
-		ft_lstclear((t_list **) &tok_list, (void (*)(void *)) free_token);
-		if (!parsed_list)
-			continue ;
-		expanded_list = expander(parsed_list, enviroment);
-		ft_lstclear((t_list **) &parsed_list, (void (*)(void *)) free_cmd);
+		add_history(raw); //dont add empty lines
+		expanded_list = complete_parser(raw, enviroment);
+		// executer
+		// ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
 	}
 	ft_lstclear((t_list **) &enviroment, (void (*)(void *)) free_env_var);
 	clear_history();
