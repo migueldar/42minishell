@@ -1,59 +1,47 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/19 03:06:33 by mde-arpe         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
+# Nombre del ejecutable
 NAME = minishell
-SRCS =	main.c lexer.c utils.c utils2.c splitter.c tokenizer.c parser.c parser2.c not_final_utils.c \
-		signal_handle.c env_list.c expander.c complete_parser.c
+
+# Archivos fuente principales
+SRCS = main_lucia_y_el_uranio.c lexer.c utils.c splitter.c tokenizer.c env_list.c utils2.c $(wildcard builtins/*.c)
+
+# Directorio para objetos
+OBJDIR = objs
+BUILTINS_OBJDIR = $(OBJDIR)/builtins
+
+# Archivos objeto
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+BUILTINS_OBJS = $(addprefix $(BUILTINS_OBJDIR)/, $(notdir $(wildcard builtins/*.c:.c=.o)))
+
+# Rutas a las bibliotecas y opciones de cgit remoompilación
 CFLAGS = -Wall -Wextra -Werror -I /Users/$(USER)/.brew/opt/readline/include
-LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline
-RM = /bin/rm -rf
-OBJS = $(SRCS:%.c=objs/%.o)
-OBJS += libft/libft.a
+LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib
 
-$(NAME): objs $(OBJS)
-	cc $(LDFLAGS) $(OBJS) -o $(NAME)
-
+# Reglas para construir el ejecutable y otros objetivos
 all: $(NAME)
-clean:
-	$(RM) objs
-	make fclean -C libft
-fclean: clean
-	$(RM) $(NAME)
-re: fclean all
 
-libft/libft.a: 
-	make -C libft
-objs:
-	mkdir -p objs
-objs/%.o: %.c
+$(NAME): $(OBJS) $(BUILTINS_OBJS)
+	cc $(OBJS) $(BUILTINS_OBJS) -o $(NAME) $(LDFLAGS) -lreadline libft/libft.a
+
+$(OBJDIR)/%.o: %.c | $(OBJDIR)
 	cc $(CFLAGS) -c $< -o $@
 
-#malloc debug flags#
+$(BUILTINS_OBJDIR)/%.o: builtins/%.c | $(BUILTINS_OBJDIR)
+	cc $(CFLAGS) -c $< -o $@
 
-fclean_nolib:
-	$(RM) objs
-	$(RM) $(NAME)
-re_nolib: fclean_nolib all
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
-malloc_debug:: CFLAGS += -D MALLOC_DEBUG
-malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
-malloc_debug: fclean_nolib objs $(OBJS) objs/malloc_debug.o
-	cc $(LDFLAGS) $(OBJS) objs/malloc_debug.o -o $(NAME)
+$(BUILTINS_OBJDIR):
+	mkdir -p $(BUILTINS_OBJDIR)
 
-#sanitizer flags#
+# Limpieza de objetos y ejecutable
+clean:
+	rm -rf $(OBJDIR)
 
-sanitize:: CFLAGS += -fsanitize=address
-sanitize:: LDFLAGS += -fsanitize=address
-sanitize:: re_nolib
+fclean: clean
+	rm -f $(NAME)
 
+# Recompilación completa
+re: fclean all
 
-.PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug
+.PHONY: all clean fclean re

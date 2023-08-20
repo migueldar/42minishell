@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 03:48:31 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/18 15:22:02 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:09:05 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "lexer.h"
 # include "parser.h"
 # include "signal_handle.h"
-# include "exit_status.h"
+//# include "exit_status.h"
 # include "libft/libft.h"
 # include "builtins.h"
 # include "expander.h"
@@ -30,6 +30,6 @@
 # include <readline/history.h>
 # include <errno.h>
 
-int	g_exit_status;
+//int	g_exit_status;
 
 #endif

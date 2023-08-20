@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma < lucia-ma@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:13 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/19 03:05:16 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/20 16:32:10 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,11 @@ static t_redir_l	*expand_redirs(t_redir_l *redirs, t_env *env)
 static t_string_l	*expand_args(t_string_l *args, t_env *env)
 {
 	t_string_l	*ret;
-	int			counter;
+	//int			counter;
 
 	(void) env;
 	ret = NULL;
-	counter = 0;
+	//counter = 0;
 	while (args)
 	{
 		if (args->content)
