@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:13 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/20 18:48:38 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/20 22:41:09 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*expand_var(char *var, t_env *env)
 }
 
 //when enter here, $ is already gone
-char 	*expand_substring(char **str, t_env *env, char in_quote)
+char	*expand_substring(char **str, t_env *env, char in_quote)
 {
 	char	*to_expand;
 	char	*aux;
@@ -61,16 +61,37 @@ char 	*expand_substring(char **str, t_env *env, char in_quote)
 	return (expand_var("$", env));
 }
 
-//the return of this function must be t_string_l, susceptible to word_splitting expansions
-char	*expand_string(char *str, t_env *env)
+int	expand_dollar(char **str, t_env *env, char in_quote, t_string_l **curr)
 {
-	char	*ret;
-	char	*aux;
-	char	*aux2;
-	char	in_quote;
+	char		*aux;
+	t_string_l	*list_to_add;
+	int			status;
+	
+	(*str)++;
+	aux = expand_substring(str, env, in_quote);
+	(*str)--;
+	if (!aux)
+		return (1);
+	list_to_add = split_to_list(aux);
+	free(aux);
+	if (!list_to_add)
+		return (1);
+	status = lst_addback_append(curr, list_to_add);
+	if (status)
+		ft_lstclear((t_list **) &list_to_add, free);
+	return (status);
+}
 
-	ret = NULL;
-	in_quote = 0;
+t_string_l	*expand_string(char *str, t_env *env)
+{
+	t_string_l	*ret;
+	char		*aux;
+	char		in_quote;
+	int			status;
+
+	ret = (in_quote = 0, ft_calloc(1, sizeof (t_string_l)));
+	if (!ret)
+		return (NULL);
 	while (*str)
 	{
 		if (in_quote && *str == in_quote)
@@ -79,31 +100,21 @@ char	*expand_string(char *str, t_env *env)
 			in_quote = *str;
 		else if (*str == '$' && in_quote != 0x27)
 		{
-			str++;
-			aux2 = expand_substring(&str, env, in_quote);
-			if (!aux2)
-				return (free(ret), NULL);
-			aux = protected_strjoin(ret, aux2);
-			free(ret);
-			free(aux2);
-			if (!aux)
-				return (NULL);
-			ret = aux;
-			continue ;
+			status = expand_dollar(&str, env, in_quote, &ret);
+			if (status)
+				return (ft_lstclear((t_list **) &ret, free), NULL);
 		}
 		else
 		{
-			aux = protected_strcharjoin(ret, *str);
-			free(ret);
+			aux = protected_strcharjoin(ft_lstlast((t_list *) ret)->content, *str);
+			free(ft_lstlast((t_list *) ret)->content);
 			if (!aux)
 				return (NULL);
-			ret = aux;
+			ft_lstlast((t_list *) ret)->content = aux;
 		}
 		str++;
 	}
-	printf("%s\n", ret);
-	free(ret);
-	return NULL;
+	return (ret);
 }
 
 static t_redir_l	*expand_redirs(t_redir_l *redirs, t_env *env)
@@ -137,12 +148,16 @@ static t_string_l	*expand_args(t_string_l *args, t_env *env)
 
 //only error this can give is malloc fail
 //expands and gets rid of quotes
+//idk exactly how but take into count empty command, maybe in executer
 t_command_l *expander(t_command_l *cmds, t_env *env)
 {
 	t_command_l	*ret;
 	t_command_l	*aux;
+	t_string_l	*dummy;
 	
-	expand_string(cmds->cmd->args->content, env);
+	dummy = expand_string(cmds->cmd->args->content, env);
+	ft_lstiter((t_list *) dummy, (void (*)(void *)) cmd_args_printer);
+	//free(dummy);
 	ret = NULL;
 	while (cmds && NULL)
 	{

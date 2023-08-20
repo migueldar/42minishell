@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/22 23:03:44 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/22 23:04:44 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@
 # include "command.h"
 # include "libft.h"
 
-int		ft_isspace(char c);
-int		ft_isoperator(char c);
-void	free_arr_2(void **fr);
-void	command_l_printer(t_command_l *in);
-char	*protected_strjoin(char *s1, char *s2);
-size_t	protected_strlen(char const *str);
-char	*protected_strcharjoin(char *str, char c);
-int		is_empty(char const *str);
+int			ft_isspace(char c);
+int			ft_isoperator(char c);
+void		free_arr_2(void **fr);
+void		command_l_printer(t_command_l *in);
+char		*protected_strjoin(char *s1, char *s2);
+size_t		protected_strlen(char const *str);
+char		*protected_strcharjoin(char *str, char c);
+int			is_empty(char const *str);
+t_string_l	*split_to_list(char const *s);
+void		cmd_args_printer(char *str);
+int			lst_addback_append(t_string_l **head, t_string_l *add);
 
 #endif

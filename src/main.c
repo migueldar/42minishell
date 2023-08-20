@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/22 23:03:58 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/22 23:04:27 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ int main(int argc, char **argv, char **env)
 	t_env		*enviroment;
 	t_command_l *expanded_list;
 	
+
 	#ifdef MALLOC_DEBUG
 	atexit(leaks);
 	#endif
-	
+
 	((void) argc, (void) argv);
 	g_exit_status = ST_OK;
 	sig_setter(sig_handler_interactive);
