@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:13 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/19 03:05:16 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/20 18:48:38 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 // returns null if malloc fails
 char	*expand_var(char *var, t_env *env)
 {
+	if (!var)
+		return (NULL);
 	if (!ft_strncmp(var, "?", 2))
 		return (ft_itoa(g_exit_status));
 	if (!ft_strncmp(var, "$", 2))
@@ -29,17 +31,34 @@ char	*expand_var(char *var, t_env *env)
 	return (ft_strdup(""));
 }
 
-char 	*expand_substring(char **str, t_env *env)
+//when enter here, $ is already gone
+char 	*expand_substring(char **str, t_env *env, char in_quote)
 {
-	int	counter;
+	char	*to_expand;
+	char	*aux;
+	char	*ret;
 
-	(void) env;
-	counter = 0;
-	while ((*str)[counter])
+	if (ft_isalpha((*str)[0]) || (*str)[0] == '_')
 	{
-		 	
+		to_expand = NULL;
+		while (ft_isalnum(**str) || (**str == '_'))
+		{
+			aux = protected_strcharjoin(to_expand, **str);
+			free(to_expand);
+			if (!aux)
+				return (NULL);
+			to_expand = aux;
+			(*str)++;
+		}
+		ret = expand_var(to_expand, env);
+		free(to_expand);
+		return (ret);
 	}
-	return NULL;
+	else if ((*str)[0] == '?')
+		return ((*str)++, expand_var("?", env));
+	else if (((*str)[0] == 0x22 || (*str)[0] == 0x27) && !in_quote)
+		return (ft_strdup(""));
+	return (expand_var("$", env));
 }
 
 //the return of this function must be t_string_l, susceptible to word_splitting expansions
@@ -56,7 +75,23 @@ char	*expand_string(char *str, t_env *env)
 	{
 		if (in_quote && *str == in_quote)
 			in_quote = 0;
-		else if (in_quote == 0x27)
+		else if (!in_quote && (*str == 0x22 || *str == 0x27))
+			in_quote = *str;
+		else if (*str == '$' && in_quote != 0x27)
+		{
+			str++;
+			aux2 = expand_substring(&str, env, in_quote);
+			if (!aux2)
+				return (free(ret), NULL);
+			aux = protected_strjoin(ret, aux2);
+			free(ret);
+			free(aux2);
+			if (!aux)
+				return (NULL);
+			ret = aux;
+			continue ;
+		}
+		else
 		{
 			aux = protected_strcharjoin(ret, *str);
 			free(ret);
@@ -64,23 +99,10 @@ char	*expand_string(char *str, t_env *env)
 				return (NULL);
 			ret = aux;
 		}
-		else if (*str == '$')
-		{
-			aux2 = expand_substring(&str, env);
-			if (!aux2)
-				return (free(ret), NULL);
-			aux = protected_strjoin(ret, aux2);
-			free(ret);
-			free(aux2);
-			if (!aux)
-				return NULL;
-			ret = aux;
-		}
-		else if (!in_quote && (*str == 0x22 || *str == 0x27))
-			in_quote = *str;
 		str++;
 	}
 	printf("%s\n", ret);
+	free(ret);
 	return NULL;
 }
 

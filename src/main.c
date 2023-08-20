@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/22 20:58:05 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/22 23:03:58 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int main(int argc, char **argv, char **env)
 		raw = readline("$> ");
 		if (!raw)   // ctrl + D
 			break ; // will have to free all
-		add_history(raw); //dont add empty lines
+		if (!is_empty(raw))
+			add_history(raw); //dont add empty lines
 		expanded_list = complete_parser(raw, enviroment);
 		// executer
 		// ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
