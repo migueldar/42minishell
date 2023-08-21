@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
+#    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/22 20:57:40 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/08/23 18:07:41 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
