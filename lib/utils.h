@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
+<<<<<<< HEAD:lib/utils.h
 /*   Updated: 2023/08/22 20:53:38 by mde-arpe         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/21 22:29:46 by lucia-ma         ###   ########.fr       */
+>>>>>>> makefile hecho:libraries/utils.h
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +20,11 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include "command.h"
+<<<<<<< HEAD:lib/utils.h
 # include "libft.h"
+=======
+# include <libft.h>
+>>>>>>> makefile hecho:libraries/utils.h
 
 int		ft_isspace(char c);
 int		ft_isoperator(char c);
