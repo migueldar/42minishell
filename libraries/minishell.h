@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 03:48:31 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/17 00:47:21 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/21 22:30:20 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "parser.h"
 # include "signal_handle.h"
 # include "exit_status.h"
-# include "libft/libft.h"
+# include <libft.h>
 # include <stdio.h>
 # include <sys/stat.h>
 # include <readline/readline.h>

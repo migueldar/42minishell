@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:26:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/14 02:39:36 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/21 22:27:59 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LEXER_H
 
 # include <stdio.h>
-# include "libft/libft.h"
+# include "libft.h"
 # include "utils.h"
 
 typedef enum e_token_flag {

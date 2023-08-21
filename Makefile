@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/21 22:17:03 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/08/21 22:28:15 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ OBJS += libft/libft.a
 
 CC = gcc
 # Ruta decompilacin
-CFLAGS = -Wall -Wextra -Werror -I . -I /Users/$(USER)/.brew/opt/readline/include #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I libraries -I libft -I /Users/$(USER)/.brew/opt/readline/include #-fsanitize=address
 LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline #-fsanitize=address
 
 

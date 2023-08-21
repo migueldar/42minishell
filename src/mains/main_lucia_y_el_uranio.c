@@ -1,6 +1,6 @@
 #include <minishell.h>
 # include "builtins.h"
-# include "libft/libft.h"
+# include <libft.h>
 
 int main(int argc, char **argv, char **env)
 {
