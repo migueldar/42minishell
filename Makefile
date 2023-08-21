@@ -3,25 +3,74 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
+#    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/16 01:25:06 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/08/21 22:17:03 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
-SRCS = main.c lexer.c utils.c splitter.c tokenizer.c parser.c parser2.c not_final_utils.c signal_handle.c
-CFLAGS = -Wall -Wextra -Werror -I /Users/$(USER)/.brew/opt/readline/include #-fsanitize=address
-LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline #-fsanitize=address
-RM = /bin/rm -rf
-OBJS = $(SRCS:%.c=objs/%.o)
+# Nombre del ejecutable
+NAME := minishell
+
+# Archivos fuente principales
+SRCS := src/env/env_list.c \
+        src/lexer/lexer.c \
+        src/mains/main.c \
+        src/mains/main_lucia_y_el_uranio.c \
+        src/malloc/malloc_debug.c \
+        src/parser/parser.c \
+        src/parser/parser2.c \
+        src/signals/signal_handle.c \
+        src/splitter/splitter.c \
+        src/tokenizer/tokenizer.c \
+        src/utils/not_final_utils.c \
+        src/utils/utils.c \
+        src/utils/utils2.c
+
+# CC CFLAGS ... .c -> .o
+
+# Archivos objeto
+OBJS := $(SRCS:%.c=objs/%.o)
 OBJS += libft/libft.a
 
-$(NAME): objs $(OBJS)
-	cc $(LDFLAGS) $(OBJS) -o $(NAME)
+CC = gcc
+# Ruta decompilacin
+CFLAGS = -Wall -Wextra -Werror -I . -I /Users/$(USER)/.brew/opt/readline/include #-fsanitize=address
+LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline #-fsanitize=address
 
+
+RM = /bin/rm -rf
+
+# Reglas para construir el ejecutable y otros objetivos
 all: $(NAME)
+
+#crear la carpeta objs
+	
+objs:
+	@mkdir -p	objs/src/env \
+				objs/src/lexer \
+				objs/src/mains \
+				objs/src/malloc \
+				objs/src/parser \
+				objs/src/signals \
+				objs/src/splitter \
+				objs/src/tokenizer \
+				objs/src/utils
+
+#compilar src
+objs/%.o: %.c | objs
+	$(CC) $(CFLAGS) -c $< -o $@
+
+#enlazar objetos a OBJS
+$(NAME): $(OBJS)
+	$(CC) $(LDFLAGS) $(OBJS) -o $(NAME)
+
+#regla de compilacion libft
+libft/libft.a: 
+	make -C libft
+
+#reglas de limpieza
 clean:
 	$(RM) objs
 	make fclean -C libft
@@ -29,12 +78,7 @@ fclean: clean
 	$(RM) $(NAME)
 re: fclean all
 
-libft/libft.a: 
-	make -C libft
-objs:
-	mkdir -p objs
-objs/%.o: %.c
-	cc $(CFLAGS) -c $< -o $@
+	
 
 #malloc debug flags#
 

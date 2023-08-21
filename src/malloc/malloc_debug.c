@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 03:25:57 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/17 17:16:42 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/21 22:16:34 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifdef MALLOC_DEBUG
 
-#include "minishell.h"
+#include <minishell.h>
 #include "malloc_debug.h"
 
 void leaks() {
