@@ -9,7 +9,9 @@ int main(int argc, char **argv, char **env)
     if (argc && **argv)
     {
         envi = create_env_list(env);
-		ft_print_env(envi);
+		//ft_print_env(envi);
+        if(ft_strncmp(argv[1], "pwd", 3) == 0 && ft_strlen(argv[1]) == 3)
+            ft_pwd(envi);
 	    ft_lstclear((t_list **) &envi, (void (*)(void	*)) free_env_var);
     }
 

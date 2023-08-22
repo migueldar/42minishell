@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:27:41 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/16 21:29:13 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:52:48 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_env	*create_env_list(char **env);
 void	ft_print_array_bi(char **array);
 void    ft_env(t_env *envi);
 int		ft_echo(char ** argv);
-char    *get_pwd(char **env);
-int     *ft_pwd(char **env);
+char    *get_pwd(t_env *env);
+int     *ft_pwd(t_env *env);
 int     ft_cd(int argc, char **argv, char **env);
 void	free_env_var(t_env_var *env_var);
 

@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/21 22:28:15 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/08/22 16:51:34 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ SRCS := src/env/env_list.c \
         src/tokenizer/tokenizer.c \
         src/utils/not_final_utils.c \
         src/utils/utils.c \
-        src/utils/utils2.c
+        src/utils/utils2.c \
+		src/builtins/pwd.c \
+
 
 # CC CFLAGS ... .c -> .o
 
@@ -56,7 +58,8 @@ objs:
 				objs/src/signals \
 				objs/src/splitter \
 				objs/src/tokenizer \
-				objs/src/utils
+				objs/src/utils \
+				objs/src/builtins \
 
 #compilar src
 objs/%.o: %.c | objs
