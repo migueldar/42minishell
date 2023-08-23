@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/22 17:34:35 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/23 21:13:44 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,17 @@ char *get_pwd(t_env *env)
     return(NULL);
 }
 
-int *ft_pwd(t_env *env)
+int ft_pwd(void)
 {
     char *pwd;
-    pwd = get_pwd(env);
-    if(pwd)
-        printf("%s\n", pwd);
+    
+    pwd = NULL;
+    getcwd(pwd, 0);
+    printf("%s\n", pwd);
+    perror("getcwd");
+    if(pwd == NULL)
+        return(1);
+    printf("%s\n", pwd);
     return(0);
 }
 
