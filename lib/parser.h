@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:36:40 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/19 03:07:36 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/23 04:21:10 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "lexer.h"
 # include <stdio.h>
 # include "utils.h"
-# include "command.h"
+# include "structs.h"
 # include "builtins.h"
 
 t_command_l	*parser_handler(t_token_l *toks);

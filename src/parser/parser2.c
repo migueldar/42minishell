@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 00:40:39 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/15 00:41:58 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/23 02:56:30 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 
 void	free_redir(t_redir *redir)
 {
+	if (!redir)
+		return ;
 	free(redir->where);
 	free(redir);
 }
 
 void	free_cmd(t_command *cmd)
 {
-	ft_lstclear((t_list **) &(cmd->args), free);
-	ft_lstclear((t_list **) &(cmd->redirs), (void (*)(void *)) free_redir);
+	if (!cmd)
+		return ;
+	if (cmd->args)
+		ft_lstclear((t_list **) &(cmd->args), free);
+	if (cmd->redirs)
+		ft_lstclear((t_list **) &(cmd->redirs), (void (*)(void *)) free_redir);
 	free(cmd);
 }
 

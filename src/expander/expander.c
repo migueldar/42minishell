@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:13 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/20 22:41:09 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/23 03:30:54 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,60 +61,65 @@ char	*expand_substring(char **str, t_env *env, char in_quote)
 	return (expand_var("$", env));
 }
 
-int	expand_dollar(char **str, t_env *env, char in_quote, t_string_l **curr)
+t_exp_str	expand_dollar(char **str, t_env *env, char in_quote, int *status)
 {
-	char		*aux;
-	t_string_l	*list_to_add;
-	int			status;
-	
+	t_exp_str	ret;
+
 	(*str)++;
-	aux = expand_substring(str, env, in_quote);
+	ret.content = expand_substring(str, env, in_quote);
 	(*str)--;
-	if (!aux)
-		return (1);
-	list_to_add = split_to_list(aux);
-	free(aux);
-	if (!list_to_add)
-		return (1);
-	status = lst_addback_append(curr, list_to_add);
-	if (status)
-		ft_lstclear((t_list **) &list_to_add, free);
-	return (status);
+	if (!ret.content)
+		return (*status = 1, ret);
+	ret.was_expanded = full_string('1', ft_strlen(ret.content));
+	if (!ret.was_expanded)
+		return (*status = 1, ret);
+	return (*status = 0, ret);
 }
 
-t_string_l	*expand_string(char *str, t_env *env)
+t_exp_str	expand_string(char *str, t_env *env, int *status)
 {
-	t_string_l	*ret;
-	char		*aux;
+	t_exp_str	ret;
+	t_exp_str	aux;
+	t_exp_str	aux2;
 	char		in_quote;
-	int			status;
 
-	ret = (in_quote = 0, ft_calloc(1, sizeof (t_string_l)));
-	if (!ret)
-		return (NULL);
+	ret.content = NULL;
+	ret.was_expanded = NULL;
+	in_quote = 0;
 	while (*str)
 	{
 		if (in_quote && *str == in_quote)
 			in_quote = 0;
 		else if (!in_quote && (*str == 0x22 || *str == 0x27))
 			in_quote = *str;
-		else if (*str == '$' && in_quote != 0x27)
+		if (*str == '$' && in_quote != 0x27)
 		{
-			status = expand_dollar(&str, env, in_quote, &ret);
-			if (status)
-				return (ft_lstclear((t_list **) &ret, free), NULL);
+			aux = expand_dollar(&str, env, in_quote, status);
+			if (*status)
+				return (ret);
+			aux2.content = protected_strjoin(ret.content, aux.content);
+			free(ret.content);
+			free(aux.content);
+			aux2.was_expanded = protected_strjoin(ret.was_expanded, aux.was_expanded);
+			free(ret.was_expanded);
+			free(aux.was_expanded);
+			if (!aux2.content || !aux2.was_expanded)
+				return (*status = 1, ret);
+			ret = aux2;
 		}
 		else
 		{
-			aux = protected_strcharjoin(ft_lstlast((t_list *) ret)->content, *str);
-			free(ft_lstlast((t_list *) ret)->content);
-			if (!aux)
-				return (NULL);
-			ft_lstlast((t_list *) ret)->content = aux;
+			aux.content = protected_strcharjoin(ret.content, *str);
+			aux.was_expanded = protected_strcharjoin(ret.was_expanded, '0');
+			free(ret.content);
+			free(ret.was_expanded);
+			if (!aux.content || !aux.was_expanded)
+				return (*status = 1, ret);
+			ret = aux;
 		}
 		str++;
 	}
-	return (ret);
+	return ret;
 }
 
 static t_redir_l	*expand_redirs(t_redir_l *redirs, t_env *env)
@@ -153,10 +158,11 @@ t_command_l *expander(t_command_l *cmds, t_env *env)
 {
 	t_command_l	*ret;
 	t_command_l	*aux;
-	t_string_l	*dummy;
+	t_exp_str	dummy;
+	int			status;
 	
-	dummy = expand_string(cmds->cmd->args->content, env);
-	ft_lstiter((t_list *) dummy, (void (*)(void *)) cmd_args_printer);
+	dummy = expand_string(cmds->cmd->args->content, env, &status);
+	printf("expanded: %s\nwasexpanded: %s\n", dummy.content, dummy.was_expanded);
 	//free(dummy);
 	ret = NULL;
 	while (cmds && NULL)

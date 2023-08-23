@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/22 23:04:44 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/23 04:20:48 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include "command.h"
+# include "structs.h"
 # include "libft.h"
 
 int			ft_isspace(char c);
@@ -26,8 +26,9 @@ char		*protected_strjoin(char *s1, char *s2);
 size_t		protected_strlen(char const *str);
 char		*protected_strcharjoin(char *str, char c);
 int			is_empty(char const *str);
-t_string_l	*split_to_list(char const *s);
+t_exp_l		*split_to_list(t_exp_str exp);
 void		cmd_args_printer(char *str);
 int			lst_addback_append(t_string_l **head, t_string_l *add);
+char		*full_string(char c, size_t n);
 
 #endif

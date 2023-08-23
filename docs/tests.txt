@@ -8,3 +8,7 @@ THINGS TO TEST MINISHELL
 	- sleep 5 | cat << a | cat << b		should take 5 secs after heredocs are closed
 
 - cat | ls	closes after one intro, broken pipe, exit 0
+
+EXPANDER
+
+- 
