@@ -6,11 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:26:55 by mde-arpe          #+#    #+#             */
-<<<<<<< HEAD:lib/lexer.h
-/*   Updated: 2023/08/22 20:52:29 by mde-arpe         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/21 22:27:59 by lucia-ma         ###   ########.fr       */
->>>>>>> makefile hecho:libraries/lexer.h
+/*   Updated: 2023/08/23 18:14:26 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/23 18:13:01 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/08/23 18:15:25 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS := src/env/env_list.c \
         src/utils/not_final_utils.c \
         src/utils/utils.c \
         src/utils/utils2.c \
-		src/expander/expander.c 
+		src/expander/expander.c \
 		src/builtins/pwd.c \
 
 
@@ -55,7 +55,8 @@ objs:
 				objs/parser \
 				objs/signals \
 				objs/utils \
-				objs/expander
+				objs/expander \
+				objs/builtins \
 
 #compilar src
 objs/%.o: src/%.c | objs
