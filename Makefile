@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/23 18:15:25 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/08/24 18:56:35 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ NAME := minishell
 SRCS := src/env/env_list.c \
         src/main.c \
         src/main_lucia_y_el_uranio.c \
-        src/debug/malloc_debug.c \
         src/parser/parser.c \
         src/parser/parser2.c \
 		src/parser/complete_parser.c \
@@ -86,8 +85,12 @@ re_nolib: fclean_nolib all
 
 malloc_debug:: CFLAGS += -D MALLOC_DEBUG
 malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
-malloc_debug: fclean_nolib objs $(OBJS) objs/malloc_debug.o
-	cc $(LDFLAGS) $(OBJS) objs/malloc_debug.o -o $(NAME)
+malloc_debug: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
+	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
+
+#malloc lucia flags#
+malloc_debug_lucia:: CFLAGS += -D LUCIA
+malloc_debug_lucia: malloc_debug
 
 #sanitizer flags#
 sanitize:: CFLAGS += -fsanitize=address
