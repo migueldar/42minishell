@@ -6,11 +6,11 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 00:58:38 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/21 22:16:34 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:05:48 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
 
 void	sig_setter(sig_t func)
 {
