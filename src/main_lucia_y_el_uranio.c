@@ -13,7 +13,7 @@ int main(int argc, char **argv, char **env)
     {
         envi = create_env_list(env);
 		ft_print_env(envi);
-        if(ft_strncmp(argv[1], "pwd", 3) == 0 && ft_strlen(argv[1]) == 3)
+        if (ft_strncmp(argv[1], "pwd", 4) == 0 && ft_strlen(argv[1]) == 3)
         {
             ft_pwd();
 
@@ -21,7 +21,7 @@ int main(int argc, char **argv, char **env)
 	    ft_lstclear((t_list **) &envi, (void (*)(void	*)) free_env_var);
     }
 
-    return(0);
+    return (0);
 }
 
 #endif
