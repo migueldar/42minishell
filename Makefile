@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
+#    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/22 20:57:40 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/08/24 16:21:35 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRCS := src/env/env_list.c \
         src/utils/not_final_utils.c \
         src/utils/utils.c \
         src/utils/utils2.c \
-		src/expander/expander.c 
+		src/expander/expander.c \
+		src/builtins/cd.c \
 
 # Archivos objeto
 OBJS := $(SRCS:src/%.c=objs/%.o)
@@ -51,7 +52,8 @@ objs:
 				objs/parser \
 				objs/signals \
 				objs/utils \
-				objs/expander
+				objs/expander \
+				objs/builtins
 
 #compilar src
 objs/%.o: src/%.c | objs

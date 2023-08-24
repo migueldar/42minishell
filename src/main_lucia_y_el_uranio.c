@@ -16,6 +16,9 @@ int main(int argc, char **argv, char **env)
 	    ft_lstclear((t_list **) &envi, (void (*)(void	*)) free_env_var);
     }
 
+    if( argc >= 2 && ft_strncmp(argv[1], "cd", 2) == 0 && ft_strlen(argv[1]) == 2)
+        ft_cd(argc, argv, env);
+
     return(0);
 }
 
