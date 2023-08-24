@@ -6,60 +6,11 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 21:23:03 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/23 04:19:24 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/24 02:37:08 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static char	*next_word(t_exp_str exp, size_t *counter)
-// {
-// 	size_t	len;
-// 	char	*ret;
-
-// 	len = 0;
-// 	while ((exp.content)[counter + len] && !ft_isspace((*s)[len]))
-// 		len++;
-// 	ret = ft_calloc(len + 1, 1);
-// 	if (!ret)
-// 		return ( NULL);
-// 	counter = -1;
-// 	while (++counter < len)
-// 		ret[counter] = *((*s)++);
-// 	return (ret);
-// }
-
-// t_exp_l	*split_to_list(t_exp_str exp)
-// {
-// 	t_exp_l		*ret;
-// 	t_string_l	*new_n;
-// 	size_t		counter;
-// 	char		in_quote;
-
-// 	ret = NULL;
-// 	counter = 0;
-// 	in_quote = 0;
-// 	while ((exp.content)[counter])
-// 	{
-// 		if (in_quote && (exp.content)[counter] == in_quote)
-// 			in_quote = 0;
-// 		else if (!in_quote && ((exp.content)[counter] == 0x22 || (exp.content)[counter] == 0x27))
-// 			in_quote = (exp.content)[counter];
-// 		if (!ft_isspace(exp.content[counter]) && )
-// 		{			
-// 			new_n = ft_calloc(1, sizeof (t_exp_l));
-// 			if (!new_n)
-// 				return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_env_var), NULL);
-// 			new_n->content = next_word(&(exp.content));
-// 			if (!new_n->content)
-// 				return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_env_var), free(new_n), NULL);
-// 			ft_lstadd_back((t_list **) &ret, (t_list *) new_n);
-// 		}
-// 		else
-// 			counter++;
-// 	}
-// 	return (ret);
-// }
 
 //joins two list but the last content of head and 
 //the first content of add get joined in just one node

@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/23 04:20:48 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/24 03:26:05 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ char		*protected_strjoin(char *s1, char *s2);
 size_t		protected_strlen(char const *str);
 char		*protected_strcharjoin(char *str, char c);
 int			is_empty(char const *str);
-t_exp_l		*split_to_list(t_exp_str exp);
 void		cmd_args_printer(char *str);
 int			lst_addback_append(t_string_l **head, t_string_l *add);
 char		*full_string(char c, size_t n);
+void		print_exp_l(t_exp_l *in);
+void		print_string_l(t_string_l *in);
 
 #endif

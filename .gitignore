@@ -5,3 +5,4 @@ minishell
 .vscode
 objs
 helpers
+params

@@ -6,7 +6,7 @@
 #    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/23 03:22:33 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/08/24 04:20:54 by mde-arpe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ SRCS := src/env/env_list.c \
         src/utils/utils.c \
         src/utils/utils2.c \
 		src/utils/utils3.c \
-		src/expander/expander.c 
+		src/expander/expander.c \
+		src/expander/expander2.c \
+		src/expander/expander3.c \
 
 # Archivos objeto
 OBJS := $(SRCS:src/%.c=objs/%.o)

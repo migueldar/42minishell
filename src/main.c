@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/22 23:04:27 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/24 02:05:12 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ int main(int argc, char **argv, char **env)
 	g_exit_status = ST_OK;
 	sig_setter(sig_handler_interactive);
 	enviroment = create_env_list(env);
+	//delete later
+	// t_env *e;
+	// e = ft_calloc(16,1 );
+	// e->content = ft_calloc(16,1 );
+	// e->content->key = ft_strdup("z");
+	// e->content->value = ft_strdup("a a");
+	// ft_lstadd_back((t_list **) &enviroment, (t_list *) e);
+	//end delete
 	// ft_print_env(enviroment);
 	if (!enviroment)
 		return 1; //algun tipo de error de malloc
