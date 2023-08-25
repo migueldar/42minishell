@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/26 00:40:16 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/26 00:54:29 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,22 @@ int	ft_cd(t_env *envi, t_string_l *args)
 
 	value = 0;
 	if (args == NULL)
-		value = chdir(ft_getenv(envi, "HOME"));
-	if (value == -1)
 	{
-		ft_putendl_fd("cd: HOME not set", 2);
-		return (0);
+		value = chdir(ft_getenv(envi, "HOME"));
+		if (value == -1)
+			return ((ft_putendl_fd("cd: HOME not set", 2)), 0);
 	}
 	else
-		value = chdir(args->content);
-	if (value == -1)
 	{
-		ft_putendl_n_fd("cd: ", 2, 0);
-		ft_putendl_n_fd(args->content, 2, 0);
-		ft_putendl_n_fd(": ", 2, 0);
-		perror("");
-		return (1);
+		value = chdir(args->content);
+		if (value == -1)
+		{
+			ft_putendl_n_fd("cd: ", 2, 0);
+			ft_putendl_n_fd(args->content, 2, 0);
+			ft_putendl_n_fd(": ", 2, 0);
+			perror("");
+			return (1);
+		}
 	}
 	return (0);
 }

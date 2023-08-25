@@ -33,9 +33,8 @@ int	ft_what_builtin(t_string_l	*args, t_env *envi)
 	{
 		if (args->content && ft_strncmp(args->content, "cd", 3) == 0)
 		{
-			ft_cd(envi, args->next);
+			ft_cd(envi, args->next);			
 			return (0);
-
 		}
 		if (args->content && ft_strncmp(args->content, "pwd", 4) == 0)
 		{

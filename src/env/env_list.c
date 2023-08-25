@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/26 00:16:22 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/26 00:54:38 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ t_env	*create_env_list(char **env)
 		value = ft_noenv(&envi);
 		if (value == 1)
 			return (NULL);
-		ft_print_env(envi);
 		return (envi);
 	}
 	while (env[++counter])
