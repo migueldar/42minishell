@@ -32,7 +32,7 @@ void	print_exp_l(t_exp_l *in)
 
 	while (in)
 	{
-		printf("Param %d: %s   wasexpanded: %s\n", counter++, in->content->content, in->content->was_expanded);
+		printf("Param %d: %s   wasexpanded: %s\n", counter++, in->content->content, in->content->was_exp);
 		in = in->next;
 	}
 }

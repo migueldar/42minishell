@@ -5,131 +5,103 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 02:37:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/24 04:19:42 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/08/24 04:18:19 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/08/24 21:31:18 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_exp_str	*next_word(t_exp_str exp, size_t *cnt, char *in_quote)
+// if var doesnt exist in env returns ""
+// returns null if malloc fails
+static char	*expand_var(char *var, t_env *env)
 {
-	size_t		len;
-	size_t		filler;
-	t_exp_str	*ret;
-
-	len = 0;
-	ret = ft_calloc(1, sizeof(t_exp_str));
-	if (!ret)
+	if (!var)
 		return (NULL);
-	while (exp.content[len + *cnt] && !(ft_isspace(exp.content[len + *cnt]) && !(*in_quote) && (exp.was_expanded)[len + *cnt] == '1'))
+	if (!ft_strncmp(var, "?", 2))
+		return (ft_itoa(g_exit_status));
+	if (!ft_strncmp(var, "$", 2))
+		return (ft_strdup("$"));
+	while (env)
 	{
-		if (len > 0 && *in_quote && (exp.content)[len + *cnt] == *in_quote && (exp.was_expanded)[len + *cnt] == '0')
-			*in_quote = 0;
-		else if (len > 0 && !*in_quote && (((exp.content)[len + *cnt] == 0x22 || (exp.content)[len + *cnt] == 0x27) && (exp.was_expanded)[len + *cnt] == '0'))
-			*in_quote = (exp.content)[len + *cnt];
-		len++;
+		if (!ft_strncmp(var, env->content->key, ft_strlen(var) + 1))
+			return (ft_strdup(env->content->value));
+		env = env->next;
 	}
-	ret->content = ft_calloc(len + 1, 1);
-	ret->was_expanded = ft_calloc(len + 1, 1);
-	if (!ret->content || !ret->was_expanded)
-		return (free(ret->content), free(ret->was_expanded), free(ret), NULL);
-	filler = -1;
-	while (++filler < len)
-	{
-		(ret->content)[filler] = (exp.content)[*cnt];
-		(ret->was_expanded)[filler] = (exp.was_expanded)[*cnt];
-		(*cnt)++;
-	}
-	return (ret);
+	return (ft_strdup(""));
 }
 
-t_exp_l	*word_split(t_exp_str exp)
+//when enter here, $ is already gone
+static char	*expand_substring(char **str, t_env *env, char in_quote)
 {
-	t_exp_l		*ret;
-	t_exp_l		*new_n;
-	size_t		counter;
-	char		in_quote;
-
-	ret = NULL;
-	counter = 0;
-	in_quote = 0;
-	while ((exp.content)[counter])
-	{
-		if (in_quote && (exp.content)[counter] == in_quote && (exp.was_expanded)[counter] == '0')
-			in_quote = 0;
-		else if (!in_quote && (((exp.content)[counter] == 0x22 || (exp.content)[counter] == 0x27) && (exp.was_expanded)[counter] == '0'))
-			in_quote = (exp.content)[counter];
-		if (!(ft_isspace(exp.content[counter]) && !in_quote && (exp.was_expanded)[counter] == '1'))
-		{			
-			new_n = ft_calloc(1, sizeof (t_exp_l));
-			if (!new_n)
-				return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_env_var), NULL);
-			new_n->content = next_word(exp, &counter, &in_quote);
-			if (!new_n->content)
-				return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_env_var), free(new_n), NULL);
-			ft_lstadd_back((t_list **) &ret, (t_list *) new_n);
-		}
-		else
-			counter++;
-	}
-	if (!ret)
-	{
-		ret = ft_calloc(1, sizeof(t_exp_l));
-		ret->content = ft_calloc(1, sizeof(t_exp_str));
-		ret->content->content = ft_strdup("");
-		ret->content->was_expanded = ft_strdup("");
-	}
-	return (ret);
-}
-
-static char	*word_quote_removal(t_exp_str *exp)
-{
-	char	*ret;
+	char	*to_expand;
 	char	*aux;
-	char	in_quote;
-	size_t	counter;
+	char	*ret;
 
-	ret = ft_strdup("");
-	if (!ret)
-		return (NULL);
-	in_quote = 0;
-	counter = 0;
-	while ((exp->content)[counter])
+	if (ft_isalpha((*str)[0]) || (*str)[0] == '_')
 	{
-		if (in_quote && (exp->content)[counter] == in_quote && (exp->was_expanded)[counter] == '0')
-			in_quote = 0;
-		else if (!in_quote && ((exp->content)[counter] == 0x22 || (exp->content)[counter] == 0x27) && (exp->was_expanded)[counter] == '0')
-			in_quote = (exp->content)[counter];
-		else
+		to_expand = NULL;
+		while (ft_isalnum(**str) || (**str == '_'))
 		{
-			aux = protected_strcharjoin(ret, (exp->content)[counter]);
-			free(ret);
+			aux = protected_strcharjoin(to_expand, **str);
+			free(to_expand);
 			if (!aux)
 				return (NULL);
-			ret = aux;
+			to_expand = aux;
+			(*str)++;
 		}
-		counter++;
+		ret = expand_var(to_expand, env);
+		free(to_expand);
+		return (ret);
 	}
-	return (ret);
+	else if ((*str)[0] == '?')
+		return ((*str)++, expand_var("?", env));
+	else if (((*str)[0] == 0x22 || (*str)[0] == 0x27) && !in_quote)
+		return (ft_strdup(""));
+	return (expand_var("$", env));
 }
 
-t_string_l	*quote_removal(t_exp_l *exp_l)
+static t_exp_str	expand_dollar(char **str, t_env *env,
+						char in_quote, int *status)
 {
-	t_string_l	*ret;
-	t_string_l	*new_n;
+	t_exp_str	ret;
 
-	ret = NULL;
-	while (exp_l)
+	(*str)++;
+	ret.content = expand_substring(str, env, in_quote);
+	(*str)--;
+	if (!ret.content)
+		return (*status = 1, ret);
+	ret.was_exp = full_string('1', ft_strlen(ret.content));
+	if (!ret.was_exp)
+		return (free(ret.content), *status = 1, ret);
+	return (*status = 0, ret);
+}
+
+t_exp_str	expand_argument(char *str, t_env *env, int *status)
+{
+	t_exp_str	ret;
+	t_exp_str	aux;
+	t_exp_str	aux2;
+	char		in_quote;
+
+	init_to_zeros(&in_quote, &ret);
+	while (*str)
 	{
-		new_n = ft_calloc(1, sizeof (t_string_l));
-		if (!new_n)
-			return (NULL);
-		new_n->content = word_quote_removal(exp_l->content);
-		if (!new_n->content)
-			return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_env_var), free(new_n), NULL);
-		ft_lstadd_back((t_list **) &ret, (t_list *) new_n);
-		exp_l = exp_l->next;
+		in_quote = in_quote_switch(in_quote, *str);
+		if (*str == '$' && in_quote != 0x27)
+		{
+			aux2 = expand_dollar(&str, env, in_quote, status);
+			if (*status)
+				return (free_exp_str(ret), ret);
+			aux = protected_exp_join(ret, aux2.content, aux2.was_exp, 1);
+			free_exp_str(aux2);
+		}
+		else
+			aux = protected_exp_join(ret, str, "0", 0);
+		free_exp_str(ret);
+		if (!aux.content || !aux.was_exp)
+			return (free_exp_str(aux), *status = 1, ret);
+		ret = (str++, aux);
 	}
-	return (ret);
+	return (*status = 0, ret);
 }

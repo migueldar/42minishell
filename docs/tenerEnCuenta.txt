@@ -28,6 +28,7 @@ EXECUTER
 
 - si hay varios </<< se toma el ultimo solo, lo mismo con >/>>. Se prioriza el (>>/> o <</<) antes quel pipe (pero hay que abrir todos, por ejemplo si tenemos ls > a > b, a y b tienen que abrirse)
 - gestionar errores al abrir archivos y pipes, y en general en todas las syscalls
+- en el executer hay que tener en cuenta que los builtins en mayuscula valen (como PWD o pWd)
 
 
 FLOW OF INPUT TILL EXECUTED

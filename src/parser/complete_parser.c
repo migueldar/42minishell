@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 02:59:31 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/23 02:57:19 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/25 05:45:30 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ t_command_l	*complete_parser(char *raw, t_env *env)
 	ft_lstclear((t_list **) &tok_list, (void (*)(void *)) free_token);
 	if (!parsed_list)
 		return (NULL);
-	expanded_list = expander(parsed_list, env);
+	expanded_list = expander_handler(parsed_list, env);
+	command_l_printer(expanded_list);
 	ft_lstclear((t_list **) &parsed_list, (void (*)(void *)) free_cmd);
+	ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
 	return (expanded_list);
 }

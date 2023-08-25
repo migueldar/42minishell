@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:53:22 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/23 04:20:40 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/25 02:42:50 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,14 @@ typedef struct s_command_l {
 	struct s_command_l	*next;
 }	t_command_l;
 
-typedef struct	s_exp_str
-{
+typedef struct s_exp_str {
 	char	*content;
-	char	*was_expanded;
+	char	*was_exp;
 }	t_exp_str;
 
-typedef struct	s_exp_l
-{
+typedef struct s_exp_l {
 	t_exp_str		*content;
-	struct	s_exp_l	*next;
+	struct s_exp_l	*next;
 }	t_exp_l;
 
 #endif

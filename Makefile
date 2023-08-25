@@ -6,7 +6,7 @@
 #    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/24 04:20:54 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/08/25 05:09:05 by mde-arpe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,12 @@ SRCS := src/env/env_list.c \
         src/utils/utils2.c \
 		src/utils/utils3.c \
 		src/expander/expander.c \
+		src/expander/expander1.c \
 		src/expander/expander2.c \
 		src/expander/expander3.c \
+		src/expander/expander4.c \
+		src/expander/expander5.c \
+		src/expander/expander6.c \
 
 # Archivos objeto
 OBJS := $(SRCS:src/%.c=objs/%.o)
@@ -86,6 +90,12 @@ malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
 malloc_debug: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
+#leaks flags#
+leaks:: CFLAGS += -D MALLOC_DEBUG
+leaks:: CFLAGS += -D MALLOC_FAIL=-1
+leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
+	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
+
 #sanitizer flags#
 sanitize:: CFLAGS += -fsanitize=address -g3
 sanitize:: LDFLAGS += -fsanitize=address
@@ -96,4 +106,4 @@ lucia:: CFLAGS += -D LUCIA
 lucia:: all
 re_lucia:: fclean_nolib lucia
 
-.PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug sanitize lucia re_lucia
+.PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug sanitize lucia re_lucia leaks

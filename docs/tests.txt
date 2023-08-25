@@ -20,3 +20,10 @@ prev: export z='a a' && gcc helpers/parameters.c -o params
 - ./params "$z"$z"$z"	2 params	
 - ./params $z$z$z		4 params
 - ./params "$z"$z$z		3 params
+
+prev: export y='"a a"' && export x="'b b'" && gcc helpers/parameters.c -o params
+- ./params $x$y$y					4 params
+- ./params $x$y$y$y$x"'"'"'$x'"'	7 params
+
+prev: export w='" "' && gcc helpers/parameters.c -o params
+- ./params z$w-		2 params
