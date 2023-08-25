@@ -6,12 +6,11 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/26 01:05:43 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/26 01:31:53 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include "minishell.h"
 
 // int	ft_cd(int argc, char **argv, char **env)
 // {
