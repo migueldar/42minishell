@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
+#    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
 #    Updated: 2023/08/25 05:09:05 by mde-arpe         ###   ########.fr        #
@@ -35,6 +35,10 @@ SRCS := src/env/env_list.c \
 		src/expander/expander4.c \
 		src/expander/expander5.c \
 		src/expander/expander6.c \
+		src/builtins/pwd.c \
+
+
+# CC CFLAGS ... .c -> .o
 
 # Archivos objeto
 OBJS := $(SRCS:src/%.c=objs/%.o)
@@ -57,7 +61,8 @@ objs:
 				objs/parser \
 				objs/signals \
 				objs/utils \
-				objs/expander
+				objs/expander \
+				objs/builtins \
 
 #compilar src
 objs/%.o: src/%.c | objs
@@ -87,7 +92,7 @@ re_nolib: fclean_nolib all
 
 malloc_debug:: CFLAGS += -D MALLOC_DEBUG
 malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
-malloc_debug: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
+malloc_debug: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
 #leaks flags#
@@ -95,6 +100,10 @@ leaks:: CFLAGS += -D MALLOC_DEBUG
 leaks:: CFLAGS += -D MALLOC_FAIL=-1
 leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
+
+#malloc lucia flags#
+malloc_debug_lucia:: CFLAGS += -D LUCIA
+malloc_debug_lucia: malloc_debug
 
 #sanitizer flags#
 sanitize:: CFLAGS += -fsanitize=address -g3

@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_debug.c                                     :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 03:25:57 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 18:39:17 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
+/*   Updated: 2023/08/24 18:46:18 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef MALLOC_DEBUG
+#include "builtins.h"
 
-#include "minishell.h"
-#include "malloc_debug.h"
-
-void leaks() {
-	system("leaks -q minishell");
-}
-
-void	*malloc(size_t n)
+int	ft_pwd(void)
 {
-	static int cnt = 0;
+	char	*pwd;
 
-	
-	if (cnt == MALLOC_FAIL) {
-		// void	*ptr[100];
-		// int		size;
-		
-		// size = backtrace(ptr, 100);
-		// backtrace_symbols_fd(ptr, size, 1);
-		return (NULL);
-	}
-	cnt++;
-	return (calloc(n, 1));
+	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
+		return (1);
+	printf("%s\n", pwd);
+	free(pwd);
+	return (0);
 }
 
-#endif
