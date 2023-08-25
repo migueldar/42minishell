@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:27:41 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/25 15:28:38 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:18:03 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 //# include "minishell.h"
 #include "libft.h"
-#include "builtins.h"
 #include "command.h"
 #include "stdio.h"
 
