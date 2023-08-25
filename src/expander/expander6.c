@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 01:37:43 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 03:36:23 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:37:24 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_string_l	*quote_removal(t_exp_l *exp_l)
 	{
 		new_n = ft_calloc(1, sizeof (t_string_l));
 		if (!new_n)
-			return (NULL);
+			return (ft_lstclear((t_list **) &ret, free), NULL);
 		new_n->content = word_quote_removal(exp_l->content);
 		if (!new_n->content)
 			return (ft_lstclear((t_list **) &ret, free), free(new_n), NULL);

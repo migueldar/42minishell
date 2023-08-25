@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 02:46:20 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 02:47:49 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:26:27 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_exp_str	*next_word_ex(t_exp_str exp, size_t *cnt, char *in_quote)
 	if (!ret->content)
 		return (free(ret), NULL);
 	ret->was_exp = ft_calloc(len + 1, 1);
-	if (!ret->content)
+	if (!ret->was_exp)
 		return (free(ret->content), free(ret), NULL);
 	filler = -1;
 	while (++filler < len)

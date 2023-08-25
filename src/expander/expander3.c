@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:54 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/24 21:31:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:18:05 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,20 @@ t_exp_str	protected_exp_join(t_exp_str exp, char *cont,
 {
 	t_exp_str	ret;
 
+	ret.content = NULL;
+	ret.was_exp = NULL;
 	if (is_str == 1)
 	{
 		ret.content = protected_strjoin(exp.content, cont);
+		if (!ret.content)
+			return (ret);
 		ret.was_exp = protected_strjoin(exp.was_exp, was_e);
 	}
 	else
 	{
 		ret.content = protected_strcharjoin(exp.content, *cont);
+		if (!ret.content)
+			return (ret);
 		ret.was_exp = protected_strcharjoin(exp.was_exp, *was_e);
 	}
 	return (ret);
