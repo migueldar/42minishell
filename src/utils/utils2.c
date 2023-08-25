@@ -3,14 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/20 21:22:55 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/26 00:32:39 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+
+void	ft_putendl_n_fd(char *s, int fd, int n)
+{
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
+	if (n == 1)
+		write(fd, "\n", 1);
+}
+
+char	*ft_getenv(t_env	*envi, char *arr)
+{
+	while (envi)
+	{
+		if (ft_strncmp(envi->content->key, arr, ft_strlen(arr) + 1) == 0)
+			return (envi->content->value);
+		envi = envi->next;
+	}
+	return (NULL);
+}
+
+void	ft_printf_args(t_string_l *args)
+{
+	while (args)
+	{
+		printf("print args == %s\n", args->content);
+		args = args->next;
+	}
+}
 
 void	ft_print_array_bi(char **array)
 {

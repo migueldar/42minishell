@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/25 15:17:06 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/26 00:40:16 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,39 @@
 // 	}
 // 	return (0);
 // }
+
+
+//    ¿alguna posibilidad de que args o args->content sea nulo?
+
+// if (value == -1)
+//                 {
+//                         write(2, "bash: cd: ", 11); 
+//                         write(2, &argv[2][counter++], ft_strlen(argv[2]));
+//                         write(2, ": ", 2);
+//                         perror("");
+//                         return(1);
+//                 }
+
 int	ft_cd(t_env *envi, t_string_l *args)
 {
-	char	*pwd;
 	int		value;
 
-	if (!envi)
-		return (1);
-	pwd = getcwd(NULL, 0);
-	//    ¿alguna posibilidad de que args o args->content sea nulo?
-	if (!pwd)
-		return (1);
-	args = args->next;
+	value = 0;
 	if (args == NULL)
-		value = chdir(getenv("HOME"));
-	else
-	{
-		value = chdir(args->content);
-	}
+		value = chdir(ft_getenv(envi, "HOME"));
 	if (value == -1)
 	{
-		free(pwd);
+		ft_putendl_fd("cd: HOME not set", 2);
+		return (0);
+	}
+	else
+		value = chdir(args->content);
+	if (value == -1)
+	{
+		ft_putendl_n_fd("cd: ", 2, 0);
+		ft_putendl_n_fd(args->content, 2, 0);
+		ft_putendl_n_fd(": ", 2, 0);
+		perror("");
 		return (1);
 	}
 	return (0);
