@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:13 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 17:29:51 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/25 21:37:15 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ static char	*expand_redir(char *arg, t_env *env, int *status)
 }
 
 //return NULL if fail
-//status 0 malloc fail
-//status 1 ambigous redirect
+//stat 0 malloc fail
+//stat 1 ambigous redirect
 //can throw ambigous redirect if expanded is empty or is more than one in len
-static t_redir_l	*expand_redirs(t_redir_l *redirs, t_env *env, int *status)
+static t_redir_l	*expand_redirs(t_redir_l *redirs, t_env *env, int *stat)
 {
 	t_redir_l	*ret;
 	t_redir_l	*new_n;
@@ -90,21 +90,22 @@ static t_redir_l	*expand_redirs(t_redir_l *redirs, t_env *env, int *status)
 	{
 		new_n = ft_calloc(1, sizeof(t_redir_l));
 		if (!new_n)
-			return (ft_lstclear((t_list **) &ret,
-					(void (*)(void *)) free_redir), NULL);
+			return (ft_lstclear_redir_l(&ret), NULL);
 		new_n->redir = ft_calloc(1, sizeof(t_redir));
 		if (!new_n->redir)
-			return (ft_lstclear((t_list **) &ret,
-					(void (*)(void *)) free_redir), free(new_n), NULL);
-		new_n->redir->where = expand_redir(redirs->redir->where, env, status);
+			return (ft_lstclear_redir_l(&ret), free(new_n), NULL);
+		if (redirs->redir->flag != HERE_DOC)
+			new_n->redir->where = expand_redir(redirs->redir->where, env, stat);
+		else
+			new_n->redir->where = ft_strdup(redirs->redir->where);
 		if (!new_n->redir->where)
-			return (free(new_n->redir), ft_lstclear((t_list **) &ret,
-					(void (*)(void *)) free_redir), free(new_n), NULL);
+			return (free(new_n->redir), ft_lstclear_redir_l(&ret),
+				free(new_n), NULL);
 		new_n->redir->flag = redirs->redir->flag;
 		ft_lstadd_back((t_list **) &ret, (t_list *) new_n);
 		redirs = redirs->next;
 	}
-	return (*status = 0, ret);
+	return (*stat = 0, ret);
 }
 
 //can only fail bc of malloc fail
