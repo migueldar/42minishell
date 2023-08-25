@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/25 14:32:30 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/08/25 18:54:19 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,14 @@ SRCS := src/env/env_list.c \
         src/utils/not_final_utils.c \
         src/utils/utils.c \
         src/utils/utils2.c \
+		src/utils/utils3.c \
 		src/expander/expander.c \
+		src/expander/expander1.c \
+		src/expander/expander2.c \
+		src/expander/expander3.c \
+		src/expander/expander4.c \
+		src/expander/expander5.c \
+		src/expander/expander6.c \
 		src/builtins/pwd.c \
 		src/builtins/cd.c \
 
@@ -90,12 +97,18 @@ malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
 malloc_debug: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
+#leaks flags#
+leaks:: CFLAGS += -D MALLOC_DEBUG
+leaks:: CFLAGS += -D MALLOC_FAIL=-1
+leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
+	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
+
 #malloc lucia flags#
 malloc_debug_lucia:: CFLAGS += -D LUCIA
 malloc_debug_lucia: malloc_debug
 
 #sanitizer flags#
-sanitize:: CFLAGS += -fsanitize=address
+sanitize:: CFLAGS += -fsanitize=address -g3
 sanitize:: LDFLAGS += -fsanitize=address
 sanitize:: re_nolib
 
@@ -104,4 +117,4 @@ lucia:: CFLAGS += -D LUCIA
 lucia:: all
 re_lucia:: fclean_nolib lucia
 
-.PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug sanitize lucia re_lucia
+.PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug sanitize lucia re_lucia leaks
