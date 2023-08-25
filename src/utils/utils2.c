@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/19 01:11:33 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/20 21:22:55 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,17 @@ char	*protected_strcharjoin(char *str, char c)
 	}
 	ret[counter] = c;
 	return (ret);
+}
+
+int	is_empty(char const *str)
+{
+	while (str && *str)
+	{
+		if (!ft_isspace(*str))
+			return (0);
+		str++;
+	}
+	return (1);
 }
 
 /*void    ft_env(t_env *envi)

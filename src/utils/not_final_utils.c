@@ -25,3 +25,25 @@ void	command_l_printer(t_command_l *in)
 		in = in->next;
 	}	
 }
+
+void	print_exp_l(t_exp_l *in)
+{
+	int counter = 1;
+
+	while (in)
+	{
+		printf("Param %d: %s   wasexpanded: %s\n", counter++, in->content->content, in->content->was_exp);
+		in = in->next;
+	}
+}
+
+void	print_string_l(t_string_l *in)
+{
+	int counter = 1;
+
+	while (in)
+	{
+		printf("Param %d: %s\n", counter++, in->content);
+		in = in->next;
+	}
+}

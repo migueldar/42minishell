@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 19:24:23 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/16 00:41:59 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/23 02:41:40 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_token(t_token *token)
 {
+	if (!token)
+		return ;
 	free(token->content);
 	free(token);
 }

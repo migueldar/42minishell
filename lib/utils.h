@@ -15,15 +15,21 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include "command.h"
+# include "structs.h"
 # include "libft.h"
 
-int		ft_isspace(char c);
-int		ft_isoperator(char c);
-void	free_arr_2(void **fr);
-void	command_l_printer(t_command_l *in);
-char	*protected_strjoin(char *s1, char *s2);
-int		protected_strlen(char const *str);
-char	*protected_strcharjoin(char *str, char c);
+int			ft_isspace(char c);
+int			ft_isoperator(char c);
+void		free_arr_2(void **fr);
+void		command_l_printer(t_command_l *in);
+char		*protected_strjoin(char *s1, char *s2);
+size_t		protected_strlen(char const *str);
+char		*protected_strcharjoin(char *str, char c);
+int			is_empty(char const *str);
+void		cmd_args_printer(char *str);
+int			lst_addback_append(t_string_l **head, t_string_l *add);
+char		*full_string(char c, size_t n);
+void		print_exp_l(t_exp_l *in);
+void		print_string_l(t_string_l *in);
 
 #endif

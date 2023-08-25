@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.h                                          :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:53:22 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/14 18:55:39 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/25 02:42:50 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMAND_H
-# define COMMAND_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 typedef struct s_string_l
 {
@@ -45,5 +45,15 @@ typedef struct s_command_l {
 	t_command			*cmd;
 	struct s_command_l	*next;
 }	t_command_l;
+
+typedef struct s_exp_str {
+	char	*content;
+	char	*was_exp;
+}	t_exp_str;
+
+typedef struct s_exp_l {
+	t_exp_str		*content;
+	struct s_exp_l	*next;
+}	t_exp_l;
 
 #endif
