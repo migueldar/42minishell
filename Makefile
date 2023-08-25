@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/25 18:54:19 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/08/26 01:06:36 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,20 +27,7 @@ SRCS := src/env/env_list.c \
         src/utils/not_final_utils.c \
         src/utils/utils.c \
         src/utils/utils2.c \
-		src/utils/utils3.c \
-		src/expander/expander.c \
-		src/expander/expander1.c \
-		src/expander/expander2.c \
-		src/expander/expander3.c \
-		src/expander/expander4.c \
-		src/expander/expander5.c \
-		src/expander/expander6.c \
-		src/builtins/pwd.c \
-		src/builtins/cd.c \
-
-
-
-# CC CFLAGS ... .c -> .o
+		src/expander/expander.c 
 
 # Archivos objeto
 OBJS := $(SRCS:src/%.c=objs/%.o)
@@ -63,8 +50,7 @@ objs:
 				objs/parser \
 				objs/signals \
 				objs/utils \
-				objs/expander \
-				objs/builtins \
+				objs/expander
 
 #compilar src
 objs/%.o: src/%.c | objs
