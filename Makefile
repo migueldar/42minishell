@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/24 18:56:35 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/08/25 14:32:30 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ SRCS := src/env/env_list.c \
         src/utils/utils2.c \
 		src/expander/expander.c \
 		src/builtins/pwd.c \
+		src/builtins/cd.c \
+
 
 
 # CC CFLAGS ... .c -> .o
