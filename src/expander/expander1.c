@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 05:01:05 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/28 01:40:02 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/28 01:47:46 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*quote_removal_heredoc(char *str)
 			if (!aux)
 				return (NULL);
 			ret = aux;
-		} 
+		}
 		str++;
 	}
 	return (ret);
