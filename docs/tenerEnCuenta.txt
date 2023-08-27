@@ -55,3 +55,4 @@ ENV
 OTHER
 
 When executing multiple commnands, separated by pipes, a subshell for each command must be generated. This means that for example the command 'cd dir | echo a' wont cd us to dir, because it well get executed in a subshell(similarly to a script)  
+cd '' doesnt change directory
