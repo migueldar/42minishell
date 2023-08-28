@@ -6,17 +6,17 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:27:41 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/26 00:32:53 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:46:08 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-//# include "minishell.h"
-#include "libft.h"
-#include "structs.h"
-#include "stdio.h"
+# include "libft.h"
+# include "structs.h"
+# include "stdio.h"
+# include "utils.h"
 
 
 typedef struct s_env_var
@@ -31,7 +31,6 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-void	ft_putendl_n_fd(char *s, int fd, int n);
 char	*ft_getenv(t_env	*envi, char *arr);
 void	ft_printf_args(t_string_l *args);
 void	ft_print_env(t_env *envi);

@@ -6,20 +6,22 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/26 00:32:39 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:08:45 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-void	ft_putendl_n_fd(char *s, int fd, int n)
+void	ft_printerror(int first, char *s, int n)
 {
 	if (!s)
 		return ;
-	write(fd, s, ft_strlen(s));
+	if (first == 1)
+		write(2, "minishell: ", 11);
+	write(2, s, ft_strlen(s));
 	if (n == 1)
-		write(fd, "\n", 1);
+		write(2, "\n", 1);
 }
 
 char	*ft_getenv(t_env	*envi, char *arr)
@@ -31,27 +33,6 @@ char	*ft_getenv(t_env	*envi, char *arr)
 		envi = envi->next;
 	}
 	return (NULL);
-}
-
-void	ft_printf_args(t_string_l *args)
-{
-	while (args)
-	{
-		printf("print args == %s\n", args->content);
-		args = args->next;
-	}
-}
-
-void	ft_print_array_bi(char **array)
-{
-	int	y;
-
-	y = 0;
-	while (array[y])
-	{
-		printf("array  ==  %s\n", array[y]);
-		y ++;
-	}
 }
 
 void	ft_print_env(t_env *envi)
