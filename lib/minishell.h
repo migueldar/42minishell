@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 03:48:31 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/23 18:14:46 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/28 04:01:03 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "libft.h"
 # include "builtins.h"
 # include "expander.h"
+# include "executer.h"
 # include <stdio.h>
 # include <sys/stat.h>
 # include <readline/readline.h>
