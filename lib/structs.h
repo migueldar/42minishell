@@ -3,15 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:53:22 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 02:42:50 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:27:05 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct s_env_var
+{
+	char	*key;
+	char	*value; 
+}	t_env_var;
+
+typedef struct s_env
+{
+	t_env_var		*content;
+	struct s_env	*next;
+}	t_env;
 
 typedef struct s_string_l
 {
@@ -55,5 +67,8 @@ typedef struct s_exp_l {
 	t_exp_str		*content;
 	struct s_exp_l	*next;
 }	t_exp_l;
+
+
+t_env_var	*create_env_var(char *env);
 
 #endif

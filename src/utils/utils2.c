@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/20 21:22:55 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:05:01 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_printerror(int first, char *s, int n)
+{
+	if (!s)
+		return ;
+	if (first == 1)
+		write(2, "minishell: ", 11);
+	write(2, s, ft_strlen(s));
+	if (n == 1)
+		write(2, "\n", 1);
+}
 
 void	ft_print_array_bi(char **array)
 {
