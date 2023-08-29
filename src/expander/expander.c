@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:13 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 21:37:15 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/28 01:41:53 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static t_redir_l	*expand_redirs(t_redir_l *redirs, t_env *env, int *stat)
 		if (redirs->redir->flag != HERE_DOC)
 			new_n->redir->where = expand_redir(redirs->redir->where, env, stat);
 		else
-			new_n->redir->where = ft_strdup(redirs->redir->where);
+			new_n->redir->where = quote_removal_heredoc(redirs->redir->where);
 		if (!new_n->redir->where)
 			return (free(new_n->redir), ft_lstclear_redir_l(&ret),
 				free(new_n), NULL);

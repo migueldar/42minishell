@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:09 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 21:30:22 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/28 01:40:41 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void		ft_lstclear_cmd_l(t_command_l **tofree);
 t_command_l	*expander_handler(t_command_l *cmds, t_env *env);
 void		ft_lstclear_exp_l(t_exp_l **tofree);
 void		ft_lstclear_redir_l(t_redir_l **tofree);
+char		*quote_removal_heredoc(char *str);
 
 #endif
