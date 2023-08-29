@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/28 16:00:38 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/29 10:36:53 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "structs.h"
 # include "libft.h"
 
+void        ft_print_array_bi(char **array);
+char        *ft_getenv(t_env	*envi, char *arr);
+void        ft_printf_args(t_string_l *args);
 void	    ft_printerror(int first, char *s, int n);
 int			ft_isspace(char c);
 int			ft_isoperator(char c);

@@ -6,12 +6,12 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/28 16:08:45 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:08:56 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
+// #include "minishel.h"
+#include "utils.h"
 
 void	ft_printerror(int first, char *s, int n)
 {
@@ -26,10 +26,15 @@ void	ft_printerror(int first, char *s, int n)
 
 char	*ft_getenv(t_env	*envi, char *arr)
 {
+	char	*dup;
+
 	while (envi)
 	{
 		if (ft_strncmp(envi->content->key, arr, ft_strlen(arr) + 1) == 0)
-			return (envi->content->value);
+		{
+			dup = ft_strdup(envi->content->value);
+			return (dup);
+		}
 		envi = envi->next;
 	}
 	return (NULL);

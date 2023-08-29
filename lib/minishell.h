@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 03:48:31 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/23 18:14:46 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:01:04 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "signal_handle.h"
 # include "exit_status.h"
 # include "libft.h"
+# include "structs.h"
 # include "builtins.h"
 # include "expander.h"
 # include <stdio.h>

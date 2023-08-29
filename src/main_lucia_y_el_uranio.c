@@ -1,6 +1,7 @@
 #ifdef LUCIA
 
 #include "minishell.h"
+#include "structs.h"
 ///# include "builtins.h"
 //# include "libft.h"
 
@@ -48,28 +49,56 @@ int	ft_what_builtin(t_string_l	*args, t_env *envi)
 	return (0);
 }
 
-int main(int argc, char **argv, char **env)
+// int	new_comando(t_string_l	**head, char *argv)
+// {
+// 	t_string_l	*new;
+
+// 	new = ft_calloc(sizeof(t_string_l *), 1);
+// 	if (!new)
+// 		return (1);
+// 	new->content = ft_strdup(argv);
+// 	if (!new->content)
+// 		return (1);
+// 	new->next = NULL;
+// 		printf("aaaa\n");
+// 	if(!*head)
+// 	{
+// 		printf("if\n");
+// 		*head = new;
+// 	}
+// 	else
+// 	{
+// 		printf("else\n");
+// 		(*head)->next = new;
+// 		new->next = NULL;
+// 	}
+// 	return (0);
+// }
+
+int	main(int argc, char **argv, char **env)
 {
 	char		*raw;
 	t_env		*enviroment;
 	t_command_l *expanded_list;
+	
+
 	#ifdef MALLOC_DEBUG
 	atexit(leaks);
 	#endif
-	
+
 	((void) argc, (void) argv);
 	g_exit_status = ST_OK;
 	sig_setter(sig_handler_interactive);
 	enviroment = create_env_list(env);
-	// ft_print_env(enviroment);
 	if (!enviroment)
-		return 1; //algun tipo de error de malloc
+		return (1); //algun tipo de error de malloc
 	while (1)
 	{
 		raw = readline("$> ");
 		if (!raw)   // ctrl + D
 			break ; // will have to free all
-		add_history(raw); //dont add empty lines
+		if (!is_empty(raw))
+			add_history(raw); //dont add empty lines
 		expanded_list = complete_parser(raw, enviroment);
 		ft_what_builtin(expanded_list->cmd->args, enviroment);
 		// executer
