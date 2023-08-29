@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 03:25:57 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/29 11:10:28 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/29 12:53:43 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	*malloc(size_t n)
 
 	
 	if (cnt == MALLOC_FAIL) {
-		void	*ptr[100];
-		int		size;
+		// void	*ptr[100];
+		// int		size;
 		
-		size = backtrace(ptr, 100);
-		backtrace_symbols_fd(ptr, size, 1);
+		// size = backtrace(ptr, 100);
+		// backtrace_symbols_fd(ptr, size, 1);
 		return (NULL);
 	}
 	cnt++;
