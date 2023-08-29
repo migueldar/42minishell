@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/29 10:42:04 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:05:33 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_cd(t_env *envi, t_string_l *args)
 	int		value;
 
 	value = 0;
-	if (args == NULL)
+	if (args == NULL || ft_strncmp(args->content, "", 2) == 0)
 	{
 		value = chdir(ft_getenv(envi, "HOME"));
 		if (value == -1)

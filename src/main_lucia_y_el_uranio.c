@@ -46,8 +46,8 @@ int	ft_what_builtin(t_string_l	*args, t_env *envi)
 	}
 
 
-	return (0);
-}
+ 	return (0);
+ }
 
 // int	new_comando(t_string_l	**head, char *argv)
 // {
@@ -73,6 +73,42 @@ int	ft_what_builtin(t_string_l	*args, t_env *envi)
 // 		new->next = NULL;
 // 	}
 // 	return (0);
+// }
+
+// int	main(int argc, char **argv, char **env)
+// {
+// 	int counter;
+// 	t_string_l	*headcomando;
+// 	t_env *enviroment;
+// 	int co;
+
+// 	co = 1;
+// 	if (argc <= 1)
+// 	{
+// 		return (1);
+// 	}
+// 	enviroment = create_env_list(env);
+// 	if (!enviroment)
+//  		return (1);
+// 	counter = 1;
+// 	while (argv[counter])
+// 		counter ++;
+// 	counter -= 2;
+// 	new_comando(&headcomando, argv[co]);
+// 	printf("comando %s\n", headcomando->content);
+// 	co ++;
+
+// 	while (counter)
+// 	{
+// 		new_comando(&headcomando, argv[co]);
+// 		printf("comando %s\n", headcomando->next->content);
+// 		printf("counter %d\n", counter);
+// 		counter --;
+// 		co ++;
+// 	}
+// 	ft_what_builtin(headcomando, enviroment);
+// 	return (0);
+
 // }
 
 int	main(int argc, char **argv, char **env)
