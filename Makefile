@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/26 01:30:20 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/08/29 17:19:26 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,9 @@ leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
 #malloc lucia flags#
 malloc_debug_lucia:: CFLAGS += -D LUCIA
 malloc_debug_lucia: malloc_debug
+
+leaks_lucia:: CFLAGS += -D LUCIA
+leaks_lucia: leaks
 
 #sanitizer flags#
 sanitize:: CFLAGS += -fsanitize=address -g3

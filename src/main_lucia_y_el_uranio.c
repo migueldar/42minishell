@@ -39,6 +39,7 @@ int	ft_what_builtin(t_string_l	*args, t_env *envi)
 		}
 		if (args->content && ft_strncmp(args->content, "pwd", 4) == 0)
 		{
+			printf("PWD\n");
 			ft_pwd();
 			return (0);
 		}
@@ -138,7 +139,7 @@ int	main(int argc, char **argv, char **env)
 		expanded_list = complete_parser(raw, enviroment);
 		ft_what_builtin(expanded_list->cmd->args, enviroment);
 		// executer
-		// ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
+		ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
 	}
 	ft_lstclear((t_list **) &enviroment, (void (*)(void *)) free_env_var);
 	clear_history();
