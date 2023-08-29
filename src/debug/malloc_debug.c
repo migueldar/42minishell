@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 03:25:57 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 19:16:08 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/29 04:10:35 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	*malloc(size_t n)
 		
 		// size = backtrace(ptr, 100);
 		// backtrace_symbols_fd(ptr, size, 1);
+		errno = ENOMEM;
 		return (NULL);
 	}
 	cnt++;

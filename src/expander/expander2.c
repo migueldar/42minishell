@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 04:18:19 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/24 21:31:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/29 03:15:54 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*expand_var(char *var, t_env *env)
 }
 
 //when enter here, $ is already gone
-static char	*expand_substring(char **str, t_env *env, char in_quote)
+char	*expand_substring(char **str, t_env *env, char in_quote)
 {
 	char	*to_expand;
 	char	*aux;
