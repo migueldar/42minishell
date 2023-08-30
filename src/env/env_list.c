@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/24 18:29:30 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/29 12:32:43 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,51 @@ t_env_var	*create_env_var(char *env)
 	length = 0;
 	env_var = ft_calloc(1, sizeof(t_env_var));
 	if (!env_var)
-		return (NULL);
+		return (write(2, "malloc env fail in env 3\n", 24), NULL);
 	while (env[length] && env[length] != '=')
 		length ++;
 	env_var->key = ft_calloc(sizeof(char), length + 1);
 	if (!env_var->key)
-		return (free_env_var(env_var), NULL);
+		return (write(2, "malloc env fail in env 4\n", 24), free_env_var(env_var), NULL);
 	put_content(length, &env_var->key, &env);
 	length = ft_strlen(env);
 	env_var->value = ft_calloc(sizeof(char), length);
 	if (!env_var->value)
-		return (free_env_var(env_var), NULL);
+		return (write(2, "malloc env fail in env 5\n", 24), free_env_var(env_var), NULL);
 	env++;
 	put_content(length, &env_var->value, &env);
 	return (env_var);
+}
+
+t_env	*ft_noenv(t_env *envi)
+{
+	t_env	*new;
+
+	new = ft_calloc(1, sizeof (t_env));
+	if (new == NULL)
+		return (NULL);
+	new->next = NULL;
+	ft_lstadd_back((t_list **)&envi, (t_list *)new);
+	envi->content = ft_calloc(1, sizeof(t_env_var));
+	if (envi->content == NULL)
+		return (NULL);
+	envi->next->content->key = ft_strdup("SHLVL");
+	if (envi->next->content->key == NULL)
+		return (NULL);
+	envi->next->content->value = ft_strdup("1");
+	if (envi->next->content->value == NULL)
+		return (NULL);
+	return (envi);
+}
+
+void	ft_env_return_error(t_env	*envi, char *message)
+{
+	while (message)
+	{
+		write(2, message, 1);
+		message ++;
+	}
+	ft_lstclear((t_list **) &envi, (void (*)(void *)) free_env_var);
 }
 
 // handle empty env, shouldnt return NULL
@@ -65,21 +96,26 @@ t_env	*create_env_list(char **env)
 	t_env	*new;
 	int		counter;
 
-	counter = -1;
-	envi = NULL;
+	envi = ((counter = -1), NULL);
+	if (!*env)
+	{
+		if (ft_noenv(envi) == NULL)
+			return (write(2, "malloc env fail in env NO_ENV\n", 24), NULL);
+		return (envi);
+	}
 	while (env[++counter])
 	{
 		new = ft_calloc(1, sizeof (t_env));
 		if (!new)
 		{
-			write(2, "malloc env fail in env\n", 24);
+			write(2, "malloc env fail in env 1\n", 24);
 			ft_lstclear((t_list **) &envi, (void (*)(void *)) free_env_var);
 			return (NULL);
 		}
 		new->content = create_env_var(env[counter]);
 		if (!new->content)
 		{
-			write(2, "malloc env fail in env\n", 24);
+			write(2, "malloc env fail in env 2\n", 24);
 			ft_lstclear((t_list **) &envi, (void (*)(void *)) free_env_var);
 			return (free(new), NULL);
 		}

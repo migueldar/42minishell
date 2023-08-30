@@ -6,22 +6,40 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/20 21:22:55 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/30 23:45:15 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishel.h"
+#include "utils.h"
 
-void	ft_print_array_bi(char **array)
+void	ft_printerror(int first, char *s, int n)
 {
-	int	y;
+	if (!s)
+		return ;
+	if (first == 1)
+		write(2, "minishell: ", 11);
+	write(2, s, ft_strlen(s));
+	if (n == 1)
+		write(2, "\n", 1);
+}
 
-	y = 0;
-	while (array[y])
+//return NULL if fail
+//status 0 malloc fail
+//status 1 not found
+char	*ft_getenv(t_env *envi, char *arr, int *status)
+{
+	while (envi)
 	{
-		printf("array  ==  %s\n", array[y]);
-		y ++;
+		if (ft_strncmp(envi->content->key, arr, ft_strlen(arr) + 1) == 0)
+		{
+			if (!envi->content->value)
+				break ;
+			return (ft_strdup(envi->content->value));
+		}
+		envi = envi->next;
 	}
+	return (*status = 1, NULL);
 }
 
 void	ft_print_env(t_env *envi)

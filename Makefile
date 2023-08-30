@@ -6,7 +6,7 @@
 #    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/30 04:53:38 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/08/29 17:19:26 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS := src/env/env_list.c \
 		src/expander/expander5.c \
 		src/expander/expander6.c \
 		src/builtins/pwd.c \
+		src/builtins/cd.c \
 		src/executer/executer.c \
 		src/executer/here_doc.c \
 		src/executer/here_doc_utils.c \
@@ -116,6 +117,9 @@ leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
 #malloc lucia flags#
 malloc_debug_lucia:: CFLAGS += -D LUCIA
 malloc_debug_lucia: malloc_debug
+
+leaks_lucia:: CFLAGS += -D LUCIA
+leaks_lucia: leaks
 
 #sanitizer flags#
 sanitize:: CFLAGS += -fsanitize=address -g3

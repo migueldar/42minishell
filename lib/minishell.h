@@ -20,6 +20,7 @@
 # include "signal_handle.h"
 # include "exit_status.h"
 # include "libft.h"
+# include "structs.h"
 # include "builtins.h"
 # include "expander.h"
 # include "executer.h"

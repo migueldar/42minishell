@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/23 18:14:51 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/30 23:18:22 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include "structs.h"
 # include "libft.h"
 
+void        ft_print_array_bi(char **array);
+char		*ft_getenv(t_env *envi, char *arr, int *status);
+void        ft_printf_args(t_string_l *args);
+void	    ft_printerror(int first, char *s, int n);
 int			ft_isspace(char c);
 int			ft_isoperator(char c);
 void		free_arr_2(void **fr);
