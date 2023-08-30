@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/29 11:08:56 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/30 23:45:15 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,22 @@ void	ft_printerror(int first, char *s, int n)
 		write(2, "\n", 1);
 }
 
-char	*ft_getenv(t_env	*envi, char *arr)
+//return NULL if fail
+//status 0 malloc fail
+//status 1 not found
+char	*ft_getenv(t_env *envi, char *arr, int *status)
 {
-	char	*dup;
-
 	while (envi)
 	{
 		if (ft_strncmp(envi->content->key, arr, ft_strlen(arr) + 1) == 0)
 		{
-			dup = ft_strdup(envi->content->value);
-			return (dup);
+			if (!envi->content->value)
+				break ;
+			return (ft_strdup(envi->content->value));
 		}
 		envi = envi->next;
 	}
-	return (NULL);
+	return (*status = 1, NULL);
 }
 
 void	ft_print_env(t_env *envi)
