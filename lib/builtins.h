@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:27:41 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/29 11:03:24 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:00:36 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 # include "structs.h"
-# include "stdio.h"
+# include <stdio.h>
 # include "utils.h"
 
 void	ft_print_env(t_env *envi);
