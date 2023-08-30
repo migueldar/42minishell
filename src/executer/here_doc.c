@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:57:26 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/30 02:51:26 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/30 04:45:39 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,23 @@ static t_redir_l	*resolve_redirs_heredoc(t_redir_l *redirs,
 {
 	t_redir_l	*ret;
 	t_redir_l	*new_n;
+	t_redir_l	*redirs_head;
 
 	ret = NULL;
+	redirs_head = redirs;
 	while (redirs)
 	{
 		new_n = ft_calloc(1, sizeof(t_redir_l));
 		if (!new_n)
-			return (ft_lstclear_redir_l(&ret), NULL);
+			return (unlink_all_heredoc_redir(ret),
+				ft_lstclear_redir_l(&ret), NULL);
 		if (redirs->redir->flag != HERE_DOC)
 			new_n->redir = redirdup(redirs->redir);
 		else
 			new_n->redir = transform_heredoc(redirs->redir, env, status);
 		if (!new_n->redir)
-			return (ft_lstclear_redir_l(&ret), free(new_n), NULL);
+			return (unlink_all_heredoc_redir(ret),
+				ft_lstclear_redir_l(&ret), free(new_n), NULL);
 		ft_lstadd_back((t_list **) &ret, (t_list *) new_n);
 		redirs = redirs->next;
 	}
@@ -108,7 +112,7 @@ int	resolve_heredocs(t_command_l *commands, t_env *env)
 {
 	t_redir_l	*aux;
 	int			status;
-	t_command_l *cmds_head;
+	t_command_l	*cmds_head;
 
 	status = 0;
 	cmds_head = commands;
@@ -117,13 +121,12 @@ int	resolve_heredocs(t_command_l *commands, t_env *env)
 		aux = resolve_redirs_heredoc(commands->cmd->redirs, env, &status);
 		if (!aux && commands->cmd->redirs)
 		{
-			unlink_all_heredoc(cmds_head, commands);
+			unlink_all_heredoc_cmd(cmds_head, commands);
 			if (status == 3)
-				write(2, "minishell: too many heredocs, \
-					cannot create file in /tmp\n", 58);
+				write(2, "minishell: heredoc: cant create file in /tmp\n", 46);
 			else if (status == 0 || status == 2)
 				perror("minishell");
-			return (status);
+			return (1);
 		}
 		ft_lstclear_redir_l(&(commands->cmd->redirs));
 		commands->cmd->redirs = aux;

@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:10:47 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/30 02:52:06 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/30 04:14:08 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*temp_name(int *status)
 	char	*name;
 
 	i = -1;
-	while (++i < 100000)
+	while (++i <= 0x7ffffff)
 	{
 		itoaed = ft_itoa(i);
 		if (!itoaed)
@@ -108,21 +108,4 @@ char	*execute_heredoc_settup(char *del, int *fd, char **file_name, int *stat)
 	if (!exp_del)
 		return (unlink(*file_name), free(*file_name), NULL);
 	return (exp_del);
-}
-
-void	unlink_all_heredoc(t_command_l *first, t_command_l *last)
-{
-	t_redir_l	*redirs_cpy;
-
-	while (first != last)
-	{
-		redirs_cpy = first->cmd->redirs;
-		while (redirs_cpy)
-		{
-			if (redirs_cpy->redir->flag == HERE_DOC)
-				unlink(redirs_cpy->redir->where);
-			redirs_cpy = redirs_cpy->next;
-		}
-		first = first->next;
-	}
 }

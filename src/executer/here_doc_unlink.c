@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_debug.c                                     :+:      :+:    :+:   */
+/*   here_doc_unlink.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 03:25:57 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/30 04:50:23 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/08/30 04:00:14 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/08/30 04:06:54 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
-#include "malloc_debug.h"
 
-void leaks() {
-	system("leaks -q minishell");
-}
-
-#ifdef MALLOC_DEBUG
-
-void	*malloc(size_t n)
+void	unlink_all_heredoc_redir(t_redir_l *first)
 {
-	static int cnt = 0;
-
-	
-	if (cnt == MALLOC_FAIL) {
-		// void	*ptr[100];
-		// int		size;
-		
-		// size = backtrace(ptr, 100);
-		// backtrace_symbols_fd(ptr, size, 1);
-		errno = ENOMEM;
-		return (NULL);
+	while (first)
+	{
+		if (first->redir->flag == HERE_DOC)
+			unlink(first->redir->where);
+		first = first->next;
 	}
-	cnt++;
-	return (calloc(n, 1));
 }
 
-#endif
+void	unlink_all_heredoc_cmd(t_command_l *first, t_command_l *last)
+{
+	while (first != last)
+	{
+		unlink_all_heredoc_redir(first->cmd->redirs);
+		first = first->next;
+	}
+}
