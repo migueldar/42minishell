@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_status.h                                      :+:      :+:    :+:   */
+/*   here_doc_unlink.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 01:43:00 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/29 17:05:35 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/08/30 04:00:14 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/08/30 04:06:54 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_STATUS_H
-# define EXIT_STATUS_H
+#include "minishell.h"
 
-# define ST_OK				0
-# define ST_SIGINT			1
-# define ST_AMB_REDIR		1
-# define ST_SIGQUIT			131
-# define ST_SYNTAX_ERROR	258
-# define ST_SIGINT_HEREDOC	1025
+void	unlink_all_heredoc_redir(t_redir_l *first)
+{
+	while (first)
+	{
+		if (first->redir->flag == HERE_DOC)
+			unlink(first->redir->where);
+		first = first->next;
+	}
+}
 
-#endif
+void	unlink_all_heredoc_cmd(t_command_l *first, t_command_l *last)
+{
+	while (first != last)
+	{
+		unlink_all_heredoc_redir(first->cmd->redirs);
+		first = first->next;
+	}
+}

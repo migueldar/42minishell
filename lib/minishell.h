@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 03:48:31 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/23 18:14:46 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/30 04:53:55 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# ifdef MALLOC_DEBUG
-#  include "malloc_debug.h"
-# endif
+# include "malloc_debug.h"
 
 # include "lexer.h"
 # include "parser.h"
@@ -24,6 +22,7 @@
 # include "libft.h"
 # include "builtins.h"
 # include "expander.h"
+# include "executer.h"
 # include <stdio.h>
 # include <sys/stat.h>
 # include <readline/readline.h>
