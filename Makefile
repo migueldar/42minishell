@@ -6,7 +6,7 @@
 #    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/28 04:01:56 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/08/30 02:13:19 by mde-arpe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS := src/env/env_list.c \
 		src/builtins/pwd.c \
 		src/executer/executer.c \
 		src/executer/here_doc.c \
+		src/executer/here_doc_utils.c \
 
 
 # CC CFLAGS ... .c -> .o

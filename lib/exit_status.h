@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 01:43:00 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 04:49:23 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:05:35 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 # define ST_AMB_REDIR		1
 # define ST_SIGQUIT			131
 # define ST_SYNTAX_ERROR	258
+# define ST_SIGINT_HEREDOC	1025
 
 #endif
