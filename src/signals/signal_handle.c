@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 00:58:38 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 17:49:29 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/30 00:12:01 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	sig_handler_here_doc(int signum)
 {
 	if (signum == SIGINT)
 	{
-		write(1, "\n", 1);
-		//g_exit_status = ST_SIGINT;
+		ioctl(0, TIOCSTI, "\n");
+		rl_on_new_line();
+		g_exit_status = ST_SIGINT_HEREDOC;
 	}
 }

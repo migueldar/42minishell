@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef MALLOC_DEBUG
 
 #include "minishell.h"
 #include "malloc_debug.h"
@@ -18,6 +17,8 @@
 void leaks() {
 	system("leaks -q minishell");
 }
+
+#ifdef MALLOC_DEBUG
 
 void	*malloc(size_t n)
 {
@@ -30,6 +31,7 @@ void	*malloc(size_t n)
 		
 		// size = backtrace(ptr, 100);
 		// backtrace_symbols_fd(ptr, size, 1);
+		errno = ENOMEM;
 		return (NULL);
 	}
 	cnt++;

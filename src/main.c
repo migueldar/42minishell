@@ -21,7 +21,7 @@ int main(int argc, char **argv, char **env)
 	t_env		*enviroment;
 	t_command_l *expanded_list;
 
-	#ifdef MALLOC_DEBUG
+	#ifdef LEAKS
 	atexit(leaks);
 	#endif
 
@@ -48,8 +48,9 @@ int main(int argc, char **argv, char **env)
 		if (!is_empty(raw))
 			add_history(raw); //dont add empty lines
 		expanded_list = complete_parser(raw, enviroment);
-		// executer
-		// ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
+		if (expanded_list)
+			g_exit_status = executer(expanded_list, enviroment);
+		ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
 	}
 	ft_lstclear((t_list **) &enviroment, (void (*)(void *)) free_env_var);
 	clear_history();

@@ -27,3 +27,20 @@ prev: export y='"a a"' && export x="'b b'" && gcc helpers/parameters.c -o params
 
 prev: export w='" "' && gcc helpers/parameters.c -o params
 - ./params z$w-		2 params
+
+
+HERE_DOC
+
+<< a
+$TERM //should expand
+a
+
+<< a
+'$TERM' //should expand
+a
+
+<< a
+$'TERM' //should not change (same for $"TERM")
+a
+
+<< a'' //nothing should expand

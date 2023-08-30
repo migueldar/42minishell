@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 00:59:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/16 01:25:34 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:49:40 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <signal.h>
 # include <unistd.h>
+# include <sys/ioctl.h>
 
 void	sig_handler_interactive(int signum);
 void	sig_handler_here_doc(int signum);
