@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:06:23 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/02 00:47:57 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/02 01:09:20 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ void	ft_print_echo(t_string_l *argv)
 int	ft_echo(t_string_l *argv)
 {
 	int	verif_n;
-	int	salto_de_linea;
+	int	jumper;
 
-	salto_de_linea = 1;
+	jumper = 1;
 	while (argv && ft_strncmp(argv->content, "-n", 2) == 0)
 	{
 		verif_n = ft_search_n(&(argv->content)[2]);
 		if (verif_n)
 			break ;
-		salto_de_linea = 0;
+		jumper = 0;
 		argv = argv->next;
 	}
 	ft_print_echo(argv);
-	if (salto_de_linea)
+	if (jumper)
 		write(1, "\n", 1);
 	return (0);
 }
