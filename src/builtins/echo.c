@@ -1,7 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/01 20:06:23 by lucia-ma          #+#    #+#             */
+/*   Updated: 2023/09/01 20:06:30 by lucia-ma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "builtins.h"
-#include <string.h>
-
-
 
 int	ft_search_n(char *str)
 {
@@ -33,7 +42,7 @@ int	ft_echo(t_string_l *argv)
 	count = 0;
 	if (argv)
 	{
-		while (argv && strncmp(argv->content, "-n", 2) == 0)
+		while (argv && ft_strncmp(argv->content, "-n", 2) == 0)
 		{
 			verif_n = ft_search_n(&argv->content[2]);
 			if (verif_n == 1)
