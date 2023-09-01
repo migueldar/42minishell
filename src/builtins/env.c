@@ -6,13 +6,13 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:08:55 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/02 01:30:08 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/02 01:34:20 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	ft_print_env(t_env *envi)
+int	ft_env(t_env *envi)
 {
 	while (envi)
 	{
@@ -20,4 +20,5 @@ void	ft_print_env(t_env *envi)
 			printf("%s=%s\n", envi->content->key, envi->content->value);
 		envi = envi->next;
 	}
+	return (0);
 }
