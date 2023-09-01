@@ -44,7 +44,7 @@ executer: executes commands in order assuming pipes between them (an overcomplic
 SIGNALS
 
 Executing:			Ctrl + C and Ctrl + \ handled by the execve. Ctrl + D, if its not recieved by the process, should wait till process ends and exit
-For heredoc: 		Ctrl + C cancels command, exits 1. Ctrl + \ does nothing. Ctrl + D exits from the heredoc its in, exits 0.
+For heredoc: 		Ctrl + C cancels command, exits 1. Ctrl + \ does nothing. Ctrl + D exits from the heredoc its in, the command keeps going, exits 0.
 Interactive mode:	Ctrl + C newline, exits 1. Ctrl + \ does nothing. Ctrl + D exits.
 
 
@@ -56,3 +56,4 @@ OTHER
 
 When executing multiple commnands, separated by pipes, a subshell for each command must be generated. This means that for example the command 'cd dir | echo a' wont cd us to dir, because it well get executed in a subshell(similarly to a script)  
 cd '' doesnt change directory
+malloc fail should set g_exit_status

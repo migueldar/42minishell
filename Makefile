@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/08/28 19:12:59 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/09/01 20:25:01 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,11 @@ SRCS := src/env/env_list.c \
 		src/expander/expander5.c \
 		src/expander/expander6.c \
 		src/builtins/pwd.c \
-		src/builtins/export.c \
+		src/builtins/cd.c \
+		src/executer/executer.c \
+		src/executer/here_doc.c \
+		src/executer/here_doc_utils.c \
+		src/executer/here_doc_unlink.c \
 
 
 # CC CFLAGS ... .c -> .o
@@ -64,6 +68,7 @@ objs:
 				objs/utils \
 				objs/expander \
 				objs/builtins \
+				objs/executer \
 
 #compilar src
 objs/%.o: src/%.c | objs
@@ -91,20 +96,30 @@ fclean_nolib:
 	$(RM) $(NAME)
 re_nolib: fclean_nolib all
 
+malloc_debug:: CFLAGS += -D LEAKS
 malloc_debug:: CFLAGS += -D MALLOC_DEBUG
 malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
 malloc_debug: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
+malloc_debug_sanitize:: CFLAGS += -fsanitize=address -g3
+malloc_debug_sanitize:: LDFLAGS += -fsanitize=address
+malloc_debug_sanitize:: CFLAGS += -D MALLOC_DEBUG
+malloc_debug_sanitize:: CFLAGS += -D MALLOC_FAIL=$(when)
+malloc_debug_sanitize: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
+	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
+
 #leaks flags#
-leaks:: CFLAGS += -D MALLOC_DEBUG
-leaks:: CFLAGS += -D MALLOC_FAIL=-1
+leaks:: CFLAGS += -D LEAKS
 leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
 #malloc lucia flags#
 malloc_debug_lucia:: CFLAGS += -D LUCIA
 malloc_debug_lucia: malloc_debug
+
+leaks_lucia:: CFLAGS += -D LUCIA
+leaks_lucia: leaks
 
 #sanitizer flags#
 sanitize:: CFLAGS += -fsanitize=address -g3

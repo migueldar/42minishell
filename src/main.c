@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/28 01:44:35 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:17:52 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int main(int argc, char **argv, char **env)
 	char		*raw;
 	t_env		*enviroment;
 	t_command_l *expanded_list;
-	
 
-	#ifdef MALLOC_DEBUG
+	#ifdef LEAKS
 	atexit(leaks);
 	#endif
 
@@ -49,8 +48,9 @@ int main(int argc, char **argv, char **env)
 		if (!is_empty(raw))
 			add_history(raw); //dont add empty lines
 		expanded_list = complete_parser(raw, enviroment);
-		// executer
-		// ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
+		if (expanded_list)
+			g_exit_status = executer(expanded_list, enviroment);
+		ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
 	}
 	ft_lstclear((t_list **) &enviroment, (void (*)(void *)) free_env_var);
 	clear_history();

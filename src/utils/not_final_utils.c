@@ -47,3 +47,24 @@ void	print_string_l(t_string_l *in)
 		in = in->next;
 	}
 }
+
+void	ft_printf_args(t_string_l *args)
+{
+	while (args)
+	{
+		printf("print args == %s\n", args->content);
+		args = args->next;
+	}
+}
+
+void	ft_print_array_bi(char **array)
+{
+	int	y;
+
+	y = 0;
+	while (array[y])
+	{
+		printf("array  ==  %s\n", array[y]);
+		y ++;
+	}
+}

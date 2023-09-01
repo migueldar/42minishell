@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 05:01:05 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/28 01:47:46 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/08/28 04:07:58 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,6 @@ t_command_l	*expander_handler(t_command_l *cmds, t_env *env)
 		else
 			write(2, "minishell: malloc fail\n", 24);
 		return (NULL);
-	}
-	return (ret);
-}
-
-char	*quote_removal_heredoc(char *str)
-{
-	char	*ret;
-	char	*aux;
-	char	in_quote;
-
-	ret = ft_strdup("");
-	if (!ret)
-		return (NULL);
-	in_quote = 0;
-	while (str && *str)
-	{
-		if (!in_quote && (*str == 0x22 || *str == 0x27))
-			in_quote = *str;
-		else if (in_quote && *str == in_quote)
-			in_quote = 0;
-		else
-		{
-			aux = protected_strcharjoin(ret, *str);
-			free(ret);
-			if (!aux)
-				return (NULL);
-			ret = aux;
-		}
-		str++;
 	}
 	return (ret);
 }

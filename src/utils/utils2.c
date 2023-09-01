@@ -6,11 +6,12 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/28 19:05:01 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/01 20:26:45 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishel.h"
+#include "utils.h"
 
 void	ft_printerror(int first, char *s, int n)
 {
@@ -23,16 +24,22 @@ void	ft_printerror(int first, char *s, int n)
 		write(2, "\n", 1);
 }
 
-void	ft_print_array_bi(char **array)
+//return NULL if fail
+//status 0 malloc fail
+//status 1 not found
+char	*ft_getenv(t_env *envi, char *arr, int *status)
 {
-	int	y;
-
-	y = 0;
-	while (array[y])
+	while (envi)
 	{
-		printf("array  ==  %s\n", array[y]);
-		y ++;
+		if (ft_strncmp(envi->content->key, arr, ft_strlen(arr) + 1) == 0)
+		{
+			if (!envi->content->value)
+				break ;
+			return (ft_strdup(envi->content->value));
+		}
+		envi = envi->next;
 	}
+	return (*status = 1, NULL);
 }
 
 void	ft_print_env(t_env *envi)
