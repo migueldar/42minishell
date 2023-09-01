@@ -17,6 +17,7 @@ void	ft_print_echo(t_string_l *argv)
 	while (argv)
 	{
 		write(1, argv->content, ft_strlen(argv->content));
+		write(1, " ", 1);
 		argv = argv->next;
 	}
 }
