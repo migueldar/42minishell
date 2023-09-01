@@ -36,6 +36,7 @@ SRCS := src/env/env_list.c \
 		src/expander/expander5.c \
 		src/expander/expander6.c \
 		src/builtins/pwd.c \
+		src/builtins/echo.c \
 		src/builtins/cd.c \
 		src/builtins/env.c \
 		src/executer/executer.c \
