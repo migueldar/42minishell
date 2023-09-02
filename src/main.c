@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/09 02:11:36 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/09 02:35:12 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main(int argc, char **argv, char **env)
 			add_history(raw); //dont add empty lines
 		expanded_list = complete_parser(raw, enviroment);
 		if (expanded_list)
-			g_exit_status = executer(expanded_list, enviroment);
+			g_exit_status = executer(expanded_list, &enviroment);
 		ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
 	}
 	ft_lstclear((t_list **) &enviroment, (void (*)(void *)) free_env_var);
