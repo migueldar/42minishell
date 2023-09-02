@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:10:47 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/30 04:14:08 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/02 02:41:11 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,18 @@ char	*expand_heredoc(char *toexp, t_env *env)
 }
 
 //returns exp_del
-char	*execute_heredoc_settup(char *del, int *fd, char **file_name, int *stat)
+char	*execute_heredoc_settup(char *del, int *fd, char **file_nam, int *stat)
 {
 	char	*exp_del;
 
-	*file_name = temp_name(stat);
-	if (!*file_name)
+	*file_nam = temp_name(stat);
+	if (!*file_nam)
 		return (NULL);
-	*fd = open(*file_name, O_CREAT | O_EXCL | O_WRONLY, 0644);
+	*fd = open(*file_nam, O_CREAT | O_EXCL | O_WRONLY, 0644);
 	if (*fd == -1)
-		return (*stat = 2, free(*file_name), NULL);
+		return (*stat = 2, free(*file_nam), NULL);
 	exp_del = quote_removal_heredoc(del);
 	if (!exp_del)
-		return (unlink(*file_name), free(*file_name), NULL);
+		return (unlink(*file_nam), free(*file_nam), NULL);
 	return (exp_del);
 }

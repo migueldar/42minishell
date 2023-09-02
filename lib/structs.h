@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:53:22 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/29 11:03:35 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/02 02:41:38 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 typedef struct s_env_var
 {
 	char	*key;
-	char	*value; 
+	char	*value;
 }	t_env_var;
 
 typedef struct s_env
