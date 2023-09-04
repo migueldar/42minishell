@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/02 02:38:56 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:29:56 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "minishel.h"
 #include "utils.h"
 
-void	ft_printerror(int first, char *s, int n)
+
+void	ft_errors(char *function, char *content)
 {
-	if (!s)
-		return ;
-	if (first == 1)
-		write(2, "minishell: ", 11);
-	write(2, s, ft_strlen(s));
-	if (n == 1)
-		write(2, "\n", 1);
+	write(2, "minishell: ", 11);
+	write(2, function, ft_strlen(function));
+	write(2, content, ft_strlen(content));
+	write(2, ": ", 2);
+	perror("");
 }
 
 //return NULL if fail
@@ -71,12 +70,3 @@ int	is_empty(char const *str)
 	}
 	return (1);
 }
-
-/*void    ft_env(t_env *envi)
-{
-	while(envi)
-	{
-		printf("%s%s\n", envi->key, envi->value);
-		envi = envi->next;
-	}
-}*/
