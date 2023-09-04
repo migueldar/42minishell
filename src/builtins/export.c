@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/28 19:34:00 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:57:35 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int	ft_export(char *var, t_env  *envi)
 		count ++;
 	if (var[count])
 	{
-		ft_printerror(1, "cd: ", 0);
-		ft_printerror(2, var, 0);
-		ft_printerror(2, ": ", 0);
+		ft_errors("export: ", var);
 		perror("");
 		return (1);
 	}

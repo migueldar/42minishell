@@ -2,31 +2,6 @@
 
 #include "minishell.h"
 #include "structs.h"
-///# include "builtins.h"
-//# include "libft.h"
-
-
-// int	main(int argc, char **argv, char **env)
-// {
-// 	t_env	*envi;
-
-// 	#ifdef	MALLOC_DEBUG
-// 	atexit(leaks);
-// 	#endif
-	
-// 	if (argc && **argv && **env)
-// 	{
-// 		envi = create_env_list(env);
-// 		// ft_print_env(envi);
-// 		if (ft_strncmp(argv[1], "pwd", 4) == 0 && ft_strlen(argv[1]) == 3)
-// 			ft_pwd();
-// 		// if (ft_strncmp(argv[1], "cd", 3) == 0 && ft_strlen(argv[1]) == 3)
-// 		// 	ft_cd();
-// 		ft_lstclear((t_list **) &envi, (void (*)(void	*)) free_env_var);
-// 	}
-
-// 	return (0);
-// }
 
 int	ft_what_builtin(t_string_l	*args, t_env *envi)
 {
@@ -44,9 +19,9 @@ int	ft_what_builtin(t_string_l	*args, t_env *envi)
 		}
 		if (args->content && ft_strncmp(args->content, "env", 4) == 0)
 		{
-			ft_print_env(envi);
-      return (0);
-    }
+			ft_env(envi);
+      		return (0);
+    	}
 		if (args && strncmp(args->content, "echo", 4) == 0)
 		{
 			ft_echo(args->next);

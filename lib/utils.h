@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/04 16:03:29 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:11:26 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "structs.h"
 # include "libft.h"
 
+void		ft_errors(char *function, char *content);
 void		ft_print_array_bi(char **array);
 char		*ft_getenv(t_env *envi, char *arr, int *status);
 void		ft_printf_args(t_string_l *args);
