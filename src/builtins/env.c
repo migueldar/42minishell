@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer.c                                         :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/02 02:39:18 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/09/01 20:08:55 by lucia-ma          #+#    #+#             */
+/*   Updated: 2023/09/02 02:39:45 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
-int	executer(t_command_l *cmds, t_env *env)
+int	ft_env(t_env *envi)
 {
-	int	status;
-
-	status = resolve_heredocs(cmds, env);
-	unlink_all_heredoc_cmd(cmds, NULL);
-	command_l_printer(cmds);
-	if (status)
-		return (1);
+	while (envi)
+	{
+		if (envi->content->value)
+			printf("%s=%s\n", envi->content->key, envi->content->value);
+		envi = envi->next;
+	}
 	return (0);
 }

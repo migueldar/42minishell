@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:53:22 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/01 20:25:52 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:03:23 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 typedef struct s_env_var
 {
 	char	*key;
-	char	*value; 
+	char	*value;
 }	t_env_var;
 
 typedef struct s_env

@@ -39,8 +39,17 @@ int	ft_what_builtin(t_string_l	*args, t_env *envi)
 		}
 		if (args->content && ft_strncmp(args->content, "pwd", 4) == 0)
 		{
-			printf("PWD\n");
 			ft_pwd();
+			return (0);
+		}
+		if (args->content && ft_strncmp(args->content, "env", 4) == 0)
+		{
+			ft_print_env(envi);
+      return (0);
+    }
+		if (args && strncmp(args->content, "echo", 4) == 0)
+		{
+			ft_echo(args->next);
 			return (0);
 		}
 		args = args->next;

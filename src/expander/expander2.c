@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 04:18:19 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/29 03:15:54 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/02 02:34:23 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ static char	*expand_var(char *var, t_env *env)
 	while (env)
 	{
 		if (!ft_strncmp(var, env->content->key, ft_strlen(var) + 1))
+		{
+			if (!env->content->value)
+				break ;
 			return (ft_strdup(env->content->value));
+		}
 		env = env->next;
 	}
 	return (ft_strdup(""));

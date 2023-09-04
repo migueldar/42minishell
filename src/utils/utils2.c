@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/01 20:26:45 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:03:41 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,6 @@ char	*ft_getenv(t_env *envi, char *arr, int *status)
 		envi = envi->next;
 	}
 	return (*status = 1, NULL);
-}
-
-void	ft_print_env(t_env *envi)
-{
-	while (envi)
-	{
-		printf("%s=%s\n", envi->content->key, envi->content->value);
-		envi = envi->next;
-	}
 }
 
 // takes NULLS as len 0
