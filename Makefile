@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/04 18:04:58 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/09/04 23:42:07 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,8 +53,8 @@ OBJS := $(SRCS:src/%.c=objs/%.o)
 OBJS += libft/libft.a
 
 # Ruta decompilacin
-CFLAGS = -Wall -Wextra -Werror -I lib -I libft -I /Users/$(USER)/.brew/opt/readline/include
-LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -I lib -I libft -I /Users/$(USER)/.brew/opt/readline/include
+LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline -g3 -fsanitize=address
 
 RM = /bin/rm -rf
 
