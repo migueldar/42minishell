@@ -22,9 +22,14 @@ int	ft_what_builtin(t_string_l	*args, t_env *envi)
 			ft_env(envi);
       		return (0);
     	}
-		if (args && strncmp(args->content, "echo", 4) == 0)
+		if (args && ft_strncmp(args->content, "echo", 4) == 0)
 		{
 			ft_echo(args->next);
+			return (0);
+		}
+		if (args && ft_strncmp(args->content, "export", 7) == 0)
+		{
+			ft_export(args->next, envi);
 			return (0);
 		}
 		args = args->next;

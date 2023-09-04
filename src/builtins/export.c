@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/04 16:57:35 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:29:36 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,37 @@
 ///     0 ==== mo es alfanumerico
 ///     1 ==== es alfanumerico
 
-void	order_env(t_env envi)
+void	order_env(void)
+{
+	printf("order env export\n");
+}
 
-int	ft_export(char *var, t_env  *envi)
+int	ft_export(t_string_l *var, t_env  *envi)
 {
 	int		count;
 	t_env	*new;
 
 	count = 0;
 	if (!var)
-		order_env(envi);
-	while (var[count] && (ft_isalnum(var[count]) || var[count] == '_'))
+		order_env();
+	if (ft_isnum(var->content[count]))
+		
+	while (var->content[count] && (ft_isalnum(var->content[count]) || var->content[count] == '_'))
 		count ++;
-	if (var[count])
+	printf("despues del while\n");
+	print_string_l(var);
+	if (var->content[count])
 	{
-		ft_errors("export: ", var);
+		ft_errors("export: ", var->content);
 		perror("");
 		return (1);
 	}
 	else
 	{
 		new = ft_calloc(1, sizeof (t_env));
-		new->content = create_env_var(var);
+		new->content = create_env_var(var->content);
 		new->next = NULL;
-		ft_lstadd_back(envi, new);
+		ft_lstadd_back((t_list **)&envi, (t_list *)new);
 	}
 	return (0);
 }

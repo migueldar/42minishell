@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:27:41 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/04 17:11:51 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:29:51 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		ft_echo(t_string_l *argv);
 int		ft_pwd(void);
 int		ft_cd(t_env	*envi, t_string_l *args);
 void	free_env_var(t_env_var *env_var);
-int		ft_export(char *var, t_env  *envi);
+int     ft_export(t_string_l *var, t_env  *envi);
+
 
 #endif
