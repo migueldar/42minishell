@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/04 17:29:56 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:36:57 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 #include "utils.h"
 
 
-void	ft_errors(char *function, char *content)
+void	ft_errors(char *function, char *content, int p)
 {
 	write(2, "minishell: ", 11);
 	write(2, function, ft_strlen(function));
 	write(2, content, ft_strlen(content));
 	write(2, ": ", 2);
-	perror("");
+	if (p)
+		perror("");
 }
 
 //return NULL if fail

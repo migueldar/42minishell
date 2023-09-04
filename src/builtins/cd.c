@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/04 17:29:42 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:37:49 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_cd(t_env *envi, t_string_l *args)
 	{
 		value = chdir(where);
 		if (value == -1)
-			return (ft_errors("cd: ", where), free(where), 1);
+			return (ft_errors("cd: ", where, 1), free(where), 1);
 	}
 	free(where);
 	return (0);
