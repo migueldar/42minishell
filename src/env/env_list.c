@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/29 12:32:43 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:02:57 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,30 @@ t_env_var	*create_env_var(char *env)
 	length = 0;
 	env_var = ft_calloc(1, sizeof(t_env_var));
 	if (!env_var)
-		return (write(2, "malloc env fail in env 3\n", 24), NULL);
+		return (perror(""), NULL);
+		
+		
 	while (env[length] && env[length] != '=')
 		length ++;
 	env_var->key = ft_calloc(sizeof(char), length + 1);
 	if (!env_var->key)
-		return (write(2, "malloc env fail in env 4\n", 24), free_env_var(env_var), NULL);
+		return (perror(""), free_env_var(env_var), NULL);
+	if(!env[length])
+	{
+		put_content(length, &env_var->key, &env);
+		return(env_var);
+	}
 	put_content(length, &env_var->key, &env);
+	if (!env)
+	{
+		return(env_var);
+	}
 	length = ft_strlen(env);
 	env_var->value = ft_calloc(sizeof(char), length);
 	if (!env_var->value)
-		return (write(2, "malloc env fail in env 5\n", 24), free_env_var(env_var), NULL);
+		return (perror(""), free_env_var(env_var), NULL);
 	env++;
+	
 	put_content(length, &env_var->value, &env);
 	return (env_var);
 }

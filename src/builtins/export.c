@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/04 23:55:57 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:02:27 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,13 @@ static void	print_export(t_env *envi)
 {
 	while (envi)
 	{
-		if (envi->content->value)
+		if (envi->content)
 		{
 			write(1, "declare -x ", 11);
-			printf("%s=%s\n", envi->content->key, envi->content->value);
+			if (envi->content->value)
+				printf("%s=\"%s\"\n", envi->content->key, envi->content->value);
+			else
+				printf("%s\n", envi->content->key);
 		}
 		envi = envi->next;
 	}
@@ -77,10 +80,9 @@ void	order_env(t_env *envi)
 	t_env	*head;
 
 	head = envi;
-	cm = envi;
 	while (envi)
 	{
-		cm = envi;
+		cm = head;
 		while (cm && cm->next)
 		{
 			if (ft_strlen(cm->content->key) < ft_strlen(cm->next->content->key))
@@ -108,9 +110,9 @@ int	ft_export(t_string_l *var, t_env  *envi)
 		order_env(envi);
 	else
 	{
-		while (var->content[count] && (ft_isalnum(var->content[count]) || var->content[count] == '_' ||  var->content[count] == '='))
+		while (var->content[count] && (ft_isalnum(var->content[count]) || var->content[count] == '_' ) &&  var->content[count] != '=')
 			count ++;
-		if (var->content[count] || ft_isdigit(var->content[0]))
+		if ((var->content[count] && var->content[count] != '=') || ft_isdigit(var->content[0]))
 		{
 			ft_errors_export("export: ", var->content, 0);
 			write(2, "not a valid identifier\n", 23);
@@ -119,6 +121,8 @@ int	ft_export(t_string_l *var, t_env  *envi)
 		else
 		{
 			new = ft_calloc(1, sizeof (t_env));
+			if(var->content[count])
+				new->content = create_env_var(var->content);
 			new->content = create_env_var(var->content);
 			new->next = NULL;
 			ft_lstadd_back((t_list **)&envi, (t_list *)new);

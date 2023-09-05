@@ -6,17 +6,16 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:26:17 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/05 15:49:45 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:16:07 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
-void ft_swap(void **prim, void **seg)
+void ft_swap(int *prim, int *seg)
 {
-    void *swap;
+    int swap;
     
-    // printf("swap?\n");
     swap = *prim;
     *prim = *seg;
     *seg = swap;
@@ -30,36 +29,35 @@ void ft_order(int *nums)
     int index_seg;
 
     seg = 10;
-    index_seg = 0;
     primer = 10;
+    index_seg = 0;
     index_prim = 0;
     while(primer --)
     {
-        index_seg  = 0;
+        index_seg = 0;
+        seg = 10;
         while(seg)
         {
-              printf("ANTEEES BUCLEEEEEEE == %d     INDEX SSEEEEEG == %d\n", nums[index_seg], index_seg);
             if (nums[index_seg] > nums[index_seg + 1])
             {
-                ft_swap((void *)&nums[index_seg], (void *) &nums[index_seg + 1]);
+                ft_swap(&(nums[index_seg]), &(nums[index_seg + 1]));
             }
             
             index_seg ++;
             seg --;
-            //  printf("BUCLEEEEEEE == %d     INDEX SSEEEEEG == %d\n", nums[index_seg], index_seg);
         }
         index_prim ++;
     }
-    // int print;
+    int print;
 
-    // print = 10;
-    // int i = 0;
-    // while(print --)
-    // {
-    //     printf("order = %d\n", nums[i]);
-    //     i++;
+    print = 10;
+    int i = 0;
+    while(print --)
+    {
+        printf("order = %d\n", nums[i]);
+        i++;
 
-    // }
+    }
 }
 
 int main(void)
