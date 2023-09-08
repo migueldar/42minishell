@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/29 11:17:52 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/08 19:32:57 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main(int argc, char **argv, char **env)
 	// ft_lstadd_back((t_list **) &enviroment, (t_list *) e);
 	//end delete
 	// ft_print_env(enviroment);
-	if (!enviroment)
+	if (!enviroment && *env)
 		return 1; //algun tipo de error de malloc
 	while (1)
 	{
