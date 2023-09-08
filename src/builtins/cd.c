@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/31 01:53:07 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:37:49 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static void	ft_errors_cd(char *content)
-{
-	ft_printerror(1, "cd: ", 0);
-	ft_printerror(2, content, 0);
-	ft_printerror(2, ": ", 0);
-	perror("");
-}
+
 
 int	ft_cd(t_env *envi, t_string_l *args)
 {
@@ -42,7 +36,7 @@ int	ft_cd(t_env *envi, t_string_l *args)
 	{
 		value = chdir(where);
 		if (value == -1)
-			return (ft_errors_cd(where), free(where), 1);
+			return (ft_errors("cd: ", where, 1), free(where), 1);
 	}
 	free(where);
 	return (0);
