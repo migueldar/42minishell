@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:25:53 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/23 18:12:06 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:44:40 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ t_token_l	*lexer(char *raw_input)
 	if (!split_raw_input)
 	{
 		if (status == 1)
-			write(2, "Malloc failed\n", 15);
+			perror("minishell");
 		else if (status == 2)
-			write(2, "Syntax error: unclosed quotes\n", 31);
+			write(2, "minishell: syntax error: unclosed quotes\n", 41);
 		return (NULL);
 	}
 	ret = tokenizer(split_raw_input);
 	ft_lstclear((t_list **) &split_raw_input, free);
 	if (!ret)
 	{
-		write(2, "Malloc failed\n", 15);
+		perror("minishell");
 		return (NULL);
 	}
 	return (ret);

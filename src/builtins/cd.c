@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/04 19:37:49 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:45:32 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-
 
 int	ft_cd(t_env *envi, t_string_l *args)
 {

@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 05:01:05 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/28 04:07:58 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:45:10 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_command_l	*expander_handler(t_command_l *cmds, t_env *env)
 	if (!ret)
 	{
 		if (status == 1)
-			write(2, "minishell: ambigous redirect\n", 30);
+			write(2, "minishell: ambigous redirect\n", 29);
 		else
-			write(2, "minishell: malloc fail\n", 24);
+			perror("minishell");
 		return (NULL);
 	}
 	return (ret);
