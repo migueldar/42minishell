@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/04 19:36:37 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/09 01:48:20 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ int			lst_addback_append(t_string_l **head, t_string_l *add);
 char		*full_string(char c, size_t n);
 void		print_exp_l(t_exp_l *in);
 void		print_string_l(t_string_l *in);
+void		lst_delnode(t_list **head, t_list *node, void (*del)(void *));
+int			single_unset(t_env **env, char *var);
 
 #endif

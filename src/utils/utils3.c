@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 21:23:03 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/24 02:37:08 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/08 21:06:56 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,31 @@ int	lst_addback_append(t_string_l **head, t_string_l *add)
 	head_cpy->content = aux;
 	head_cpy->next = add;
 	return (0);
+}
+
+void	lst_delnode(t_list **head, t_list *node, void (*del)(void *))
+{
+	t_list	*head_cpy;
+	t_list	*prev;
+	
+	if (!head || !*head || !node || !del)
+		return ;
+	head_cpy = *head;
+	prev = NULL;
+	while (head_cpy)
+	{
+		if (head_cpy == node)
+		{
+			if (prev)
+				prev->next = head_cpy->next;
+			else
+				*head = head_cpy->next;
+			ft_lstdelone(head_cpy, del);
+			break ;
+		}
+		prev = head_cpy;
+		head_cpy = head_cpy->next;
+	}
 }
 
 // returns a string of size n full of char c
