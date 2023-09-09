@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-=======
-history for inside heredoc shouldnt be able to see history from main readline
-errors in parser should be better
->>>>>>> inicio del executer
