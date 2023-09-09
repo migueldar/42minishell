@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
+#    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/09 02:34:59 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/09/09 21:04:36 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS := src/env/env_list.c \
 		src/builtins/cd.c \
 		src/builtins/env.c \
 		src/builtins/unset.c \
+		src/builtins/export_utils.c \
 		src/builtins/builtins_utils.c \
 		src/executer/executer.c \
 		src/executer/here_doc.c \
