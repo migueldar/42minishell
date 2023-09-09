@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/09 02:49:02 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:35:53 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,10 +179,11 @@ int	create_varexport(t_env	**envi, char *var, int count)
 	t_env		*new;
 	int			status;
 	
+	(void) count;
 	if(ft_contains_key(*envi, var, &status))
 		return(1);
 	if(status)
-		unset_
+		ft_unset(NULL, NULL);
 	new = ft_calloc(1, sizeof (t_env));
 	if (!new)
 		return(perror(""), 1);
