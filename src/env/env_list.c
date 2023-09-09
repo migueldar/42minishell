@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/08 19:24:53 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:33:49 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ t_env_var	*create_env_var(char *env)
 	int				length;
 
 	length = 0;
-
-
 	env_var = ft_calloc(1, sizeof(t_env_var));
 	if (!env_var)
 		return (NULL);
