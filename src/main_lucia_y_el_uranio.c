@@ -18,12 +18,16 @@ int	ft_what_builtin(t_string_l	*args, t_env **envi)
 		if (args->content && ft_strncmp(args->content, "env", 4) == 0)
 		{
       		return (ft_env(*envi));
-    	}
+    }
 		if (args && ft_strncmp(args->content, "echo", 4) == 0)
 		{
 			return (ft_echo(args->next));
 		}
 		if (args && ft_strncmp(args->content, "export", 7) == 0)
+			ft_env(envi);
+      return (0);
+    }
+		if (args && strncmp(args->content, "echo", 4) == 0)
 		{
 			return (ft_export(args->next, envi));
 		}

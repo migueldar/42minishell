@@ -70,5 +70,3 @@ int	is_empty(char const *str)
 	}
 	return (1);
 }
-
-

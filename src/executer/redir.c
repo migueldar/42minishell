@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_status.h                                      :+:      :+:    :+:   */
+/*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 01:43:00 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/09 02:07:55 by mde-arpe         ###   ########.fr       */
+/*   Created: 2023/09/02 08:04:12 by mde-arpe          #+#    #+#             */
+/*   Updated: 2023/09/02 08:09:36 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_STATUS_H
-# define EXIT_STATUS_H
+#include "minishell.h"
 
-# define ST_OK				0
-# define ST_SIGINT			1
-# define ST_AMB_REDIR		1
-# define ST_SIGQUIT			131
-# define ST_SYNTAX_ERROR	258
-# define ST_SIGINT_HEREDOC	1025
-# define ST_EXIT			2048
+int	execute_redirs(t_redir_l *redirs)
+{
+	(void) redirs;
 
-#endif
+	return 0;
+}

@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:57:26 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/30 04:45:39 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:44:55 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	resolve_heredocs(t_command_l *commands, t_env *env)
 		{
 			unlink_all_heredoc_cmd(cmds_head, commands);
 			if (status == 3)
-				write(2, "minishell: heredoc: cant create file in /tmp\n", 46);
+				write(2, "minishell: heredoc: cant create file in /tmp\n", 45);
 			else if (status == 0 || status == 2)
 				perror("minishell");
 			return (1);
