@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/04 23:42:07 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/09/08 20:28:23 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME := minishell
 
 # Archivos fuente principales
 SRCS := src/env/env_list.c \
+		src/env/env_utils.c \
         src/main.c \
         src/main_lucia_y_el_uranio.c \
         src/parser/parser.c \
@@ -53,8 +54,8 @@ OBJS := $(SRCS:src/%.c=objs/%.o)
 OBJS += libft/libft.a
 
 # Ruta decompilacin
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -I lib -I libft -I /Users/$(USER)/.brew/opt/readline/include
-LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I lib -I libft -I /Users/$(USER)/.brew/opt/readline/include
+LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline
 
 RM = /bin/rm -rf
 
@@ -117,6 +118,11 @@ leaks:: CFLAGS += -D LEAKS
 leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
+#sanitizer flags#
+sanitize:: CFLAGS += -fsanitize=address -g3
+sanitize:: LDFLAGS += -fsanitize=address
+sanitize:: re_nolib
+
 #malloc lucia flags#
 malloc_debug_lucia:: CFLAGS += -D LUCIA
 malloc_debug_lucia: malloc_debug
@@ -124,12 +130,9 @@ malloc_debug_lucia: malloc_debug
 leaks_lucia:: CFLAGS += -D LUCIA
 leaks_lucia: leaks
 
-#sanitizer flags#
-sanitize:: CFLAGS += -fsanitize=address -g3
-sanitize:: LDFLAGS += -fsanitize=address
-sanitize:: re_nolib
+sanitize_lucia:: CFLAGS += -D LUCIA
+sanitize_lucia:: sanitize
 
-#main lucia#
 lucia:: CFLAGS += -D LUCIA
 lucia:: all
 re_lucia:: fclean_nolib lucia

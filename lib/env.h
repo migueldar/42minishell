@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 21:27:41 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/08 18:56:03 by lucia-ma         ###   ########.fr       */
+/*   Created: 2023/09/08 17:30:54 by lucia-ma          #+#    #+#             */
+/*   Updated: 2023/09/08 20:19:35 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#ifndef ENV_H
+# define ENV_H
 
-# include "libft.h"
-# include "structs.h"
-# include <stdio.h>
-# include "utils.h"
+#include "structs.h"
 
-int		ft_env(t_env *envi);
-t_env	*create_env_list(char **env);
-int		ft_echo(t_string_l *argv);
-int		ft_pwd(void);
-int		ft_cd(t_env	*envi, t_string_l *args);
-void	free_env_var(t_env_var *env_var);
-int     ft_export(t_string_l *var, t_env  **envi);
-
+int         put_valenv(t_env **envi, char *val);
+int         lenenv(t_env *env);
 
 #endif

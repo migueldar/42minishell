@@ -3,34 +3,29 @@
 #include "minishell.h"
 #include "structs.h"
 
-int	ft_what_builtin(t_string_l	*args, t_env *envi)
+int	ft_what_builtin(t_string_l	*args, t_env **envi)
 {
 	while (args)
 	{
 		if (args->content && ft_strncmp(args->content, "cd", 3) == 0)
 		{
-			ft_cd(envi, args->next);			
-			return (0);
+			return (ft_cd(*envi, args->next));
 		}
 		if (args->content && ft_strncmp(args->content, "pwd", 4) == 0)
 		{
-			ft_pwd();
-			return (0);
+			return (ft_pwd());
 		}
 		if (args->content && ft_strncmp(args->content, "env", 4) == 0)
 		{
-			ft_env(envi);
-      		return (0);
+      		return (ft_env(*envi));
     	}
 		if (args && ft_strncmp(args->content, "echo", 4) == 0)
 		{
-			ft_echo(args->next);
-			return (0);
+			return (ft_echo(args->next));
 		}
 		if (args && ft_strncmp(args->content, "export", 7) == 0)
 		{
-			ft_export(args->next, envi);
-			return (0);
+			return (ft_export(args->next, envi));
 		}
 		args = args->next;
 	}
@@ -126,7 +121,8 @@ int	main(int argc, char **argv, char **env)
 		if (!is_empty(raw))
 			add_history(raw); //dont add empty lines
 		expanded_list = complete_parser(raw, enviroment);
-		ft_what_builtin(expanded_list->cmd->args, enviroment);
+		// if (!is_empty(raw))
+			ft_what_builtin(expanded_list->cmd->args, &enviroment);
 		// executer
 		ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
 	}

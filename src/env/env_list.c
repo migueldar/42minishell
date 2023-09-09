@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/05 20:02:57 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:56:06 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ t_env_var	*create_env_var(char *env)
 	int				length;
 
 	length = 0;
+
+
 	env_var = ft_calloc(1, sizeof(t_env_var));
 	if (!env_var)
 		return (perror(""), NULL);
-		
-		
+
+
 	while (env[length] && env[length] != '=')
 		length ++;
 	env_var->key = ft_calloc(sizeof(char), length + 1);
