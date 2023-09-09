@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/08 19:32:57 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/09 02:08:57 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 #include "minishell.h"
 
-// add history should not add empty lines
 int main(int argc, char **argv, char **env)
 {
 	char		*raw;
@@ -39,8 +38,8 @@ int main(int argc, char **argv, char **env)
 	//end delete
 	// ft_print_env(enviroment);
 	if (!enviroment && *env)
-		return 1; //algun tipo de error de malloc
-	while (1)
+		return (1); //algun tipo de error de malloc
+	while (g_exit_status >= ST_EXIT)
 	{
 		raw = readline("$> ");
 		if (!raw)   // ctrl + D
@@ -48,12 +47,17 @@ int main(int argc, char **argv, char **env)
 		if (!is_empty(raw))
 			add_history(raw); //dont add empty lines
 		expanded_list = complete_parser(raw, enviroment);
+		ft_env(enviroment);
+		printf("%d\n", ft_unset(&enviroment, expanded_list->cmd->args->next));
+		printf("\n\n\n\n");
+		ft_env(enviroment);
 		if (expanded_list)
 			g_exit_status = executer(expanded_list, enviroment);
 		ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
 	}
 	ft_lstclear((t_list **) &enviroment, (void (*)(void *)) free_env_var);
 	clear_history();
+	return ((char) g_exit_status);
 }
 
 #endif
