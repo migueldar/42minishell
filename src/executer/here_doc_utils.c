@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:10:47 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/02 02:41:11 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/02 07:15:11 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*temp_name(int *status)
 	char	*name;
 
 	i = -1;
-	while (++i <= 0x7ffffff)
+	while (++i <= 0x7fffffff)
 	{
 		itoaed = ft_itoa(i);
 		if (!itoaed)
