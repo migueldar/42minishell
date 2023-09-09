@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 21:23:03 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/09 02:35:25 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/09 02:48:39 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	lst_delnode(t_list **head, t_list *node, void (*del)(void *))
 {
 	t_list	*head_cpy;
 	t_list	*prev;
-	
+
 	if (!head || !*head || !node || !del)
 		return ;
 	head_cpy = *head;
