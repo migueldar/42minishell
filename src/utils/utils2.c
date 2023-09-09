@@ -6,13 +6,12 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/04 19:36:57 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:27:59 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "minishel.h"
 #include "utils.h"
-
 
 void	ft_errors(char *function, char *content, int p)
 {

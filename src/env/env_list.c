@@ -40,6 +40,8 @@ t_env_var	*create_env_var(char *env)
 	int				length;
 
 	length = 0;
+
+
 	env_var = ft_calloc(1, sizeof(t_env_var));
 	if (!env_var)
 		return (NULL);

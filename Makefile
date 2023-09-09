@@ -15,6 +15,7 @@ NAME := minishell
 
 # Archivos fuente principales
 SRCS := src/env/env_list.c \
+		src/env/env_utils.c \
         src/main.c \
         src/main_lucia_y_el_uranio.c \
         src/parser/parser.c \
@@ -36,6 +37,7 @@ SRCS := src/env/env_list.c \
 		src/expander/expander5.c \
 		src/expander/expander6.c \
 		src/builtins/pwd.c \
+		src/builtins/export.c \
 		src/builtins/echo.c \
 		src/builtins/cd.c \
 		src/builtins/env.c \
@@ -119,6 +121,11 @@ leaks:: CFLAGS += -D LEAKS
 leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
+#sanitizer flags#
+sanitize:: CFLAGS += -fsanitize=address -g3
+sanitize:: LDFLAGS += -fsanitize=address
+sanitize:: re_nolib
+
 #malloc lucia flags#
 malloc_debug_lucia:: CFLAGS += -D LUCIA
 malloc_debug_lucia: malloc_debug
@@ -126,12 +133,9 @@ malloc_debug_lucia: malloc_debug
 leaks_lucia:: CFLAGS += -D LUCIA
 leaks_lucia: leaks
 
-#sanitizer flags#
-sanitize:: CFLAGS += -fsanitize=address -g3
-sanitize:: LDFLAGS += -fsanitize=address
-sanitize:: re_nolib
+sanitize_lucia:: CFLAGS += -D LUCIA
+sanitize_lucia:: sanitize
 
-#main lucia#
 lucia:: CFLAGS += -D LUCIA
 lucia:: all
 re_lucia:: fclean_nolib lucia
