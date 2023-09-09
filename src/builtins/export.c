@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/09 02:42:33 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/09 02:49:02 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,21 +181,15 @@ int	create_varexport(t_env	**envi, char *var, int count)
 	
 	if(ft_contains_key(*envi, var, &status))
 		return(1);
-	if(!status)
-	{
-		new = ft_calloc(1, sizeof (t_env));
-		if (!new)
-			return(perror(""), 1);
-		new->content = create_env_var(var);
-		if (!new->content)
-			return(free(new), perror(""), 1);
-		ft_lstadd_back((t_list **)envi, (t_list *)new);
-	}
-	else
-	{
-		if (put_valenv(envi, &(var[count])))
-			return(perror(""), 1);
-	}
+	if(status)
+		unset_
+	new = ft_calloc(1, sizeof (t_env));
+	if (!new)
+		return(perror(""), 1);
+	new->content = create_env_var(var);
+	if (!new->content)
+		return(free(new), perror(""), 1);
+	ft_lstadd_back((t_list **)envi, (t_list *)new);
 	return (0);
 }
 
