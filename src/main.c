@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/09 17:16:55 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/09 02:35:12 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv, char **env)
 	// ft_print_env(enviroment);
 	if (!enviroment && *env)
 		return (1); //algun tipo de error de malloc
-	while (g_exit_status < ST_EXIT)
+	while (g_exit_status >= ST_EXIT)
 	{
 		raw = readline("$> ");
 		if (!raw)   // ctrl + D

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/09 17:30:18 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:33:49 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,12 @@ t_env_var	*create_env_var(char *env)
 	if (!env_var->key)
 		return (free_env_var(env_var), NULL);
 	put_content(length, &env_var->key, &env);
-	if (!*env)
-		env_var->value = NULL;
-	
-	else
-	{
-		env++;
-		length = ft_strlen(env);
-		env_var->value = ft_calloc(sizeof(char), length + 1);
-		if (!env_var->value)
-			return (free_env_var(env_var), NULL);
-		put_content(length, &env_var->value, &env);
-	
-	}
+	env++;
+	length = ft_strlen(env);
+	env_var->value = ft_calloc(sizeof(char), length + 1);
+	if (!env_var->value)
+		return (free_env_var(env_var), NULL);
+	put_content(length, &env_var->value, &env);
 	return (env_var);
 }
 
