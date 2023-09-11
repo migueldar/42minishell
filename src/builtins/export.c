@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/09 21:18:11 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/11 19:57:35 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	no_args_export(t_env *envi)
 		}
 		verifless(env_cpy, printverif, iter);
 	}
+	free (printverif);
 	return (0);
 }
 
@@ -97,15 +98,16 @@ int	create_varexport(t_env	**envi, char *var)
 		if (var[ft_strlen(findkey)] || var[ft_strlen(findkey) + 1])
 			single_unset(envi, findkey);
 		else
-			return (0);
+			return (free(findkey), 0);
 	}
 	new = ft_calloc(1, sizeof (t_env));
 	if (!new)
-		return (perror(""), 1);
+		return ((free (findkey)), perror(""), 1);
 	new->content = create_env_var(var);
 	if (!new->content)
-		return (free(new), perror(""), 1);
+		return (free(new), (free(findkey)), perror(""), 1);
 	ft_lstadd_back((t_list **)envi, (t_list *)new);
+	free (findkey);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/09 21:04:36 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/09/11 20:14:33 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ NAME := minishell
 SRCS := src/env/env_list.c \
 		src/env/env_utils.c \
         src/main.c \
-        src/main_lucia_y_el_uranio.c \
         src/parser/parser.c \
         src/parser/parser2.c \
 		src/parser/complete_parser.c \

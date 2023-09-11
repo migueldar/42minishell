@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/09 17:16:55 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/09 21:44:40 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ int main(int argc, char **argv, char **env)
 			add_history(raw); //dont add empty lines
 		expanded_list = complete_parser(raw, enviroment);
 		if (expanded_list)
+		{
+
 			g_exit_status = executer(expanded_list, &enviroment);
+			printf("despues\n");
+		}
 		ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
 	}
 	ft_lstclear((t_list **) &enviroment, (void (*)(void *)) free_env_var);

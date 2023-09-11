@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 03:25:57 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/02 07:02:58 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/09 22:00:52 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void leaks()
 	char *commmand = ft_strjoin("leaks -q ", itoaed);
 
 	free(itoaed);
-	system(commmand);
 	free(commmand);
+	system("leaks -q minishell");
 }
 
 #ifdef MALLOC_DEBUG

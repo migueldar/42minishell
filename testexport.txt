@@ -1,0 +1,8 @@
+export hola=kaka
+export hola
+export hola=
+export
+export hola=kaka jaja=jjjj jojoj=lalala
+export hola=kaka 1jojoj=lalala
+export hola=kaka jaja=jjjj jojoj
+export h2ola=kaka jaja=jjjj 
