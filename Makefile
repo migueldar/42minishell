@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
+#    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/11 20:14:33 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/09/12 17:34:22 by mde-arpe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ NAME := minishell
 
 # Archivos fuente principales
 SRCS := src/env/env_list.c \
-		src/env/env_utils.c \
         src/main.c \
         src/parser/parser.c \
         src/parser/parser2.c \
@@ -125,19 +124,5 @@ leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
 sanitize:: CFLAGS += -fsanitize=address -g3
 sanitize:: LDFLAGS += -fsanitize=address
 sanitize:: re_nolib
-
-#malloc lucia flags#
-malloc_debug_lucia:: CFLAGS += -D LUCIA
-malloc_debug_lucia: malloc_debug
-
-leaks_lucia:: CFLAGS += -D LUCIA
-leaks_lucia: leaks
-
-sanitize_lucia:: CFLAGS += -D LUCIA
-sanitize_lucia:: sanitize
-
-lucia:: CFLAGS += -D LUCIA
-lucia:: all
-re_lucia:: fclean_nolib lucia
 
 .PHONY: all clean fclean re fclean_nolib re_nolib malloc_debug sanitize lucia re_lucia leaks

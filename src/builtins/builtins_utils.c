@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 07:32:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/09 21:43:55 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:34:51 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	is_builtin(char *cmd)
 int	execute_builtin(t_command_l *cmd, t_env **env)
 {
 	// redirs
-	printf("antes\n");
 	if (!ft_strncmp_ignore_case(cmd->cmd->args->content, "echo", 5))
 		return (ft_echo(cmd->cmd->args->next));
 	if (!ft_strncmp_ignore_case(cmd->cmd->args->content, "cd", 3))

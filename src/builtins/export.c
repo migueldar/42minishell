@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/11 19:57:35 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:53:52 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,105 +14,104 @@
 #include "structs.h"
 #include "env.h"
 
-void	verifless(t_env	*env_cpy, char *printverif, int iter)
+void	verify_alpha_smaller(t_env *env_cpy, char *print_verif, int iter)
 {
-	t_env	*enviprint;
-	int		positionprint;
+	t_env	*envi_print;
+	int		position_print;
 
-	positionprint = iter;
-	enviprint = env_cpy;
+	position_print = iter;
+	envi_print = env_cpy;
 	while (env_cpy)
 	{
-		if (ft_strncmp(enviprint->content->key, env_cpy->content->key, \
-			ft_strlen(enviprint->content->key)) > 0)
+		if (ft_strncmp(envi_print->content->key, env_cpy->content->key, \
+			ft_strlen(envi_print->content->key)) > 0)
 		{
-			if (!printverif[iter])
+			if (!print_verif[iter])
 			{
-				positionprint = iter;
-				enviprint = env_cpy;
+				position_print = iter;
+				envi_print = env_cpy;
 			}
 		}
 		env_cpy = env_cpy->next;
 		iter ++;
 	}
-	print_export(enviprint);
-	printverif[positionprint] = '1';
+	single_print_export(envi_print);
+	print_verif[position_print] = '1';
 }
 
 int	no_args_export(t_env *envi)
 {
-	char	*printverif;
+	char	*print_verif;
 	t_env	*env_cpy;
 	int		len;
 	int		iter;
 
 	len = ft_lstsize((t_list *) envi);
-	printverif = ft_calloc(sizeof(char), len);
-	if (!printverif)
+	print_verif = ft_calloc(sizeof(char), len);
+	if (!print_verif)
 		return (perror("minishell"), 1);
 	while (len--)
 	{
 		iter = 0;
 		env_cpy = envi;
-		while (printverif[iter])
+		while (print_verif[iter])
 		{
 			iter++;
 			env_cpy = env_cpy->next;
 		}
-		verifless(env_cpy, printverif, iter);
+		verify_alpha_smaller(env_cpy, print_verif, iter);
 	}
-	free (printverif);
+	free(print_verif);
 	return (0);
 }
 
-char	*selectkey(char *var)
+char	*select_key(char *var)
 {
-	char	*copyfindkey;
+	char	*copy_find_key;
 	int		counter;
 
 	counter = 0;
 	while (var[counter])
-		counter ++;
-	copyfindkey = ft_calloc(counter + 1, sizeof(char));
-	if (!copyfindkey)
-		return (perror("minishell: "), NULL);
+		counter++;
+	copy_find_key = ft_calloc(counter + 1, sizeof(char));
+	if (!copy_find_key)
+		return (perror("minishell"), NULL);
 	counter = 0;
 	while (var[counter] && var[counter] != '=')
 	{
-		copyfindkey[counter] = var[counter];
-		counter ++;
+		copy_find_key[counter] = var[counter];
+		counter++;
 	}
-	return (copyfindkey);
+	return (copy_find_key);
 }
 
-int	create_varexport(t_env	**envi, char *var)
+int	create_varexport(t_env **envi, char *var)
 {
 	t_env		*new;
-	char		*findkey;
+	char		*find_key;
 
-	findkey = selectkey(var);
-	if (!findkey)
+	find_key = select_key(var);
+	if (!find_key)
 		return (1);
-	if (ft_contains_key(*envi, findkey))
+	if (ft_contains_key(*envi, find_key))
 	{
-		if (var[ft_strlen(findkey)] || var[ft_strlen(findkey) + 1])
-			single_unset(envi, findkey);
+		if (var[ft_strlen(find_key)])
+			single_unset(envi, find_key);
 		else
-			return (free(findkey), 0);
+			return (free(find_key), 0);
 	}
 	new = ft_calloc(1, sizeof (t_env));
 	if (!new)
-		return ((free (findkey)), perror(""), 1);
+		return (free(find_key), perror("minishell"), 1);
 	new->content = create_env_var(var);
 	if (!new->content)
-		return (free(new), (free(findkey)), perror(""), 1);
+		return (free(new), free(find_key), perror("minishell"), 1);
 	ft_lstadd_back((t_list **)envi, (t_list *)new);
-	free (findkey);
+	free(find_key);
 	return (0);
 }
 
-// cuando nobre no permitido exit code a 1
-int	ft_export( t_env **envi, t_string_l *var)
+int	ft_export(t_env **envi, t_string_l *var)
 {
 	int			count;
 	int			status;
