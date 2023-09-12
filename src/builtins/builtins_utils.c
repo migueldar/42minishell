@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 07:32:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/09 02:50:14 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:34:51 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	execute_builtin(t_command_l *cmd, t_env **env)
 	if (!ft_strncmp_ignore_case(cmd->cmd->args->content, "pwd", 4))
 		return (ft_pwd());
 	if (!ft_strncmp_ignore_case(cmd->cmd->args->content, "export", 7))
-		return (ft_pwd());
+		return (ft_export(env, cmd->cmd->args->next));
 	if (!ft_strncmp_ignore_case(cmd->cmd->args->content, "unset", 6))
 		return (ft_unset(env, cmd->cmd->args->next));
 	if (!ft_strncmp_ignore_case(cmd->cmd->args->content, "env", 4))
