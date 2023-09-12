@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/12 17:53:52 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:55:30 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "structs.h"
 #include "env.h"
 
-void	verify_alpha_smaller(t_env *env_cpy, char *print_verif, int iter)
+static void	verify_alpha_smaller(t_env *env_cpy, char *print_verif, int iter)
 {
 	t_env	*envi_print;
 	int		position_print;
@@ -39,7 +39,7 @@ void	verify_alpha_smaller(t_env *env_cpy, char *print_verif, int iter)
 	print_verif[position_print] = '1';
 }
 
-int	no_args_export(t_env *envi)
+static int	no_args_export(t_env *envi)
 {
 	char	*print_verif;
 	t_env	*env_cpy;
@@ -65,7 +65,7 @@ int	no_args_export(t_env *envi)
 	return (0);
 }
 
-char	*select_key(char *var)
+static char	*select_key(char *var)
 {
 	char	*copy_find_key;
 	int		counter;
@@ -85,7 +85,7 @@ char	*select_key(char *var)
 	return (copy_find_key);
 }
 
-int	create_varexport(t_env **envi, char *var)
+static int	create_varexport(t_env **envi, char *var)
 {
 	t_env		*new;
 	char		*find_key;
