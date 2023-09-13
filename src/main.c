@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/09 17:16:55 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:34:41 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifndef LUCIA
 
 #include "minishell.h"
 
@@ -55,5 +53,3 @@ int main(int argc, char **argv, char **env)
 	clear_history();
 	return ((char) g_exit_status);
 }
-
-#endif
