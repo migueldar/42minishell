@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/09 17:30:18 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:33:23 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+int	ft_contains_key(t_env *envi, char *fkey)
+{
+	while (envi && ft_strncmp((envi)->content->key, fkey, ft_strlen(fkey)))
+		envi = (envi)->next;
+	if (envi)
+		return (1);
+	return (0);
+}
 
 void	free_env_var(t_env_var *env_var)
 {
@@ -51,7 +60,6 @@ t_env_var	*create_env_var(char *env)
 	put_content(length, &env_var->key, &env);
 	if (!*env)
 		env_var->value = NULL;
-	
 	else
 	{
 		env++;
@@ -60,7 +68,6 @@ t_env_var	*create_env_var(char *env)
 		if (!env_var->value)
 			return (free_env_var(env_var), NULL);
 		put_content(length, &env_var->value, &env);
-	
 	}
 	return (env_var);
 }
