@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/13 21:17:47 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:56:06 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int	executer(t_command_l *cmds, t_env **env)
 {
-	int	status;
+	int			status;
+	t_command	*command_to_exec;
+	t_list		*pids;
 
+	pids = NULL;
 	status = resolve_heredocs(cmds, *env);
 	unlink_all_heredoc_cmd(cmds, NULL);
 	//command_l_printer(cmds);
@@ -29,14 +32,15 @@ int	executer(t_command_l *cmds, t_env **env)
 		}
 		else
 		{
+			if (single_forked_cmd(pids))
+				return (1);
 			return (0);
 		}
 	}
 	else
 	{
-		
-		t_command *jiji = fork_free_command_l(&cmds, 1);
-		free_cmd(jiji);
+		command_to_exec = fork_free_command_l(&cmds, 1);
+		free_cmd(command_to_exec);
 	}
 		
 		// fork_free_command_l(&cmds, 11);
