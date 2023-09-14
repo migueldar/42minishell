@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/13 21:17:47 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:59:54 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	executer(t_command_l *cmds, t_env **env)
 	{
 		if (cmds->cmd->args && is_builtin(cmds->cmd->args->content))
 		{
+			handle_redirs(cmds->cmd->redirs);
 			return (execute_builtin(cmds, env));
 		}
 		else
