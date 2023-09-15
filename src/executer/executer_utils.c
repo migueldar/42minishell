@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/15 14:50:14 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:02:44 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int	single_forked_cmd(t_command_l *cmd)
 		return (1);
 	if (pid > 0)
 	{
-		
+		//redirecciones
+		//verificar comando
+		//ejecutar
 	}
 	else
 		wait(NULL);
