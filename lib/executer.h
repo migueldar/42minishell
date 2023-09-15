@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:47:51 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/13 21:23:54 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:31:44 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char		*execute_heredoc_settup(char *del, int *fd, \
 	char **file_nam, int *stat);
 void		unlink_all_heredoc_cmd(t_command_l *first, t_command_l *last);
 void		unlink_all_heredoc_redir(t_redir_l *first);
-int			execute_builtin(t_command_l *cmd, t_env **env);
 t_command	*fork_free_command_l(t_command_l **command_l, int which);
+int			handle_redirs(t_redir_l *redirs);
 
 #endif
