@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/13 19:37:53 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/09/15 16:56:11 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME := minishell
 
 # Archivos fuente principales
 SRCS := src/env/env_list.c \
+		src/env/env_utils.c \
         src/main.c \
         src/parser/parser.c \
         src/parser/parser2.c \
