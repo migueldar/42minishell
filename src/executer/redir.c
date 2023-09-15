@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:04:12 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/15 00:20:33 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/15 20:02:31 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,17 @@ static int	redir_out_append(int *fdout, char *file, t_redir_flag flag)
 static int	handle_dups(int fdin, int fdout)
 {
 	if (fdin != -2)
+	{
 		if (dup2(fdin, STDIN_FILENO) == -1)
 			return (perror("minishell"), close(fdin), close(fdout), 1);
+		close(fdin);
+	}
 	if (fdout != -2)
+	{
 		if (dup2(fdout, STDOUT_FILENO) == -1)
-			return (perror("minishell"), close(fdin), close(fdout), 1);
+			return (perror("minishell"), close(fdout), 1);
+		close(fdout);
+	}
 	return (0);
 }
 
@@ -63,14 +69,14 @@ int	handle_redirs(t_redir_l *redirs)
 		if (redirs->redir->flag == IN || redirs->redir->flag == HERE_DOC)
 		{
 			if (redir_in_heredoc(&fdin, redirs->redir->where))
-				return (unlink_all_heredoc_redir(recp), close(fdout),
-						perror("minishell"), 1);
+				return (perror("minishell"), unlink_all_heredoc_redir(recp)
+					, close(fdout), 1);
 		}
 		else
 			if (redir_out_append(&fdout, redirs->redir->where,
 					redirs->redir->flag))
-				return (unlink_all_heredoc_redir(recp), close(fdin),
-						perror("minishell"), 1);
+				return (perror("minishell"), unlink_all_heredoc_redir(recp)
+					, close(fdin), 1);
 		redirs = redirs->next;
 	}
 	return (unlink_all_heredoc_redir(recp), handle_dups(fdin, fdout));
