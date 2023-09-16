@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/15 16:56:11 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/09/16 20:44:08 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS := src/env/env_list.c \
         src/utils/utils.c \
         src/utils/utils2.c \
 		src/utils/utils3.c \
+		src/utils/utils4.c \
 		src/expander/expander.c \
 		src/expander/expander1.c \
 		src/expander/expander2.c \

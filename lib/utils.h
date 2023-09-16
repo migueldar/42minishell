@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/09 02:49:20 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/15 20:18:04 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ void		lst_delnode(t_list **head, t_list *node, void (*del)(void *));
 int			single_unset(t_env **env, char *var);
 int			ft_strncmp_ignore_case(const char *s1, const char *s2,
 				unsigned int n);
+char		**string_l_to_array(t_string_l *arg);
+char		**env_to_array(t_env *arg);
 
 #endif

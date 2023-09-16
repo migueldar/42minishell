@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 07:32:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/14 14:09:01 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/15 20:05:25 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,43 @@ int	is_builtin(char *cmd)
 
 // take into account side effects that executing 
 // exit in children may have for the global variable
-int	execute_builtin(t_command_l *cmd, t_env **env)
+static int	execute_builtin(t_string_l *args, t_env **env)
 {
-	// redirs
-	if (!ft_strncmp(cmd->cmd->args->content, "echo", 5))
-		return (ft_echo(cmd->cmd->args->next));
-	if (!ft_strncmp(cmd->cmd->args->content, "cd", 3))
-		return (ft_cd(*env, cmd->cmd->args->next));
-	if (!ft_strncmp(cmd->cmd->args->content, "pwd", 4))
+	if (!ft_strncmp(args->content, "echo", 5))
+		return (ft_echo(args->next));
+	if (!ft_strncmp(args->content, "cd", 3))
+		return (ft_cd(*env, args->next));
+	if (!ft_strncmp(args->content, "pwd", 4))
 		return (ft_pwd());
-	if (!ft_strncmp(cmd->cmd->args->content, "export", 7))
-		return (ft_export(env, cmd->cmd->args->next));
-	if (!ft_strncmp(cmd->cmd->args->content, "unset", 6))
-		return (ft_unset(env, cmd->cmd->args->next));
-	if (!ft_strncmp(cmd->cmd->args->content, "env", 4))
+	if (!ft_strncmp(args->content, "export", 7))
+		return (ft_export(env, args->next));
+	if (!ft_strncmp(args->content, "unset", 6))
+		return (ft_unset(env, args->next));
+	if (!ft_strncmp(args->content, "env", 4))
 		return (ft_env(*env));
-	if (!ft_strncmp(cmd->cmd->args->content, "exit", 5))
+	if (!ft_strncmp(args->content, "exit", 5))
 		return (ft_pwd());
+	return (0);
+}
+
+int	handle_builtin(t_command_l *cmd, t_env **env, int single)
+{
+	int	in;
+	int	out;
+	
+	if (single)
+	{
+		in = dup(0);
+		out = dup(1);
+	}
+	if (handle_redirs(cmd->cmd->redirs) == 0)
+		execute_builtin(cmd->cmd->args, env);
+	if (single)
+	{
+		dup2(in, 0);
+		dup2(out, 1);
+		close(in);
+		close(out);
+	}
 	return (0);
 }
