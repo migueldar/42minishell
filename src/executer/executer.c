@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/16 20:44:17 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:53:06 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	executer(t_command_l *cmds, t_env **env)
 			return (handle_builtin(cmds, env, 1));
 		else
 		{
-			if (single_forked_cmd(pids))
+			if (single_forked_cmd())
 				return (1);
 			return (0);
 		}

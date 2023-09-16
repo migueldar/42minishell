@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:00:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/15 16:10:15 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:22:51 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*ft_getenv(t_env *envi, char *arr, int *status)
 {
 	char	*key_found;
 
+	*status = 0;
 	while (envi)
 	{
 		if (ft_strncmp(envi->content->key, arr, ft_strlen(arr) + 1) == 0)
