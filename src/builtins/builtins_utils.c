@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 07:32:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/15 20:05:25 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:09:41 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	execute_builtin(t_string_l *args, t_env **env)
 	if (!ft_strncmp(args->content, "env", 4))
 		return (ft_env(*env));
 	if (!ft_strncmp(args->content, "exit", 5))
-		return (ft_pwd());
+		return (ft_exit(args->next));
 	return (0);
 }
 
@@ -52,6 +52,7 @@ int	handle_builtin(t_command_l *cmd, t_env **env, int single)
 {
 	int	in;
 	int	out;
+	int	ret;
 	
 	if (single)
 	{
@@ -59,7 +60,9 @@ int	handle_builtin(t_command_l *cmd, t_env **env, int single)
 		out = dup(1);
 	}
 	if (handle_redirs(cmd->cmd->redirs) == 0)
-		execute_builtin(cmd->cmd->args, env);
+		ret = execute_builtin(cmd->cmd->args, env);
+	else
+		ret = 1;
 	if (single)
 	{
 		dup2(in, 0);
@@ -67,5 +70,5 @@ int	handle_builtin(t_command_l *cmd, t_env **env, int single)
 		close(in);
 		close(out);
 	}
-	return (0);
+	return (ret);
 }
