@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:00:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/16 21:22:51 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/18 21:23:46 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 char	*ft_getenv(t_env *envi, char *arr, int *status)
 {
-	char	*key_found;
-
 	*status = 0;
 	while (envi)
 	{
@@ -23,10 +21,7 @@ char	*ft_getenv(t_env *envi, char *arr, int *status)
 		{
 			if (!envi->content->value)
 				break ;
-			key_found = ft_strdup(envi->content->value);
-			if (!key_found)
-				perror("minishell");
-			return (key_found);
+			return (ft_strdup(envi->content->value));
 		}
 		envi = envi->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:47:51 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/16 21:13:04 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/18 20:18:30 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ char		*execute_heredoc_settup(char *del, int *fd, \
 void		unlink_all_heredoc_cmd(t_command_l *first, t_command_l *last);
 void		unlink_all_heredoc_redir(t_redir_l *first);
 t_command	*fork_free_command_l(t_command_l **command_l, int which);
-int			single_forked_cmd();
+int			single_cmd(t_command_l *cmd, t_env *env);
 int			handle_redirs(t_redir_l *redirs);
 char		*find_path(t_env *env, char *cmd);
-
 
 #endif
