@@ -6,7 +6,7 @@
 #    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/18 17:07:50 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/09/18 18:45:46 by mde-arpe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,13 +105,13 @@ fclean_nolib:
 	$(RM) $(NAME)
 re_nolib: fclean_nolib all
 
-malloc_debug:: CFLAGS += -D LEAKS
 malloc_debug:: CFLAGS += -D MALLOC_DEBUG
 malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
-malloc_debug: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
+malloc_debug: $(OBJS) objs/debug/malloc_debug.o
+	cc $(CFLAGS) -c src/debug/malloc_debug.c -o objs/debug/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
-malloc_debug_sanitize:: CFLAGS += -fsanitize=address -g3
+malloc_debug_sanitize:: CFLAGS += -fsanitize=address
 malloc_debug_sanitize:: LDFLAGS += -fsanitize=address
 malloc_debug_sanitize:: CFLAGS += -D MALLOC_DEBUG
 malloc_debug_sanitize:: CFLAGS += -D MALLOC_FAIL=$(when)
@@ -120,7 +120,8 @@ malloc_debug_sanitize: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
 
 #leaks flags#
 leaks:: CFLAGS += -D LEAKS
-leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
+leaks: $(OBJS) objs/debug/malloc_debug.o
+	cc $(CFLAGS) -c src/main.c -o src/main.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
 #sanitizer flags#
