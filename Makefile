@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/18 19:34:30 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/09/19 00:26:47 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS := src/env/env_list.c \
 		src/builtins/cd.c \
 		src/builtins/env.c \
 		src/builtins/unset.c \
+		src/builtins/exit.c \
 		src/builtins/export_utils.c \
 		src/builtins/builtins_utils.c \
 		src/executer/executer.c \
@@ -106,13 +107,13 @@ fclean_nolib:
 	$(RM) $(NAME)
 re_nolib: fclean_nolib all
 
-malloc_debug:: CFLAGS += -D LEAKS
 malloc_debug:: CFLAGS += -D MALLOC_DEBUG
 malloc_debug:: CFLAGS += -D MALLOC_FAIL=$(when)
-malloc_debug: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
+malloc_debug: $(OBJS) objs/debug/malloc_debug.o
+	cc $(CFLAGS) -c src/debug/malloc_debug.c -o objs/debug/malloc_debug.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
-malloc_debug_sanitize:: CFLAGS += -fsanitize=address -g3
+malloc_debug_sanitize:: CFLAGS += -fsanitize=address
 malloc_debug_sanitize:: LDFLAGS += -fsanitize=address
 malloc_debug_sanitize:: CFLAGS += -D MALLOC_DEBUG
 malloc_debug_sanitize:: CFLAGS += -D MALLOC_FAIL=$(when)
@@ -121,7 +122,8 @@ malloc_debug_sanitize: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
 
 #leaks flags#
 leaks:: CFLAGS += -D LEAKS
-leaks: fclean_nolib objs $(OBJS) objs/debug/malloc_debug.o
+leaks: $(OBJS) objs/debug/malloc_debug.o
+	cc $(CFLAGS) -c src/main.c -o objs/main.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
 #sanitizer flags#

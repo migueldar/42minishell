@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:07:43 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/16 20:36:54 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:59:18 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,34 @@ char	**env_to_array(t_env *arg)
 		arg = arg->next;
 	}
 	return (ret);
+}
+
+//counter acts as strlen
+//status 1 if fail
+long int	ft_atol(const char *str, int *status)
+{
+	int					minus;
+	unsigned long int	ret;
+	int					counter;
+
+	ret = 0;
+	minus = 0;
+	counter = 0;
+	if (*str == '-')
+		minus = 1;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str)
+	{
+		if (!(*str <= '9' && *str >= '0'))
+			return (*status = 1, 0);
+		ret = ret * 10 + (*str++ - '0');
+		counter++;
+	}
+	if (counter > 19 || (ret > 0x7fffffffffffffff && !minus)
+		|| (ret > 0x8000000000000000 && minus))
+		return (*status = 1, 0);
+	if (minus)
+		ret *= -1;
+	return (*status = 0, ret);
 }
