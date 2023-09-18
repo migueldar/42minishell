@@ -6,7 +6,7 @@
 #    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/18 18:45:46 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/09/18 19:21:59 by mde-arpe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,7 +121,7 @@ malloc_debug_sanitize: fclean_nolib $(OBJS) objs/debug/malloc_debug.o
 #leaks flags#
 leaks:: CFLAGS += -D LEAKS
 leaks: $(OBJS) objs/debug/malloc_debug.o
-	cc $(CFLAGS) -c src/main.c -o src/main.o
+	cc $(CFLAGS) -c src/main.c -o objs/main.o
 	cc $(LDFLAGS) $(OBJS) objs/debug/malloc_debug.o -o $(NAME)
 
 #sanitizer flags#
