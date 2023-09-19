@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/18 15:18:43 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:02:04 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ int main(int argc, char **argv, char **env)
 			add_history(raw);
 		expanded_list = complete_parser(raw, enviroment);
 		if (expanded_list)
+		{
 			g_exit_status = executer(expanded_list, &enviroment);
-		ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
+			ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
+		}
+
+		
 	}
 	ft_lstclear((t_list **) &enviroment, (void (*)(void *)) free_env_var);
 	clear_history();

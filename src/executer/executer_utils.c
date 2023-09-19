@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/16 18:59:14 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:03:17 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,26 @@ int	single_forked_cmd(t_env **env, t_command_l *cmd)
 {
 	int		pid;
 
-	pid = fork();
-	if (pid < 0)
-		return (1);
-	if (pid > 0)
-	{
-		//redirecciones
-		//verificar comando
-		printf("soy un hijo\n");
-		ft_lstclear_cmd_l(&cmd);
-		ft_lstclear((t_list **) env, (void (*)(void *)) free_env_var);
-		//ejecutar
-		//if no se ha podido verificar liberamos ¿en padre?
-	}
-	else
-	{
+	//if (find path(env, cmd->cmd->args->content)
+	//{
+		pid = fork();
+		if (pid < 0)
+			return (1);
+		if (pid > 0)
+		{
+			//redirecciones
+			handle_redirs(cmd->cmd->redirs);
+			// printf("redir == %s\n", cmd->cmd->redirs->redir->where);
+			printf("soy un hijo\n");
+			ft_lstclear_cmd_l(&cmd);
+			ft_lstclear((t_list **) env, (void (*)(void *)) free_env_var);
+			clear_history();
+			//ejecutar
+			//if no se ha podido verificar liberamos ¿en padre?
+		}
 		printf("soy el padre\n");
 		wait(NULL);
-	}
-	return (0);
+		return(0);
+	//}
+	return (1);
 }
