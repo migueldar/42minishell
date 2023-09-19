@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:36:28 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/17 03:48:50 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/18 21:13:00 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ t_command_l	*parser_handler(t_token_l *toks)
 	if (!ret)
 	{
 		if (status == 1)
-			printf("Malloc fail\n");
+			perror("minishell");
 		else if (status == 2)
 			printf("Begin pipe\n");
 		else if (status == 3)

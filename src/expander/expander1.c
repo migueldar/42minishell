@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 05:01:05 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/13 18:01:28 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/18 21:17:09 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,15 @@ t_command_l	*expander_handler(t_command_l *cmds, t_env *env)
 	if (!ret)
 	{
 		if (status == 1)
+		{
 			write(2, "minishell: ambigous redirect\n", 29);
+			g_exit_status = ST_AMB_REDIR;
+		}
 		else
+		{
 			perror("minishell");
+			g_exit_status = 1;
+		}
 		return (NULL);
 	}
 	return (ret);
