@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:21:06 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/11 19:57:35 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:40:21 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,8 @@ int	ft_export( t_env **envi, t_string_l *var)
 			|| var->content[count] == '_') && var->content[count] != '=')
 			count ++;
 		if ((var->content[count] != '=' && var->content[count]) \
-			|| ft_isdigit(var->content[0]) || var->content[0] == '=')
+			|| ft_isdigit(var->content[0]) || var->content[0] == '=' \
+			|| var->content[0] == '\0')
 		{
 			status = 1;
 			ft_errors_export(var->content);
