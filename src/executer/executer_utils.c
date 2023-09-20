@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/20 13:56:41 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:24:39 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_command	*fork_free_command_l(t_command_l **command_l, int which)
 
 int	single_forked_cmd(t_env **env, t_command_l *cmd)
 {
+	printf("antes\n");
 	int		pid;
 	char *programPath = "/bin/ls";
 	char *args[] = {programPath, "-l", "-a", "/bin", NULL};
@@ -44,19 +45,21 @@ int	single_forked_cmd(t_env **env, t_command_l *cmd)
 	//if (find path(env, cmd->cmd->args->content)
 	//{
 		envi = env_to_array(*env);
+		if (!envi)
+			return (1);
 		pid = fork();
 		if (pid < 0)
 			return (1);
 		if (pid == 0)
 		{
 			//redirecciones
-			handle_redirs(cmd->cmd->redirs);
+			if (handle_redirs(cmd->cmd->redirs))
+				return(1);
 			// printf("redir == %s\n", cmd->cmd->redirs->redir->where);
 			printf("soy un hijo\n");
 			if (execve(programPath, args, envi) == -1)
 			{
-				printf("aaaaaa\n");
-				perror("execve"); // Si ocurre un error, imprime un mensaje de error
+				perror("minishell"); // Si ocurre un error, imprime un mensaje de error
         		exit(1);
     		}
 			ft_lstclear_cmd_l(&cmd);
@@ -71,6 +74,7 @@ int	single_forked_cmd(t_env **env, t_command_l *cmd)
 			wait(NULL);
 
 		}
+		printf("despues\n");
 		return(0);
 	//}
 	return (1);
