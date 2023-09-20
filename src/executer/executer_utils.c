@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/20 14:51:55 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:14:53 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,11 @@ t_command	*fork_free_command_l(t_command_l **command_l, int which)
 	return (fork_command);
 }
 
-int	childs_tasks(t_env **env, t_command_l *cmd)
+int	childs_tasks(char **envi, t_env **env, t_command_l *cmd)
 {
 	char *programPath = "/bin/ls";
 	char *args[] = {programPath, "-l", "-a", "/bin", NULL};
-	char **envi;
 
-	envi = env_to_array(*env);
-	if (!envi)
-		return (1);
 	if (handle_redirs(cmd->cmd->redirs))
 		return(1);
 	// printf("redir == %s\n", cmd->cmd->redirs->redir->where);
@@ -62,6 +58,11 @@ int	single_forked_cmd(t_env **env, t_command_l *cmd)
 {
 	printf("antes\n");
 	int		pid;
+	char **envi;
+
+	envi = env_to_array(*env);
+	if (!envi)
+		return (1);
 	//if (find path(env, cmd->cmd->args->content)
 	//{
 		pid = fork();
@@ -70,7 +71,7 @@ int	single_forked_cmd(t_env **env, t_command_l *cmd)
 		if (pid == 0)
 		{
 			//redirecciones
-			if (childs_tasks(env, cmd))
+			if (childs_tasks(envi, env, cmd))
 			{
 				ft_lstclear_cmd_l(&cmd);
 				ft_lstclear((t_list **) env, (void (*)(void *)) free_env_var);
