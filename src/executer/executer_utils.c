@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/19 00:29:15 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:06:16 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	single_cmd(t_command_l *cmd, t_env *env)
 {
 	//int		pid;
 	char	*cmd_path;
-	printf("hola\n");
 
 	cmd_path = find_path(env, cmd->cmd->args->content);
 	if (!cmd_path)
@@ -48,7 +47,6 @@ int	single_cmd(t_command_l *cmd, t_env *env)
 	// printf("%s\n", cmd_path);
 	// else
 	free(cmd_path);
-	printf("adios\n");
 	// pid = fork();
 	// if (pid < 0)
 	// 	return (1);
