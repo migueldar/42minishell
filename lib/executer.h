@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:47:51 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/15 16:31:44 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:02:40 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ void		unlink_all_heredoc_cmd(t_command_l *first, t_command_l *last);
 void		unlink_all_heredoc_redir(t_redir_l *first);
 t_command	*fork_free_command_l(t_command_l **command_l, int which);
 int			handle_redirs(t_redir_l *redirs);
+int			handle_dups(int fdin, int fdout);
+int			manage_pipes_and_forks(t_env **env, t_command_l	*cmd);
 
 #endif

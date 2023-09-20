@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 08:04:12 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/15 20:02:31 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/20 16:30:42 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	redir_out_append(int *fdout, char *file, t_redir_flag flag)
 	return (0);
 }
 
-static int	handle_dups(int fdin, int fdout)
+int	handle_dups(int fdin, int fdout)
 {
 	if (fdin != -2)
 	{
