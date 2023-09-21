@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/20 17:01:25 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:36:49 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ int	executer(t_command_l *cmds, t_env **env)
 	}
 	else
 	{
-		manage_pipes_and_forks(env, cmds);	
-		t_command *jiji = fork_free_command_l(&cmds, 1);
-		free_cmd(jiji);
+		manage_pipes_and_forks(env, cmds);
 	}
+		
 		
 		// fork_free_command_l(&cmds, 11);
 		// pipex(free_command_l);
