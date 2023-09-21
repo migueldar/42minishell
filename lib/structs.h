@@ -6,22 +6,12 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:53:22 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/14 19:27:40 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/21 15:30:26 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
-typedef struct s_executer
-{
-	int		heredoc;
-	int		**fd;
-	int		ncomand;
-	int		comand;
-	int		pid;
-	char	**paths;
-}	t_executer;
 
 typedef struct s_env_var
 {
