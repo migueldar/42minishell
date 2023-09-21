@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
+#    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/18 19:21:59 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/09/19 00:26:47 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME := minishell
 
 # Archivos fuente principales
 SRCS := src/env/env_list.c \
+		src/env/env_utils.c \
         src/main.c \
         src/parser/parser.c \
         src/parser/parser2.c \
@@ -49,6 +50,7 @@ SRCS := src/env/env_list.c \
 		src/executer/here_doc.c \
 		src/executer/here_doc_utils.c \
 		src/executer/here_doc_unlink.c \
+		src/executer/find_path.c \
 		src/executer/redir.c \
 
 
