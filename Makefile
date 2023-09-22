@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
+#    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/18 19:21:59 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/09/22 21:53:27 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SRCS := src/env/env_list.c \
 		src/executer/redir.c \
 
 
-# CC CFLAGS ... .c -> .o
+#CC CFLAGS ... .c -> .o
 
 # Archivos objeto
 OBJS := $(SRCS:src/%.c=objs/%.o)

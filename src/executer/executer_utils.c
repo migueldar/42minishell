@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/21 19:19:18 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:31:57 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ int	create_pipes(int ***pipes_fd, int len)
 	int	counter;
 
 	counter = 0;
-	(*pipes_fd) = malloc(len * sizeof(char *));
+	(*pipes_fd) = malloc(len * sizeof(int *));
 	if (!(*pipes_fd))
 		return(1);
 	while (len--)
 	{
-		(*pipes_fd)[counter] = malloc(2 * sizeof(char));
+		(*pipes_fd)[counter] = malloc(2 * sizeof(int));
 		if (!(*pipes_fd)[counter] || pipe((*pipes_fd)[counter]) < 0)
 		{
 			return (1);
@@ -122,7 +122,6 @@ int	manage_pipes_and_forks(t_env **env, t_command_l	*cmd)
 	int		**pipes_fd;
 	int		len;
 	
-	printf("antes \n");
 	position_child = 0;
 	envi = env_to_array(*env);
 	pipes_fd = NULL;
@@ -161,6 +160,5 @@ int	manage_pipes_and_forks(t_env **env, t_command_l	*cmd)
 	if(pid > 0)
 		while (len --)
 			wait(NULL);
-	printf("despues \n");
 	return (0);
 }
