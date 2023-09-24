@@ -6,11 +6,11 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 04:25:53 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/08 18:44:40 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/18 21:08:03 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
 // returns NULL if any of these happen:
 // - malloc fail
@@ -30,14 +30,14 @@ t_token_l	*lexer(char *raw_input)
 			perror("minishell");
 		else if (status == 2)
 			write(2, "minishell: syntax error: unclosed quotes\n", 41);
-		return (NULL);
+		return (g_exit_status = 1, NULL);
 	}
 	ret = tokenizer(split_raw_input);
 	ft_lstclear((t_list **) &split_raw_input, free);
 	if (!ret)
 	{
 		perror("minishell");
-		return (NULL);
+		return (g_exit_status = 1, NULL);
 	}
 	return (ret);
 }

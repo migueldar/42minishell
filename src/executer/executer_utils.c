@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/21 19:10:03 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:27:03 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,29 @@ int	single_forked_cmd(t_env **env, t_command_l *cmd)
 		return(0);
 	//}
 	return (1);
+int	single_cmd(t_command_l *cmd, t_env *env)
+{
+	//int		pid;
+	char	*cmd_path;
+
+	cmd_path = find_path(env, cmd->cmd->args->content);
+	if (!cmd_path)
+	{
+		return (1);
+	}
+	// printf("%s\n", cmd_path);
+	// else
+	free(cmd_path);
+	// pid = fork();
+	// if (pid < 0)
+	// 	return (1);
+	// if (pid > 0)
+	// {
+	// 	//redirecciones
+	// 	//verificar comando
+	// 	//ejecutar
+	// }
+	// else
+	// 	wait(NULL);
+	return (0);
 }

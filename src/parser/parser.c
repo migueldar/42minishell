@@ -6,11 +6,11 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 19:36:28 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/17 03:48:50 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/24 15:04:25 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
 static t_command_l	*malloc_command_l(void)
 {
@@ -25,10 +25,9 @@ static t_command_l	*malloc_command_l(void)
 	return (ret);
 }
 
-// return 1 malloc fail
-// return 3 nothing after pipe
-// return 4 syntax error near unexpected token
+// return 1: malloc fail
 // return 5 means pipe found
+// return 0x20 | flag: syntax error near unexpected token
 static char	flag_handler(t_token_flag flag, t_token_l **toks, t_command *cmd)
 {
 	char	status;
@@ -37,15 +36,16 @@ static char	flag_handler(t_token_flag flag, t_token_l **toks, t_command *cmd)
 		status = add_word(cmd, (*toks)->token);
 	else if (flag == OP_PIPE)
 	{
-		status = 5;
-		if (!(*toks)->next)
-			status = 3;
-		*toks = (*toks)->next;
+		status = ((*toks = (*toks)->next), 5);
+		if (!(*toks))
+			status = 0x20 | 0x6;
 	}
 	else
 	{
-		if (!(*toks)->next || (*toks)->next->token->flag != WORD)
-			status = 4;
+		if (!(*toks)->next)
+			status = 0x20 | 0x6;
+		else if ((*toks)->next->token->flag != WORD)
+			status = 0x20 | (*toks)->next->token->flag;
 		else
 		{
 			status = add_redir(cmd, (*toks)->token, (*toks)->next->token);
@@ -59,8 +59,7 @@ static char	flag_handler(t_token_flag flag, t_token_l **toks, t_command *cmd)
 
 // return NULL means error
 // status = 1 malloc fail
-// status = 3 nothing after pipe
-// status = 4 syntax error near unexpected token 
+// status = 0x20 | flag: syntax error near unexpected token
 t_command_l	*create_command_l(t_token_l **toks, char *status)
 {
 	t_command_l	*ret;
@@ -84,9 +83,7 @@ t_command_l	*create_command_l(t_token_l **toks, char *status)
 
 // return NULL means error
 // status = 1 malloc fail
-// status = 2 begin pipe
-// status = 3 nothing after pipe
-// status = 4 syntax error near unexpected token 
+// status = 0x20 | flag: syntax error near unexpected token
 t_command_l	*parser(t_token_l *toks, char *status)
 {
 	t_command_l	*ret;
@@ -97,7 +94,7 @@ t_command_l	*parser(t_token_l *toks, char *status)
 	{
 		if (toks->token->flag == OP_PIPE)
 			return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_cmd),
-					*status = 2, NULL);
+					*status = 0x20 | OP_PIPE, NULL);
 		aux = create_command_l(&toks, status);
 		if (!aux)
 			return (ft_lstclear((t_list **) &ret, (void (*)(void *)) free_cmd),
@@ -111,19 +108,26 @@ t_command_l	*parser_handler(t_token_l *toks)
 {
 	char		status;
 	t_command_l	*ret;
+	char		*flag_error;
 
 	status = 0;
 	ret = parser(toks, &status);
 	if (!ret)
 	{
+		g_exit_status = 1;
 		if (status == 1)
-			printf("Malloc fail\n");
-		else if (status == 2)
-			printf("Begin pipe\n");
-		else if (status == 3)
-			printf("Nothing after pipe\n");
-		else if (status == 4)
-			printf("syntax error near unexpected token redir\n");
+			perror("minishell");
+		else
+		{
+			flag_error = token_flag_to_str(status & 0x7);
+			if (!flag_error)
+				return (perror("minishell"), NULL);
+			g_exit_status = ST_SYNTAX_ERROR;
+			write(2, "minishell: syntax error near unexpected token `", 47);
+			write(2, flag_error, ft_strlen(flag_error));
+			write(2, "'\n", 2);
+			free(flag_error);
+		}
 		return (NULL);
 	}
 	return (ret);

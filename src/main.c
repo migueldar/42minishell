@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/20 13:17:52 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:28:25 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv, char **env)
 		raw = readline("$> ");
 		if (!raw)   // ctrl + D
 			break ;
-		if (!is_empty(raw))
+		if (raw[0])
 			add_history(raw);
 		expanded_list = complete_parser(raw, enviroment);
 		if (expanded_list)

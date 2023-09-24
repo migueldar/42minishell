@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/20 13:19:10 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:29:49 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	executer(t_command_l *cmds, t_env **env)
 {
 	int			status;
 	t_command	*command_to_exec;
+	t_list		*pids;
 
 	// printf("entras\n");
 	status = resolve_heredocs(cmds, *env);
@@ -35,14 +36,10 @@ int	executer(t_command_l *cmds, t_env **env)
 		
 	}
 	else
-	{
-		command_to_exec = fork_free_command_l(&cmds, 1);
-		free_cmd(command_to_exec);
-	}
+	{}
 		
 		// fork_free_command_l(&cmds, 11);
 		// pipex(free_command_l);
 			///dentro del pipex se mete cuando se haga el fork free_command_l
-	// forker();
 	return (0);
 }
