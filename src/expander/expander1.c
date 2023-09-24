@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 05:01:05 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/18 21:17:09 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/24 22:41:22 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_command_l	*expander_handler(t_command_l *cmds, t_env *env)
 	int			status;
 	t_command_l	*ret;
 
+	printf("start\n");
 	status = 0;
 	ret = expander(cmds, env, &status);
 	if (!ret)
@@ -43,5 +44,6 @@ t_command_l	*expander_handler(t_command_l *cmds, t_env *env)
 		}
 		return (NULL);
 	}
+	printf("end\n");
 	return (ret);
 }

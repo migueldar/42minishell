@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:53:05 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/20 18:36:38 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:07:16 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char	*protected_strjoin(char *s1, char *s2)
 	char	*ret;
 	int		counter;
 
+	if (!s1 && !s2)
+		return (NULL);
 	ret = ft_calloc(protected_strlen(s1) + protected_strlen(s2) + 1, 1);
 	if (ret == NULL)
 		return (NULL);

@@ -52,3 +52,4 @@ echo < $z
 echo < ''
 echo < '      '
 $z echo
+export a=' ' echo < $a
