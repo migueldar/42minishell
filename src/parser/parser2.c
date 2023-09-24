@@ -6,11 +6,28 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 00:40:39 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/23 02:56:30 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:48:14 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+char	*token_flag_to_str(t_token_flag flag)
+{
+	if (flag == OP_IN)
+		return (ft_strdup("<"));
+	else if (flag == OP_HERE_DOC)
+		return (ft_strdup("<<"));
+	else if (flag == OP_OUT)
+		return (ft_strdup(">"));
+	else if (flag == OP_APPEND)
+		return (ft_strdup(">>"));
+	else if (flag == OP_PIPE)
+		return (ft_strdup("|"));
+	else if (flag == 0x6)
+		return (ft_strdup("newline"));
+	return (NULL);
+}
 
 void	free_redir(t_redir *redir)
 {
