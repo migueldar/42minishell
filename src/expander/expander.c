@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:13 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/28 04:07:46 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/24 22:35:16 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,22 @@
 // 	print_string_l(dummy3);
 // }
 
-//can only fail bc of malloc fail
-t_string_l	*fully_expand_arg(char *arg, t_env *env)
+// NULL if fail
+//status 0 malloc fail
+//status 1 ok but expanded to NULL
+t_string_l	*fully_expand_arg(char *arg, t_env *env, int *status)
 {
 	t_exp_str	exp_arg;
 	t_exp_l		*splitted_arg;
 	t_string_l	*ret;
-	int			status;
 
-	status = 0;
-	exp_arg = expand_argument(arg, env, &status);
-	if (status)
-		return (NULL);
-	splitted_arg = word_split(exp_arg);
+	*status = 0;
+	exp_arg = expand_argument(arg, env, status);
+	if (*status)
+		return (*status = 0, NULL);
+	if (!*status && !exp_arg.content)
+		return (*status = 1, NULL);
+	splitted_arg = word_split(exp_arg, status);
 	free_exp_str(exp_arg);
 	if (!splitted_arg)
 		return (NULL);
@@ -66,10 +69,10 @@ static char	*expand_redir(char *arg, t_env *env, int *status)
 	t_string_l	*exp;
 	char		*ret;
 
-	exp = fully_expand_arg(arg, env);
-	if (!exp)
+	exp = fully_expand_arg(arg, env, status);
+	if (!exp && !*status)
 		return (*status = 0, NULL);
-	if (ft_lstsize((t_list *) exp) != 1 || is_empty(exp->content))
+	if (ft_lstsize((t_list *) exp) != 1)
 		return (*status = 1, ft_lstclear((t_list **) &exp, free), NULL);
 	ret = ft_strdup(exp->content);
 	ft_lstclear((t_list **) &exp, free);
@@ -79,12 +82,12 @@ static char	*expand_redir(char *arg, t_env *env, int *status)
 //return NULL if fail
 //stat 0 malloc fail
 //stat 1 ambigous redirect
-//can throw ambigous redirect if expanded is empty or is more than one in len
 static t_redir_l	*expand_redirs(t_redir_l *redirs, t_env *env, int *stat)
 {
 	t_redir_l	*ret;
 	t_redir_l	*new_n;
 
+	*stat = 0;
 	ret = NULL;
 	while (redirs)
 	{
@@ -108,8 +111,9 @@ static t_redir_l	*expand_redirs(t_redir_l *redirs, t_env *env, int *stat)
 	return (*stat = 0, ret);
 }
 
-//can only fail bc of malloc fail
-static t_string_l	*expand_args(t_string_l *args, t_env *env)
+//status 0 malloc fail
+//status 1 ok but expanded to NULL
+static t_string_l	*expand_args(t_string_l *args, t_env *env, int *status)
 {
 	t_string_l	*ret;
 	t_string_l	*new_n;
@@ -117,10 +121,12 @@ static t_string_l	*expand_args(t_string_l *args, t_env *env)
 	ret = NULL;
 	while (args)
 	{
-		new_n = fully_expand_arg(args->content, env);
-		if (!new_n)
+		*status = 0;
+		new_n = fully_expand_arg(args->content, env, status);
+		if (!new_n && *status == 0)
 			return (ft_lstclear((t_list **) &ret, free), NULL);
-		ft_lstadd_back((t_list **) &ret, (t_list *) new_n);
+		if (new_n)
+			ft_lstadd_back((t_list **) &ret, (t_list *) new_n);
 		args = args->next;
 	}
 	return (ret);
@@ -129,8 +135,6 @@ static t_string_l	*expand_args(t_string_l *args, t_env *env)
 //return NULL if fail
 //status 0 malloc fail
 //status 1 ambigous redirect
-//can throw ambigous redirect if expanded is empty or is more than one in len
-//missing prints, have to decide where to make them
 t_command_l	*expander(t_command_l *cmds, t_env *env, int *status)
 {
 	t_command_l	*ret;
@@ -145,8 +149,8 @@ t_command_l	*expander(t_command_l *cmds, t_env *env, int *status)
 		aux->cmd = ft_calloc(1, sizeof(t_command));
 		if (!aux->cmd)
 			return (ft_lstclear_cmd_l(&ret), free(aux), NULL);
-		aux->cmd->args = expand_args(cmds->cmd->args, env);
-		if (!aux->cmd->args && cmds->cmd->args)
+		aux->cmd->args = expand_args(cmds->cmd->args, env, status);
+		if (!aux->cmd->args && cmds->cmd->args && *status == 0)
 			return (ft_lstclear_cmd_l(&ret), free(aux->cmd), free(aux), NULL);
 		aux->cmd->redirs = expand_redirs(cmds->cmd->redirs, env, status);
 		if (!aux->cmd->redirs && cmds->cmd->redirs)

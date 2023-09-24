@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:54 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/25 17:18:05 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:50:06 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,39 @@ char	in_quote_switch(char in_quote, char curr)
 	return (ret);
 }
 
-//is_str = 1 :strjoin
-//is_str = 0 :strcharjoin
-t_exp_str	protected_exp_join(t_exp_str exp, char *cont,
-									char *was_e, int is_str)
+// status 0 ok
+// status 1 malloc fail
+t_exp_str	protected_exp_join_char(t_exp_str exp, char *cont,
+									char *was_e, int *status)
 {
 	t_exp_str	ret;
 
+	*status = 0;
 	ret.content = NULL;
 	ret.was_exp = NULL;
-	if (is_str == 1)
-	{
-		ret.content = protected_strjoin(exp.content, cont);
-		if (!ret.content)
-			return (ret);
-		ret.was_exp = protected_strjoin(exp.was_exp, was_e);
-	}
-	else
-	{
-		ret.content = protected_strcharjoin(exp.content, *cont);
-		if (!ret.content)
-			return (ret);
-		ret.was_exp = protected_strcharjoin(exp.was_exp, *was_e);
-	}
+	if (!exp.content && !cont)
+		return (ret);
+	ret.content = protected_strcharjoin(exp.content, *cont);
+	if (!ret.content)
+		return (ret);
+	ret.was_exp = protected_strcharjoin(exp.was_exp, *was_e);
+	return (ret);
+}
+
+t_exp_str	protected_exp_join_str(t_exp_str exp, char *cont,
+									char *was_e, int *status)
+{
+	t_exp_str	ret;
+
+	*status = 0;
+	ret.content = NULL;
+	ret.was_exp = NULL;
+	if (!exp.content && !cont)
+		return (ret);
+	ret.content = protected_strjoin(exp.content, cont);
+	if (!ret.content)
+		return (ret);
+	ret.was_exp = protected_strjoin(exp.was_exp, was_e);
 	return (ret);
 }
 

@@ -6,43 +6,11 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 21:23:03 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/09 02:48:39 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:42:04 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//joins two list but the last content of head and 
-//the first content of add get joined in just one node
-//returns 0 if all ok, 1 if malloc fails
-int	lst_addback_append(t_string_l **head, t_string_l *add)
-{
-	t_string_l	*head_cpy;
-	t_string_l	*add_cpy;
-	char		*aux;
-
-	if (!(*head))
-	{
-		*head = add;
-		return (0);
-	}
-	if (!add)
-		return (0);
-	head_cpy = *head;
-	while (head_cpy->next != NULL)
-		head_cpy = head_cpy->next;
-	aux = protected_strjoin(head_cpy->content, add->content);
-	if (!aux)
-		return (1);
-	free(head_cpy->content);
-	free(add->content);
-	add_cpy = add;
-	add = add->next;
-	free(add_cpy);
-	head_cpy->content = aux;
-	head_cpy->next = add;
-	return (0);
-}
 
 void	lst_delnode(t_list **head, t_list *node, void (*del)(void *))
 {
