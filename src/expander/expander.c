@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:13 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/24 22:08:04 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:43:21 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static char	*expand_redir(char *arg, t_env *env, int *status)
 	if (ft_lstsize((t_list *) exp) != 1 || is_empty(exp->content))
 		return (*status = 1, ft_lstclear((t_list **) &exp, free), NULL);
 	ret = ft_strdup(exp->content);
+	ft_lstclear((t_list **) &exp, free);
 	return (ret);
 }
 
