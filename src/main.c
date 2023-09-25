@@ -42,8 +42,12 @@ int main(int argc, char **argv, char **env)
 		}
 		expanded_list = complete_parser(raw, enviroment);
 		if (expanded_list)
-			g_exit_status = executer(expanded_list, &enviroment);
-		ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
+		{
+			g_exit_status =  executer(expanded_list, &enviroment);
+			ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
+		}
+
+		
 	}
 	ft_lstclear((t_list **) &enviroment, (void (*)(void *)) free_env_var);
 	clear_history();

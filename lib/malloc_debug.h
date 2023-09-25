@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 03:27:04 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/29 04:10:26 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/25 17:30:11 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <string.h>
 # include <execinfo.h>
 # include <sys/errno.h>
+# include <string.h>
 
 void	*malloc(size_t n);
 void	leaks(void);

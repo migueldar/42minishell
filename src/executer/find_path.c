@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:32:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/19 00:24:51 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:09:18 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static char	*ft_strdup_perror(char *str)
 	return (ret);
 }
 
-char	*find_path(t_env *env, char *cmd)
+char	*find_path(t_env *env, char *cmd, int *stat)
 {
 	char	**paths;
 	char	*correct_path;
@@ -117,7 +117,7 @@ char	*find_path(t_env *env, char *cmd)
 			return (perror("minishell"), NULL);
 		write(2, "minishell: ", 11);
 		write(2, cmd, ft_strlen(cmd));
-		return (write(2, ": command not found\n", 20), NULL);
+		return (*stat = 127, write(2, ": command not found\n", 20), NULL);
 	}
 	return (correct_path);
 }
