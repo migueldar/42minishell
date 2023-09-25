@@ -1,2 +1,1 @@
 signals on executer
-command: '  ' should reset exit code to 0, but it doesnt (in fact it sets it to 1)
