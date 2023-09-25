@@ -1,2 +1,3 @@
 arreglar expander
 signals on executer
+change find path to check for access(dir and exec permission) in "verify slash == true" case

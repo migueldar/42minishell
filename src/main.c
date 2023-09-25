@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/24 20:28:25 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:31:14 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main(int argc, char **argv, char **env)
 		expanded_list = complete_parser(raw, enviroment);
 		if (expanded_list)
 		{
-			g_exit_status = executer(expanded_list, &enviroment);
+			g_exit_status =  executer(expanded_list, &enviroment);
 			ft_lstclear((t_list **) &expanded_list, (void (*)(void *)) free_cmd);
 		}
 
