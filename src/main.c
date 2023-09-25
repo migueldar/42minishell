@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/25 16:31:14 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:35:37 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int main(int argc, char **argv, char **env)
 			break ;
 		if (raw[0])
 			add_history(raw);
+		if (is_empty(raw))
+		{
+			free(raw);
+			continue ;
+		}
 		expanded_list = complete_parser(raw, enviroment);
 		if (expanded_list)
 		{

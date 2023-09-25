@@ -3,6 +3,7 @@ if [ $# -ne 3 ]; then
 	exit 1
 fi
 
+rm log logerr
 make leaks
 for ((i = $1; i <= $2; i++)); do
 	echo $i

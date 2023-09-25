@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:09 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/13 20:32:30 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/24 22:28:30 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 # include "utils.h"
 
 t_command_l	*expander(t_command_l *cmds, t_env *env, int *status);
-t_exp_l		*word_split(t_exp_str exp);
+t_exp_l		*word_split(t_exp_str exp, int *status);
 t_string_l	*quote_removal(t_exp_l *exp_l);
 t_exp_str	expand_argument(char *str, t_env *env, int *status);
 void		free_exp_str(t_exp_str to_free);
 char		in_quote_switch(char in_quote, char curr);
-t_exp_str	protected_exp_join(t_exp_str exp, char *cont,
-				char *was_e, int is_str);
+t_exp_str	protected_exp_join_char(t_exp_str exp, char *cont,
+				char *was_e, int *status);
+t_exp_str	protected_exp_join_str(t_exp_str exp, char *cont,
+				char *was_e, int *status);
 void		init_to_zeros(char *str, t_exp_str *exp);
 int			in_quote_switch2(char *in_q, t_exp_str *exp, int cnt);
 t_exp_str	*next_word_ex(t_exp_str exp, size_t *cnt, char *in_quote);
@@ -35,6 +37,7 @@ t_command_l	*expander_handler(t_command_l *cmds, t_env *env);
 void		ft_lstclear_exp_l(t_exp_l **tofree);
 void		ft_lstclear_redir_l(t_redir_l **tofree);
 char		*quote_removal_heredoc(char *str);
-char		*expand_substring(char **str, t_env *env, char in_quote);
+char		*expand_substring(char **str, t_env *env, char in_quote,
+				int *status);
 
 #endif

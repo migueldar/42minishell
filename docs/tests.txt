@@ -28,6 +28,14 @@ prev: export y='"a a"' && export x="'b b'" && gcc helpers/parameters.c -o params
 prev: export w='" "' && gcc helpers/parameters.c -o params
 - ./params z$w-		2 params
 
+prev: unset z (all checks for expander expanding unexisting or NULL vars to NULL instead of '')
+$z | cat
+echo < $z
+echo < ''
+echo < '      '
+$z echo
+export a=' ' echo < $a
+
 
 HERE_DOC
 
@@ -46,9 +54,7 @@ a
 << a'' //nothing should expand
 
 
-prev: unset z (all checks for expander expanding unexisting or NULL vars to NULL instead of '')
-$z | cat
-echo < $z
-echo < ''
-echo < '      '
-$z echo
+EXIT STATUS
+echo < 
+     
+echo $? (should give 258)

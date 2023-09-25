@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:10:47 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/02 07:15:11 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/24 22:01:14 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*expand_heredoc(char *toexp, t_env *env)
 	char	*ret;
 	char	*aux;
 	char	*aux2;
+	int		status;
 
 	ret = ft_strdup("");
 	while (*toexp)
@@ -76,17 +77,15 @@ char	*expand_heredoc(char *toexp, t_env *env)
 		if (*toexp == '$')
 		{
 			toexp++;
-			aux2 = expand_substring(&toexp, env, 1);
-			toexp--;
-			if (!aux2)
+			aux2 = expand_substring(&toexp, env, 1, &status);
+			if (toexp--, !aux2 && !status)
 				return (free(ret), NULL);
 			aux = protected_strjoin(ret, aux2);
 			free(aux2);
 		}
 		else
 			aux = protected_strcharjoin(ret, *toexp);
-		free(ret);
-		if (!aux)
+		if (free(ret), !aux)
 			return (NULL);
 		ret = (toexp++, aux);
 	}
