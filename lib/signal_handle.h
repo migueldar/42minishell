@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 00:59:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/29 21:49:40 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:01:37 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 void	sig_handler_interactive(int signum);
 void	sig_handler_here_doc(int signum);
+void	sig_handler_wait(int signum);
 void	sig_setter(sig_t func);
 
 #endif
