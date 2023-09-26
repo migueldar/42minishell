@@ -6,7 +6,7 @@
 #    By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/19 00:26:47 by lucia-ma         ###   ########.fr        #
+#    Updated: 2023/09/26 17:33:34 by lucia-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,8 @@ SRCS := src/env/env_list.c \
 		src/executer/here_doc_unlink.c \
 		src/executer/find_path.c \
 		src/executer/redir.c \
+		src/executer/single_command.c \
+		src/executer/plural_commands.c \
 
 
 # CC CFLAGS ... .c -> .o

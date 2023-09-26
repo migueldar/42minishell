@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/25 16:31:35 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:26:19 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int	executer(t_command_l *cmds, t_env **env)
 			return (single_cmd(cmds, env));
 	}
 	else
-	{}
+	{
+		return (plural_commands(env, cmds));
+	}
 		// fork_free_command_l(&cmds, 11);
 		// pipex(free_command_l);
 			///dentro del pipex se mete cuando se haga el fork free_command_l

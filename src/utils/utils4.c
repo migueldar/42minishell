@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:07:43 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/18 17:59:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:34:15 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	cmd_size(t_command_l *cmd)
+{
+	int	len;
+
+	len = 0;
+	while (cmd)
+	{
+		len ++;
+		cmd = cmd->next;
+	}
+	return (len);
+}
 
 char	**string_l_to_array(t_string_l *arg)
 {

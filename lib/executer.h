@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:47:51 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/25 16:09:51 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:29:57 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int			single_forked_cmd(t_env **env, t_command_l *cmd);
 int			handle_redirs(t_redir_l *redirs);
 int			single_cmd(t_command_l *cmd, t_env **env);
 char		*find_path(t_env *env, char *cmd, int *status);
-
+int			handle_dups(int fdin, int fdout);
+int			plural_commands(t_env **env, t_command_l	*cmd);
+void		childs_tasks(t_env **env, t_command_l *cmd);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/18 18:00:30 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:34:51 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int			ft_strncmp_ignore_case(const char *s1, const char *s2,
 char		**string_l_to_array(t_string_l *arg);
 char		**env_to_array(t_env *arg);
 long int	ft_atol(const char *str, int *status);
+int			cmd_size(t_command_l *cmd);
 
 #endif
