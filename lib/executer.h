@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:47:51 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 17:29:57 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:19:30 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ char		*execute_heredoc_settup(char *del, int *fd, \
 	char **file_nam, int *stat);
 void		unlink_all_heredoc_cmd(t_command_l *first, t_command_l *last);
 void		unlink_all_heredoc_redir(t_redir_l *first);
-t_command	*fork_free_command_l(t_command_l **command_l, int which);
-int			single_forked_cmd(t_env **env, t_command_l *cmd);
 int			handle_redirs(t_redir_l *redirs);
-int			single_cmd(t_command_l *cmd, t_env **env);
+int			single_cmd(t_env **env, t_command_l *cmd);
 char		*find_path(t_env *env, char *cmd, int *status);
 int			handle_dups(int fdin, int fdout);
-int			plural_commands(t_env **env, t_command_l	*cmd);
-void		childs_tasks(t_env **env, t_command_l *cmd);
+int			plural_commands(t_env **env, t_command_l *cmd);
+void		childs_tasks(t_env **env, t_command *cmd);
+t_command	*isolate_cmd(t_command_l *command_l, int which);
+void		clear_child(t_env **env, t_command *cmd, char *arg1, char **arg2);
+
 #endif

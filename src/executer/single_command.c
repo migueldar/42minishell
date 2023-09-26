@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   single_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 17:37:44 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:18:09 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	clear_child(t_env **env, t_command_l *cmd, char *arg1, char **arg2)
+void	clear_child(t_env **env, t_command *cmd, char *arg1, char **arg2)
 {
 	if (env)
 		ft_lstclear((t_list **) env, (void (*)(void *)) free_env_var);
 	if (cmd)
-		ft_lstclear_cmd_l(&cmd);
+		free_cmd(cmd);
 	if (arg1)
 		free(arg1);
 	if (arg2)
@@ -25,20 +25,22 @@ static void	clear_child(t_env **env, t_command_l *cmd, char *arg1, char **arg2)
 	clear_history();
 }
 
-void	childs_tasks(t_env **env, t_command_l *cmd)
+void	childs_tasks(t_env **env, t_command *cmd)
 {
 	char	*path;
 	char	**argv;
 	char	**envi;
 	int		status;
 
-	if (handle_redirs(cmd->cmd->redirs))
+	if (handle_redirs(cmd->redirs))
 		(clear_child(env, cmd, NULL, NULL), exit(1));
+	if (!cmd->args)
+		exit(0);
 	status = 1;
-	path = find_path(*env, cmd->cmd->args->content, &status);
+	path = find_path(*env, cmd->args->content, &status);
 	if (!path)
 		(clear_child(env, cmd, NULL, NULL), exit(status));
-	argv = string_l_to_array(cmd->cmd->args);
+	argv = string_l_to_array(cmd->args);
 	if (!argv)
 		(clear_child(env, cmd, path, NULL), perror("minishell"), exit(1));
 	envi = env_to_array(*env);
@@ -52,18 +54,20 @@ void	childs_tasks(t_env **env, t_command_l *cmd)
 	exit(127);
 }
 
-int	single_cmd(t_command_l *cmd, t_env **env)
+int	single_cmd(t_env **env, t_command_l *cmd)
 {
-	int	pid;
-	int	stat;
+	int			pid;
+	int			stat;
+	t_command	*to_exec;
 
-	if (!cmd->cmd->args)
-		return (0);
 	pid = fork();
 	if (pid < 0)
 		return (perror("minishell"), 1);
 	if (pid == 0)
-		childs_tasks(env, cmd);
+	{
+		to_exec = isolate_cmd(cmd, 0);
+		childs_tasks(env, to_exec);
+	}
 	if (pid > 0)
 		wait(&stat);
 	return (WEXITSTATUS(stat));

@@ -1,4 +1,0 @@
-ls | ls
-ls | ls | ls | ls
-ls | ls -hsdjkñ´dlsafkdìgiuwerio3ur
-ls -hsdjkñ´dlsafkdìgiuwerio3ur | ls

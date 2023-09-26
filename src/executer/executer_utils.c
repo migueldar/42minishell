@@ -3,34 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   executer_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 17:33:58 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:47:24 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command	*fork_free_command_l(t_command_l **command_l, int which)
+t_command	*isolate_cmd(t_command_l *command_l, int which)
 {
-	int			counter;
-	t_command	*fork_command;
-	t_command_l	*head;
+	t_command_l	*head_cpy;
+	t_command_l	*prev;
+	t_command	*ret;
 
-	counter = 0;
-	head = *command_l;
-	while (*command_l)
+	head_cpy = command_l;
+	prev = NULL;
+	ret = NULL;
+	while (head_cpy)
 	{
-		if (counter == which)
+		if (which == 0)
 		{
-			fork_command = (*command_l)->cmd;
-			(*command_l)->cmd = NULL;
+			if (prev)
+				prev->next = head_cpy->next;
+			else
+				command_l = head_cpy->next;
+			ret = head_cpy->cmd;
+			free(head_cpy);
+			break ;
 		}
-		(*command_l) = (*command_l)->next;
-		counter ++;
+		prev = head_cpy;
+		head_cpy = head_cpy->next;
+		which--;
 	}
-	ft_lstclear_cmd_l(&head);
-	return (fork_command);
+	return (ft_lstclear_cmd_l(&command_l), ret);
 }
-

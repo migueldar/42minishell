@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 17:34:51 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:50:19 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ size_t		protected_strlen(char const *str);
 char		*protected_strcharjoin(char *str, char c);
 int			is_empty(char const *str);
 void		cmd_args_printer(char *str);
-int			lst_addback_append(t_string_l **head, t_string_l *add);
 char		*full_string(char c, size_t n);
 void		print_exp_l(t_exp_l *in);
 void		print_string_l(t_string_l *in);
@@ -42,6 +41,5 @@ int			ft_strncmp_ignore_case(const char *s1, const char *s2,
 char		**string_l_to_array(t_string_l *arg);
 char		**env_to_array(t_env *arg);
 long int	ft_atol(const char *str, int *status);
-int			cmd_size(t_command_l *cmd);
 
 #endif

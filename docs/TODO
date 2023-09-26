@@ -1,2 +1,6 @@
 signals on executer
 change find path to check for access(dir and exec permission) in "verify slash == true" case
+check for leaks when execute one command that doesnt exist
+implement that builtins go through builints in plural commands
+normi
+close pipe fds

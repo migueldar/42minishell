@@ -3,104 +3,102 @@
 /*                                                        :::      ::::::::   */
 /*   plural_commands.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 17:33:08 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:49:55 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	create_pipes(int ***pipes_fd, int len)
-{
-	int	counter;
-
-	counter = 0;
-	(*pipes_fd) = malloc(len * sizeof(int *));
-	if (!(*pipes_fd))
-		return (1);
-	while (len--)
-	{
-		(*pipes_fd)[counter] = malloc(2 * sizeof(int));
-		if (!(*pipes_fd)[counter] || pipe((*pipes_fd)[counter]) < 0)
-			return (1);
-		counter ++;
-	}
-	return (0);
-}
-
-int	manage_pipes(int child, int **pipes_fd, int number_commands)
-{
-	if (child == 0)
-		if (handle_dups(-2, pipes_fd[child][1]))
-			return (1);
-	if (child > 0 && child < number_commands)
-		if (handle_dups(pipes_fd[child - 1][0], pipes_fd[child][1]))
-			return (1);
-	if (child == number_commands)
-		if (handle_dups(pipes_fd[child - 1][0], -2))
-			return (1);
-	return (0);
-}
 
 void	kill_childs(int *pid, int position_childs)
 {
 	int	counter;
 
 	counter = 0;
-	while (position_childs)
+	while (counter < position_childs)
 	{
 		kill(pid[counter], SIGKILL);
-		position_childs --;
-		counter ++;
+		counter++;
 	}
 }
 
-int	manage_pipes_and_forks(t_env **env, t_command_l	*cmd, int **pid2, int ***pipes_fd)
+int	wait_all(int *pid, int len)
 {
-	int		position_child;
-	int		*pid;
+	int	counter;
+	int stat;
 
-	pid = ((position_child = 0), *pid2);
-	while (cmd)
+	counter = 0;
+	while (counter < len)
 	{
-		pid[position_child] = fork();
-		if (pid[position_child] < 0)
-			return (kill_childs(pid, position_child), perror("minishell"), 1);
-		if (pid[position_child] == 0)
-		{
-			if (manage_pipes(position_child, *pipes_fd,  cmd_size(cmd) - 1))
-			{
-				ft_lstclear_cmd_l(&cmd);
-				ft_lstclear((t_list **) env, (void (*)(void *)) free_env_var);
-				clear_history();
-				return (perror("minishell"), 1);
-			}
-			childs_tasks (env, cmd);
-		}
-		cmd = ((position_child ++), cmd->next);
+		waitpid(pid[counter], &stat, 0);
+		counter++;
+	}
+	return (stat);
+}
+
+int	manage_child(t_env **env, t_command_l *cmd, int fdin, int fdout, int *pid, int counter)
+{
+	t_command	*to_exec;
+
+	pid[counter] = fork();
+	if (pid[counter] < 0)
+		return (perror("minishell"), 1);
+	if (pid[counter] == 0)
+	{
+		if (handle_dups(fdin, fdout))
+			(clear_child(env, NULL, NULL, NULL), ft_lstclear_cmd_l(&cmd), exit(1));
+		to_exec = isolate_cmd(cmd, counter);
+		childs_tasks(env, to_exec);
 	}
 	return (0);
 }
 
+void	swap_pipes(int pipes[2][2])
+{
+	int	aux;
+
+	aux = pipes[0][0];
+	pipes[0][0] = pipes[1][0];
+	pipes[1][0] = aux;
+	aux = pipes[0][1];
+	pipes[0][1] = pipes[1][1];
+	pipes[1][1] = aux;
+}
+
 int	plural_commands(t_env **env, t_command_l *cmd)
 {
-	int	**pipes_fd;
-	int	position_child;
+	int	pipes[2][2];
 	int	len;
 	int	*pid;
 	int	stat;
+	int	counter;
+	int	stat_chi;
 
-	position_child = 0;
-	pipes_fd = NULL;
-	len = cmd_size(cmd);
+	len = ft_lstsize((t_list *) cmd);
 	pid = malloc(sizeof(int) * len);
-	if (!pid || create_pipes(&pipes_fd, cmd_size(cmd) - 1))
+	if (!pid)
 		return (perror("minishell"), 1);
-	if (manage_pipes_and_forks(env, cmd, &pid, &pipes_fd))
+	pipe(pipes[0]);
+	stat_chi = manage_child(env, cmd, -2, pipes[0][1], pid, 0);
+	if (stat_chi)
 		return (1);
-	while (len --)
-		wait(&stat);
-	return (WEXITSTATUS(stat));
+	counter = 1;
+	while (counter < len - 1)
+	{
+		pipe(pipes[1]);
+		stat_chi = manage_child(env, cmd, pipes[0][0], pipes[1][1], pid, counter);
+		if (stat_chi)
+			return (kill_childs(pid, counter), 1);
+		swap_pipes(pipes);
+		counter++;
+	}
+	stat_chi = manage_child(env, cmd, pipes[0][0], -2, pid, counter);
+	counter++;
+	if (stat_chi)
+		return (kill_childs(pid, counter), 1);
+	stat = wait_all(pid, len);
+	free(pid);
+	return(WEXITSTATUS(stat));
 }
