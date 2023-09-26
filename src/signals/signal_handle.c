@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 00:58:38 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/08/30 00:12:01 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:04:09 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 void	sig_setter(sig_t func)
 {
 	signal(SIGINT, func);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, func);
+}
+
+void	sig_handler_wait(int signum)
+{
+	(void) signum;
+	write(1, "\n", 1);
 }
 
 void	sig_handler_interactive(int signum)

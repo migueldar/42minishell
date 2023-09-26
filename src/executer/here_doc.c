@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:57:26 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/08 18:44:55 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:00:01 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,8 @@ static t_redir_l	*resolve_redirs_heredoc(t_redir_l *redirs,
 {
 	t_redir_l	*ret;
 	t_redir_l	*new_n;
-	t_redir_l	*redirs_head;
 
 	ret = NULL;
-	redirs_head = redirs;
 	while (redirs)
 	{
 		new_n = ft_calloc(1, sizeof(t_redir_l));
