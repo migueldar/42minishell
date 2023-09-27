@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 20:18:09 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:59:59 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	childs_tasks(t_env **env, t_command *cmd)
 	if (!envi)
 		(clear_child(env, cmd, path, argv), perror("minishell"), exit(1));
 	clear_child(env, cmd, NULL, NULL);
+	sig_setter(SIG_DFL);
 	execve(path, argv, envi);
 	free_arr_2((void **) envi);
 	clear_child(NULL, NULL, path, argv);
-	perror("minishell");
-	exit(127);
+	exit((perror("minishell"), 127));
 }
 
 int	single_cmd(t_env **env, t_command_l *cmd)
@@ -63,12 +63,18 @@ int	single_cmd(t_env **env, t_command_l *cmd)
 	pid = fork();
 	if (pid < 0)
 		return (perror("minishell"), 1);
+	sig_setter(sig_handler_wait);
 	if (pid == 0)
 	{
 		to_exec = isolate_cmd(cmd, 0);
 		childs_tasks(env, to_exec);
 	}
 	if (pid > 0)
+	{
 		wait(&stat);
+		sig_setter(sig_handler_interactive);
+	}
+	if (WIFSIGNALED(stat))
+		return (WTERMSIG(stat) | 0x80);
 	return (WEXITSTATUS(stat));
 }

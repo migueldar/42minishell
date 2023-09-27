@@ -6,11 +6,41 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 19:47:24 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:05:42 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	kill_childs(int *pid, int position_childs)
+{
+	int	counter;
+
+	counter = 0;
+	while (counter < position_childs)
+	{
+		kill(pid[counter], SIGKILL);
+		counter++;
+	}
+}
+
+int	wait_all_free(int *pid, int len)
+{
+	int	counter;
+	int	stat;
+
+	counter = 0;
+	while (counter < len)
+	{
+		waitpid(pid[counter], &stat, 0);
+		counter++;
+	}
+	sig_setter(sig_handler_interactive);
+	free(pid);
+	if (WIFSIGNALED(stat))
+		return (WTERMSIG(stat) | 0x80);
+	return (WEXITSTATUS(stat));
+}
 
 t_command	*isolate_cmd(t_command_l *command_l, int which)
 {
@@ -38,4 +68,26 @@ t_command	*isolate_cmd(t_command_l *command_l, int which)
 		which--;
 	}
 	return (ft_lstclear_cmd_l(&command_l), ret);
+}
+
+void	swap_pipes(int pipes[2][2])
+{
+	int	aux;
+
+	aux = pipes[0][0];
+	pipes[0][0] = pipes[1][0];
+	pipes[1][0] = aux;
+	aux = pipes[0][1];
+	pipes[0][1] = pipes[1][1];
+	pipes[1][1] = aux;
+}
+
+t_child_aux	create_aux_struct(int counter, int in, int out)
+{
+	t_child_aux	ret;
+
+	ret.counter = counter;
+	ret.fdin = in;
+	ret.fdout = out;
+	return (ret);
 }

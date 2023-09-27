@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 20:52:09 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/18 18:13:39 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:58:08 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_exit(t_string_l *args)
 {
 	int	ret;
 	int	status;
-	
+
 	write(2, "exit\n", 5);
 	if (ft_lstsize((t_list *) args) == 0)
 		return (ST_EXIT | g_exit_status);

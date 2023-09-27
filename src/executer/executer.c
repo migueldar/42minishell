@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 20:18:48 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:05:45 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	executer(t_command_l *cmds, t_env **env)
 	if (ft_lstsize((t_list *) cmds) <= 1)
 	{
 		if (cmds->cmd->args && is_builtin(cmds->cmd->args->content))
-			return (handle_builtin(cmds, env, 1));
+			return (handle_builtin(cmds->cmd, env, 1));
 		else
 			return (single_cmd(env, cmds));
 	}

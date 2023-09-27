@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 19:00:42 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:46:08 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ int main(int argc, char **argv, char **env)
 		}
 	}
 	ft_lstclear((t_list **) &enviroment, (void (*)(void *)) free_env_var);
-	clear_history();
 	return ((unsigned char) g_exit_status);
 }

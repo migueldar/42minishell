@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:32:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/25 16:09:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:57:18 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,6 @@ static char	*verify_path(char **paths, char	*cmd, int *status)
 		free(complete_path);
 	}
 	return (*status = 1, NULL);
-}
-
-static char	*ft_strdup_perror(char *str)
-{
-	char	*ret;
-
-	ret = ft_strdup(str);
-	if (!ret)
-		perror("minishell");
-	return (ret);
 }
 
 char	*find_path(t_env *env, char *cmd, int *stat)
