@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 07:32:55 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/18 17:09:41 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:56:14 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ static int	execute_builtin(t_string_l *args, t_env **env)
 	return (0);
 }
 
-int	handle_builtin(t_command_l *cmd, t_env **env, int single)
+int	handle_builtin(t_command *cmd, t_env **env, int single)
 {
 	int	in;
 	int	out;
 	int	ret;
-	
+
 	if (single)
 	{
 		in = dup(0);
 		out = dup(1);
 	}
-	if (handle_redirs(cmd->cmd->redirs) == 0)
-		ret = execute_builtin(cmd->cmd->args, env);
+	if (handle_redirs(cmd->redirs) == 0)
+		ret = execute_builtin(cmd->args, env);
 	else
 		ret = 1;
 	if (single)

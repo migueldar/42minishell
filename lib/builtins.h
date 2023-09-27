@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 21:27:41 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/18 17:07:32 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:06:04 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int		single_unset(t_env **env, char *var);
 void	free_env_var(t_env_var *env_var);
 int		ft_export( t_env **envi, t_string_l *var);
 int		is_builtin(char *cmd);
-int		handle_builtin(t_command_l *cmd, t_env **env, int single);
+int		handle_builtin(t_command *cmd, t_env **env, int single);
 
 #endif

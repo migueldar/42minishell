@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 21:23:03 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/24 20:42:04 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:57:32 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,12 @@ int	ft_strncmp_ignore_case(const char *s1, const char *s2, unsigned int n)
 	return (0);
 }
 
-// char	*ft_tolower_string(char *str)
-// {
-// 	size_t	counter;
-// 	char	*ret;
+char	*ft_strdup_perror(char *str)
+{
+	char	*ret;
 
-// 	if (!str)
-// 		return (NULL);
-// 	ret = ft_calloc(ft_strlen(str) + 1, 1);
-// 	if (!ret)
-// 		return (NULL);
-// 	counter = 0;
-// 	while (str[counter])
-// 	{
-// 		ret[counter] = ft_tolower(str[counter]);
-// 		counter++;
-// 	}
-// 	return (ret);
-// }
+	ret = ft_strdup(str);
+	if (!ret)
+		perror("minishell");
+	return (ret);
+}

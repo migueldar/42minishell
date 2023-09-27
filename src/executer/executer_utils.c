@@ -6,94 +6,88 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 17:07:19 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:16:24 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command	*fork_free_command_l(t_command_l **command_l, int which)
+void	kill_childs(int *pid, int position_childs)
 {
-	int			counter;
-	t_command	*fork_command;
-	t_command_l	*head;
+	int	counter;
 
 	counter = 0;
-	head = *command_l;
-	while (*command_l)
+	while (counter < position_childs)
 	{
-		if (counter == which)
-		{
-			fork_command = (*command_l)->cmd;
-			(*command_l)->cmd = NULL;
-		}
-		(*command_l) = (*command_l)->next;
-		counter ++;
+		kill(pid[counter], SIGKILL);
+		counter++;
 	}
-	ft_lstclear_cmd_l(&head);
-	return (fork_command);
 }
 
-static void	clear_child(t_env **env, t_command_l *cmd, char *arg1, char **arg2)
+int	wait_all_free(int *pid, int len)
 {
-	if (env)
-		ft_lstclear((t_list **) env, (void (*)(void *)) free_env_var);
-	if (cmd)
-		ft_lstclear_cmd_l(&cmd);
-	if (arg1)
-		free(arg1);
-	if (arg2)
-		free_arr_2((void **) arg2);
-	clear_history();
-}
-
-void	childs_tasks(t_env **env, t_command_l *cmd)
-{
-	char	*path;
-	char	**argv;
-	char	**envi;
-	int		status;
-
-	if (handle_redirs(cmd->cmd->redirs))
-		(clear_child(env, cmd, NULL, NULL), exit(1));
-	status = 1;
-	path = find_path(*env, cmd->cmd->args->content, &status);
-	if (!path)
-		(clear_child(env, cmd, NULL, NULL), exit(status));
-	argv = string_l_to_array(cmd->cmd->args);
-	if (!argv)
-		(clear_child(env, cmd, path, NULL), perror("minishell"), exit(1));
-	envi = env_to_array(*env);
-	if (!envi)
-		(clear_child(env, cmd, path, argv), perror("minishell"), exit(1));
-	clear_child(env, cmd, NULL, NULL);
-	sig_setter(SIG_DFL);
-	execve(path, argv, envi);
-	free_arr_2((void **) envi);
-	clear_child(NULL, NULL, path, argv);
-	perror("minishell");
-	exit(127);
-}
-
-int	single_cmd(t_command_l *cmd, t_env **env)
-{
-	int	pid;
+	int	counter;
 	int	stat;
 
-	if (!cmd->cmd->args)
-		return (0);
-	pid = fork();
-	if (pid < 0)
-		return (perror("minishell"), 1);
-	sig_setter(sig_handler_wait);
-	if (pid == 0)
-		childs_tasks(env, cmd);
-	if (pid > 0)
+	counter = 0;
+	while (counter < len)
 	{
-		wait(&stat);
-		sig_setter(sig_handler_interactive);
+		waitpid(pid[counter], &stat, 0);
+		counter++;
 	}
+	sig_setter(sig_handler_interactive, 1);
+	free(pid);
 	if (WIFSIGNALED(stat))
 		return (WTERMSIG(stat) | 0x80);
 	return (WEXITSTATUS(stat));
+}
+
+t_command	*isolate_cmd(t_command_l *command_l, int which)
+{
+	t_command_l	*head_cpy;
+	t_command_l	*prev;
+	t_command	*ret;
+
+	head_cpy = command_l;
+	prev = NULL;
+	ret = NULL;
+	while (head_cpy)
+	{
+		if (which == 0)
+		{
+			if (prev)
+				prev->next = head_cpy->next;
+			else
+				command_l = head_cpy->next;
+			ret = head_cpy->cmd;
+			free(head_cpy);
+			break ;
+		}
+		prev = head_cpy;
+		head_cpy = head_cpy->next;
+		which--;
+	}
+	return (ft_lstclear_cmd_l(&command_l), ret);
+}
+
+void	swap_pipes(int pipes[2][2])
+{
+	int	aux;
+
+	aux = pipes[0][0];
+	pipes[0][0] = pipes[1][0];
+	pipes[1][0] = aux;
+	aux = pipes[0][1];
+	pipes[0][1] = pipes[1][1];
+	pipes[1][1] = aux;
+}
+
+t_child_aux	create_aux_struct(int counter, int in, int out)
+{
+	t_child_aux	ret;
+
+	ret.counter = counter;
+	ret.fdin = in;
+	ret.fdout = out;
+	return (ret);
 }

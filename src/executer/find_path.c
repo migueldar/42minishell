@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:32:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/25 16:09:18 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 20:05:05 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,29 @@
 
 static int	verify_if_slash(char *cmd)
 {
-	int	counter;
+	int			counter;
+	struct stat	st;
 
 	counter = 0;
 	while (cmd[counter] && cmd[counter] != '/')
 		counter ++;
-	if (cmd[counter])
+	if (cmd[counter] == 0)
+		return (0);
+	if (stat(cmd, &st) == -1)
 		return (1);
-	return (0);
+	else
+	{
+		if (S_ISDIR(st.st_mode))
+		{
+			write(2, "minishell: ", 11);
+			write(2, cmd, ft_strlen(cmd));
+			write(2, ": is a directory\n", 17);
+			return (2);
+		}
+		if (access(cmd, X_OK) == -1)
+			return (perror("minishell"), 2);
+	}
+	return (1);
 }
 
 static char	*ft_strjoinpath(char const *s1, char const *s2)
@@ -83,24 +98,15 @@ static char	*verify_path(char **paths, char	*cmd, int *status)
 	return (*status = 1, NULL);
 }
 
-static char	*ft_strdup_perror(char *str)
-{
-	char	*ret;
-
-	ret = ft_strdup(str);
-	if (!ret)
-		perror("minishell");
-	return (ret);
-}
-
 char	*find_path(t_env *env, char *cmd, int *stat)
 {
 	char	**paths;
 	char	*correct_path;
 	int		status;
 
-	status = 0;
-	if (verify_if_slash(cmd))
+	if (verify_if_slash(cmd) == 2)
+		return (*stat = 126, NULL);
+	else if (verify_if_slash(cmd) == 1)
 		return (ft_strdup_perror(cmd));
 	paths = create_path(env, &status);
 	if (!paths)
@@ -115,8 +121,7 @@ char	*find_path(t_env *env, char *cmd, int *stat)
 	{
 		if (status == 0)
 			return (perror("minishell"), NULL);
-		write(2, "minishell: ", 11);
-		write(2, cmd, ft_strlen(cmd));
+		write((write(2, "minishell: ", 11), 2), cmd, ft_strlen(cmd));
 		return (*stat = 127, write(2, ": command not found\n", 20), NULL);
 	}
 	return (correct_path);
