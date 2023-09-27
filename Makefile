@@ -63,7 +63,7 @@ OBJS := $(SRCS:src/%.c=objs/%.o)
 OBJS += libft/libft.a
 
 # Ruta decompilacin
-CFLAGS = -Wall -Wextra -Werror -I lib -I libft -I /Users/$(USER)/.brew/opt/readline/include
+CFLAGS = -Wall -Wextra -Werror -I lib -I libft -I /Users/$(USER)/.brew/opt/readline/include -fcommon
 LDFLAGS = -L /Users/$(USER)/.brew/opt/readline/lib -lreadline
 
 RM = /bin/rm -rf

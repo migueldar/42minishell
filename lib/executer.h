@@ -15,6 +15,7 @@
 
 # include "structs.h"
 # include <fcntl.h>
+# include <sys/wait.h>
 
 typedef struct s_child_aux
 {

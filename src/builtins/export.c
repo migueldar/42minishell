@@ -131,10 +131,9 @@ int	ft_export(t_env **envi, t_string_l *var)
 			status = 1;
 			ft_errors_export(var->content);
 		}
-		else
-			if (create_varexport(envi, var->content))
-				return (1);
-			var = var->next;
+		else if (create_varexport(envi, var->content))
+			return (1);
+		var = var->next;
 	}
 	return (status);
 }
