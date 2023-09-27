@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/27 17:05:42 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:16:24 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	wait_all_free(int *pid, int len)
 		waitpid(pid[counter], &stat, 0);
 		counter++;
 	}
-	sig_setter(sig_handler_interactive);
+	sig_setter(sig_handler_interactive, 1);
 	free(pid);
 	if (WIFSIGNALED(stat))
 		return (WTERMSIG(stat) | 0x80);

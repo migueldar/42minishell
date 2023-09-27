@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/27 15:59:59 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:16:55 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	clear_child(t_env **env, t_command *cmd, char *arg1, char **arg2)
 		free(arg1);
 	if (arg2)
 		free_arr_2((void **) arg2);
-	clear_history();
 }
 
 void	childs_tasks(t_env **env, t_command *cmd)
@@ -47,7 +46,7 @@ void	childs_tasks(t_env **env, t_command *cmd)
 	if (!envi)
 		(clear_child(env, cmd, path, argv), perror("minishell"), exit(1));
 	clear_child(env, cmd, NULL, NULL);
-	sig_setter(SIG_DFL);
+	sig_setter(SIG_DFL, 0);
 	execve(path, argv, envi);
 	free_arr_2((void **) envi);
 	clear_child(NULL, NULL, path, argv);
@@ -63,7 +62,7 @@ int	single_cmd(t_env **env, t_command_l *cmd)
 	pid = fork();
 	if (pid < 0)
 		return (perror("minishell"), 1);
-	sig_setter(sig_handler_wait);
+	sig_setter(sig_handler_wait, 0);
 	if (pid == 0)
 	{
 		to_exec = isolate_cmd(cmd, 0);
@@ -72,7 +71,7 @@ int	single_cmd(t_env **env, t_command_l *cmd)
 	if (pid > 0)
 	{
 		wait(&stat);
-		sig_setter(sig_handler_interactive);
+		sig_setter(sig_handler_interactive, 1);
 	}
 	if (WIFSIGNALED(stat))
 		return (WTERMSIG(stat) | 0x80);

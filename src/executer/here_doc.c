@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:57:26 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 17:00:01 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:14:35 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static t_redir	*transform_heredoc(t_redir *redir, t_env *env, int *status)
 	ret = ft_calloc(1, sizeof(t_redir));
 	if (!ret)
 		return (NULL);
-	sig_setter(sig_handler_here_doc);
+	sig_setter(sig_handler_here_doc, 1);
 	ret->where = execute_heredoc(redir->where, env, status);
-	sig_setter(sig_handler_interactive);
+	sig_setter(sig_handler_interactive, 1);
 	if (!ret->where)
 		return (free(ret), NULL);
 	ret->flag = redir->flag;

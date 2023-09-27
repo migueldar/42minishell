@@ -6,16 +6,19 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 00:58:38 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 17:04:09 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/27 21:13:41 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sig_setter(sig_t func)
+void	sig_setter(sig_t func, int flag)
 {
 	signal(SIGINT, func);
-	signal(SIGQUIT, func);
+	if (flag == 0)
+		signal(SIGQUIT, func);
+	else
+		signal(SIGQUIT, SIG_IGN);
 }
 
 void	sig_handler_wait(int signum)
