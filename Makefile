@@ -6,7 +6,7 @@
 #    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/28 18:07:36 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/09/28 20:48:48 by mde-arpe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ SRCS := src/env/env_list.c \
         src/lexer/lexer.c \
         src/lexer/splitter.c \
         src/lexer/tokenizer.c \
-        src/utils/not_final_utils.c \
         src/utils/utils.c \
         src/utils/utils2.c \
 		src/utils/utils3.c \
