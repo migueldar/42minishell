@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:07:43 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/26 17:49:47 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:03:48 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,10 @@ long int	ft_atol(const char *str, int *status)
 	unsigned long int	ret;
 	int					counter;
 
-	ret = 0;
-	minus = 0;
+	ret = ((minus = 0, 0));
 	counter = 0;
+	if (!str[0])
+		return (*status = 1, 0);
 	if (*str == '-')
 		minus = 1;
 	if (*str == '+' || *str == '-')

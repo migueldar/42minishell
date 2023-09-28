@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ $# -ne 3 ]; then
 	echo "Usage: malloc_debug <first_malloc> <last_malloc> <in_file>"
 	exit 1

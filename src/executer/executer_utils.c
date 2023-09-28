@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/27 21:16:24 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:36:03 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,13 @@ void	swap_pipes(int pipes[2][2])
 	pipes[1][1] = aux;
 }
 
-t_child_aux	create_aux_struct(int counter, int in, int out)
+t_child_aux	crt_aux_s(int counter, int in, int out, int in_next)
 {
 	t_child_aux	ret;
 
 	ret.counter = counter;
 	ret.fdin = in;
 	ret.fdout = out;
+	ret.fdin_next = in_next;
 	return (ret);
 }

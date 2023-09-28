@@ -6,7 +6,7 @@
 #    By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/13 21:05:06 by mde-arpe          #+#    #+#              #
-#    Updated: 2023/09/26 19:51:25 by mde-arpe         ###   ########.fr        #
+#    Updated: 2023/09/28 18:07:36 by mde-arpe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,12 @@ SRCS := src/env/env_list.c \
 		src/utils/utils3.c \
 		src/utils/utils4.c \
 		src/expander/expander.c \
-		src/expander/expander1.c \
-		src/expander/expander2.c \
-		src/expander/expander3.c \
-		src/expander/expander4.c \
-		src/expander/expander5.c \
-		src/expander/expander6.c \
+		src/expander/expander_handler.c \
+		src/expander/expand_arg.c \
+		src/expander/expand_arg_utils.c \
+		src/expander/word_split.c \
+		src/expander/word_split_utils.c \
+		src/expander/quote_removal.c \
 		src/builtins/pwd.c \
 		src/builtins/export.c \
 		src/builtins/echo.c \

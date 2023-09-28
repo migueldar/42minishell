@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:57:25 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/27 16:57:41 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/28 20:22:49 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ char		**string_l_to_array(t_string_l *arg);
 char		**env_to_array(t_env *arg);
 long int	ft_atol(const char *str, int *status);
 char		*ft_strdup_perror(char *str);
+char		*ft_strjoinpath(char const *s1, char const *s2);
 
 #endif

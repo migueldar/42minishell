@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 18:22:36 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/09/21 15:29:29 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/09/28 20:22:37 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,24 @@ int	is_empty(char const *str)
 		str++;
 	}
 	return (1);
+}
+
+char	*ft_strjoinpath(char const *s1, char const *s2)
+{
+	char	*s;
+	int		l;
+
+	if (!s1 || !s2)
+		return (NULL);
+	l = ft_strlen(s1) + ft_strlen(s2) + 1;
+	s = malloc((l + 1) * sizeof(char));
+	if (s == NULL)
+		return (NULL);
+	while (*s1)
+		*s++ = *s1++;
+	*s++ = '/';
+	while (*s2)
+		*s++ = *s2++;
+	*s = 0;
+	return (s - l);
 }

@@ -3,40 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 03:46:13 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/24 22:35:16 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:04:50 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// t_string_l	*fully_expand_arg_print(char *arg, t_env *env)
-// {
-// 	t_exp_str	dummy;
-// 	t_exp_l		*dummy2;
-// 	t_string_l	*dummy3;
-// 	int			status;
-
-// 	status = 0;
-// 	// ft_print_env(env);
-// 	printf("Parameter expansion:\n");
-// 	dummy = expand_argument(arg, env, &status);
-// 	if (status)
-// 		return NULL;
-// 	printf("expanded: %s    wasexpanded: %s\n\n", dummy.content, dummy.was_exp);
-// 	printf("Word split:\n");
-// 	dummy2 = word_split(dummy);
-// 	if (!dummy2)
-// 		return NULL;
-// 	print_exp_l(dummy2);
-// 	printf("\nQuote removal:\n");
-// 	dummy3 = quote_removal(dummy2);
-// 	if (!dummy3)
-// 		return NULL;
-// 	print_string_l(dummy3);
-// }
 
 // NULL if fail
 //status 0 malloc fail

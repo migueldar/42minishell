@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:53:06 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/27 21:18:12 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/28 20:35:39 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **env)
 	char		*raw;
 	t_env		*enviroment;
 	t_command_l	*expanded_list;
-
+	
 	((void) argc, (void) argv);
 	g_exit_status = ST_OK;
 	sig_setter(sig_handler_interactive, 1);
@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **env)
 	while (g_exit_status < ST_EXIT)
 	{
 		raw = readline("$> ");
-		if (!raw)
+		if (!raw && write(2, "exit\n", 5))
 			break ;
 		expanded_list = complete_parser(raw, enviroment);
 		if (expanded_list)

@@ -6,7 +6,7 @@
 /*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:47:51 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/27 17:05:42 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:36:03 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_child_aux
 	int	counter;
 	int	fdin;
 	int	fdout;
+	int	fdin_next;
 }	t_child_aux;
 
 int			resolve_heredocs(t_command_l *commands, t_env *env);
@@ -43,7 +44,7 @@ t_command	*isolate_cmd(t_command_l *command_l, int which);
 void		clear_child(t_env **env, t_command *cmd, char *arg1, char **arg2);
 int			handle_builtin(t_command *cmd, t_env **env, int single);
 void		swap_pipes(int pipes[2][2]);
-t_child_aux	create_aux_struct(int counter, int in, int out);
+t_child_aux	crt_aux_s(int counter, int in, int out, int in_next);
 void		kill_childs(int *pid, int position_childs);
 int			wait_all_free(int *pid, int len);
 
