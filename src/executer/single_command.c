@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   single_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-arpe <mde-arpe@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mde-arpe <mde-arpe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 23:18:16 by mde-arpe          #+#    #+#             */
-/*   Updated: 2023/09/27 21:16:55 by mde-arpe         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:20:31 by mde-arpe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	single_cmd(t_env **env, t_command_l *cmd)
 	int			stat;
 	t_command	*to_exec;
 
+	stat = 0;
 	pid = fork();
 	if (pid < 0)
 		return (perror("minishell"), 1);
