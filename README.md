@@ -1,6 +1,6 @@
 # minishell
 
-A minimal Unix shell implementation written in C, developed as part of the 42 School curriculum. It replicates key features of standard shells like bash and zsh, focusing on process management, parsing, and terminal control; all built from scratch without external parsing libraries.
+A Unix shell implementation written in C, developed as part of the 42 School curriculum. It replicates key features of standard shells like bash and zsh, focusing on process management, parsing, and terminal control; all built from scratch without external parsing libraries.
 
 ## Features
 
@@ -20,3 +20,4 @@ git clone https://github.com/migueldar/42minishell
 cd 42minishell
 make
 ./minishell
+```
